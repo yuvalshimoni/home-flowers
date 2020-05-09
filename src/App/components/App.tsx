@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { theme, GlobalStyle } from 'shared/theme';
+import Order from 'order';
 
 const Layout = styled.div`
   width: 100%;
@@ -14,6 +15,7 @@ const App = () => (
     <Layout>
       <h1>Home Flowers</h1>
 
+      <Order />
     </Layout>
   </ThemeProvider>
 );
