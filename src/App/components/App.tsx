@@ -1,11 +1,21 @@
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
-import { theme } from '../../shared/theme';
+import styled, { ThemeProvider } from 'styled-components';
+import { theme, GlobalStyle } from 'shared/theme';
+
+const Layout = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1200px;
+`;
 
 const App = () => (
   <ThemeProvider theme={{ ...theme }}>
-    <h1>Home Flowers</h1>
+    <GlobalStyle />
+    <Layout>
+      <h1>Home Flowers</h1>
+
+    </Layout>
   </ThemeProvider>
 );
 
-export default App; 
+export default App;
