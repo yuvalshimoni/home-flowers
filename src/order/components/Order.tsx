@@ -1,6 +1,5 @@
-import React, { useState, useReducer, useCallback } from 'react';
+import React, { useReducer, useCallback } from 'react';
 import styled from 'styled-components';
-import { ProductType } from 'shared/components';
 import PickProducts from './PickProducts';
 
 const Wrapper = styled.div`
@@ -12,42 +11,55 @@ const initialOrder = {
   deliveryDate: '',
 }
 
-interface order {
+interface OrderShape {
   products: Array<{
-    id: any;
+    productId: any;
     amount: number;
   }>;
   address: string;
   deliveryDate: string;
 };
 
+type Action =
+  | {
+    type: 'UPDATE_PRODUCT';
+    payload: {
+      productId: any;
+      amount: number;
+    };
+  }
+  | {
+    type: 'DELETE_PRODUCT';
+    payload: {
+      productId: any;
+    };
+  };
 
-interface action {
-  type: 'update_products';
-  id: any;
-  amount: number;
-};
 
-const orderReducer = (state: order, action: action) => {
+const orderReducer = (state: OrderShape, action: Action) => {
 
   switch (action.type) {
-    case 'update_products':
-      const { id, amount } = action;
-      const { products } = state;
+    case 'UPDATE_PRODUCT':
+      const { productId, amount } = action.payload;
 
       return {
         ...state,
-        products: products.some(p => p.id === id)
-          ? amount === 0 ?
-            products.filter(p => p.id === id)
-            : products.map(product => {
-              if (product.id === id) {
-                return { ...product, amount };
-              } else {
-                return product;
-              }
-            })
-          : products.concat([{ id, amount }])
+        products: state.products.some(p => p.productId === productId)
+          ? state.products.map(product => {
+            if (product.productId === productId) {
+              return { ...product, amount };
+            } else {
+              return product;
+            }
+          })
+          : state.products.concat([{ productId, amount: 1 }])
+      };
+    case 'DELETE_PRODUCT':
+      const id = action.payload.productId;
+
+      return {
+        ...state,
+        products: state.products.filter(p => p.productId === id)
       };
     default:
       return state;
@@ -58,12 +70,25 @@ const Order = () => {
   const [order, dispatch] = useReducer(orderReducer, initialOrder);
 
   const updateProducts = useCallback(
-    ({ id, amount }) => {
-      dispatch({ type: "update_products", id, amount });
+    ({ productId, amount }) => {
+      if (amount > 0) {
+        dispatch({
+          type: 'UPDATE_PRODUCT', payload: {
+            productId,
+            amount
+          }
+        })
+      } else {
+
+        dispatch({
+          type: 'DELETE_PRODUCT', payload: {
+            productId,
+          }
+        })
+      }
     },
     [],
   );
-  console.log(order.products)
 
   return (
     <Wrapper>

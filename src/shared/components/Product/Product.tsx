@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
+import { useEffectOnUpdate } from 'shared/hooks';
 import { ProductType } from './types'
 
 const Wrapper = styled.div`
@@ -31,30 +32,35 @@ const Button = styled.div`
 `;
 
 type onChangeProps = {
-  id: any;
+  productId: any;
   amount: number;
 }
 
 interface ProductProps extends ProductType {
-  onChange: ({ id, amount }: onChangeProps) => void;
+  initialAmount?: number;
+  onChange: ({ productId, amount }: onChangeProps) => void;
 }
 
-const Product = ({ id, title, price, onChange }: ProductProps) => {
-  const [amount, setAmount] = useState<number>(0);
+const Product = ({ id, title, price, initialAmount = 0, onChange }: ProductProps) => {
+  const [amount, setAmount] = useState<number>(initialAmount);
 
-  const handleOnClick = useCallback(type => {
-    let newAmount: number = amount;
-    if (type === 'increase') {
-      newAmount = amount + 1;
-    }
+  const onIncrease = useCallback(
+    () => {
+      setAmount(prev => prev + 1);
+    },
+    [],
+  );
 
-    if (type === 'decrease') {
-      newAmount = amount < 1 ? 0 : amount - 1
-    }
+  const onDecrease = useCallback(
+    () => {
+      setAmount(prev => prev < 1 ? 0 : prev - 1);
+    },
+    [],
+  );
 
-    setAmount(newAmount);
-    onChange({ id, amount: newAmount })
-  }, [id, amount]);
+  useEffectOnUpdate(() => {
+    onChange({ productId: id, amount: amount })
+  }, [amount])
 
   return (
     <Wrapper>
@@ -63,8 +69,8 @@ const Product = ({ id, title, price, onChange }: ProductProps) => {
       <Price>{amount} :כמות</Price>
 
       <ButtonsWrapper>
-        <Button onClick={() => handleOnClick('increase')}>+</Button>
-        <Button onClick={() => handleOnClick('decrease')}>-</Button>
+        <Button onClick={onIncrease}>+</Button>
+        <Button onClick={onDecrease}>-</Button>
       </ButtonsWrapper>
     </Wrapper>
   );

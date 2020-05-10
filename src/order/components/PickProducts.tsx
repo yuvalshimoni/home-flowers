@@ -36,12 +36,12 @@ const products: Array<ProductType> = [
 ];
 
 type onChangeProps = {
-  id: any;
+  productId: any;
   amount: number;
 }
 
 interface PickProdcutProps {
-  updateProducts: ({ id, amount }: onChangeProps) => void;
+  updateProducts: ({ productId, amount }: onChangeProps) => void;
 }
 
 
