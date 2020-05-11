@@ -51,7 +51,6 @@ type UpdateCart = ({ productId, amount, price }: CartItemType) => void;
 const Order = () => {
   const [cart, dispatch] = useReducer(cartReducer, []);
 
-  console.log(cart)
 
   const updateCart = useCallback(
     ({ productId, amount, price }: CartItemType) => {
