@@ -1,87 +1,70 @@
 import React, { useReducer, useCallback } from 'react';
 import styled from 'styled-components';
 import PickProducts from './PickProducts';
+import {Cart, CartItemType} from './types';
 
 const Wrapper = styled.div`
 `;
 
-const initialOrder = {
-  products: [],
-  address: '',
-  deliveryDate: '',
-}
-
-interface OrderShape {
-  products: Array<{
-    productId: any;
-    amount: number;
-  }>;
-  address: string;
-  deliveryDate: string;
-};
 
 type Action =
-  | {
-    type: 'UPDATE_PRODUCT';
-    payload: {
-      productId: any;
-      amount: number;
-    };
+  {
+    type: 'UPDATE_CART_ITEM';
+    payload: CartItemType;
   }
   | {
-    type: 'DELETE_PRODUCT';
+    type: 'REMOVE_ITEM_FROM_CART';
     payload: {
-      productId: any;
+      productId: CartItemType['productId'];
     };
   };
 
 
-const orderReducer = (state: OrderShape, action: Action) => {
-
+const cartReducer = (state: Cart, action: Action) => {
   switch (action.type) {
-    case 'UPDATE_PRODUCT':
-      const { productId, amount } = action.payload;
+    case 'UPDATE_CART_ITEM':
+      {
+        const { productId, amount, price } = action.payload;
 
-      return {
-        ...state,
-        products: state.products.some(p => p.productId === productId)
-          ? state.products.map(product => {
-            if (product.productId === productId) {
-              return { ...product, amount };
-            } else {
-              return product;
-            }
-          })
-          : state.products.concat([{ productId, amount: 1 }])
-      };
-    case 'DELETE_PRODUCT':
-      const id = action.payload.productId;
+        return state.some(p => p.productId === productId) 
+        ? state.map(product => {
+          if (product.productId === productId) {
+            return { ...product, amount };
+          } else {
+            return product;
+          }
+        }) : state.concat([{ productId, amount: 1, price }]);
+      }
+    case 'REMOVE_ITEM_FROM_CART':
+     {
+      const productId = action.payload.productId;
 
-      return {
-        ...state,
-        products: state.products.filter(p => p.productId === id)
-      };
+      return state.filter(p => p.productId === productId);
+     }
     default:
       return state;
   }
 };
 
-const Order = () => {
-  const [order, dispatch] = useReducer(orderReducer, initialOrder);
+type UpdateCart = ({ productId, amount, price }: CartItemType) => void;
 
-  const updateProducts = useCallback(
-    ({ productId, amount }) => {
+const Order = () => {
+  const [cart, dispatch] = useReducer(cartReducer, []);
+
+  const updateCart = useCallback(
+    ({ productId, amount, price }: CartItemType) => {
       if (amount > 0) {
         dispatch({
-          type: 'UPDATE_PRODUCT', payload: {
+          type: 'UPDATE_CART_ITEM', payload: {
             productId,
-            amount
+            amount,
+            price
           }
         })
       } else {
 
         dispatch({
-          type: 'DELETE_PRODUCT', payload: {
+          type: 'REMOVE_ITEM_FROM_CART', payload: {
             productId,
           }
         })
@@ -92,7 +75,7 @@ const Order = () => {
 
   return (
     <Wrapper>
-      <PickProducts updateProducts={updateProducts} />
+      <PickProducts updateCart={updateCart} />
     </Wrapper>
   );
 };

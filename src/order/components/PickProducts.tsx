@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Product, ProductType } from 'shared/components';
+import {CartItemType} from './types';
 
 const Wrapper = styled.div`
 `;
@@ -41,16 +42,16 @@ type onChangeProps = {
 }
 
 interface PickProdcutProps {
-  updateProducts: ({ productId, amount }: onChangeProps) => void;
+  updateCart: ({ productId, amount, price }: CartItemType) => void;
 }
 
 
-const PickProdcut = ({ updateProducts }: PickProdcutProps) => (
+const PickProdcut = ({ updateCart }: PickProdcutProps) => (
   <Wrapper>
     <Title>בחר זרים</Title>
 
     <ProductsWrapper>
-      {products.map(({ id, title, price }) => <Product onChange={updateProducts} {...{ id, title, price }} />)}
+      {products.map(({ id, title, price }) => <Product onChange={updateCart} {...{ id, title, price }} />)}
     </ProductsWrapper>
 
   </Wrapper>

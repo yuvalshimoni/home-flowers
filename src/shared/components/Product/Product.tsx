@@ -34,11 +34,12 @@ const Button = styled.div`
 type onChangeProps = {
   productId: any;
   amount: number;
+  price: number;
 }
 
 interface ProductProps extends ProductType {
   initialAmount?: number;
-  onChange: ({ productId, amount }: onChangeProps) => void;
+  onChange: ({ productId, amount, price }: onChangeProps) => void;
 }
 
 const Product = ({ id, title, price, initialAmount = 0, onChange }: ProductProps) => {
@@ -59,7 +60,7 @@ const Product = ({ id, title, price, initialAmount = 0, onChange }: ProductProps
   );
 
   useEffectOnUpdate(() => {
-    onChange({ productId: id, amount: amount })
+    onChange({ productId: id, amount, price })
   }, [amount])
 
   return (
