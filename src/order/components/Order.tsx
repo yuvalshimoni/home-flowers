@@ -1,7 +1,20 @@
 import React, { useReducer, useCallback } from 'react';
 import styled from 'styled-components';
 import PickProducts from './PickProducts';
+import Details from './Details';
+import Payment from './Payment';
+import Summary from './Summary';
 import {Cart, CartItemType} from './types';
+
+// const orderShape = {
+//   cart = [],
+//   total,
+//   target,
+//   date,
+//   name, 
+//   phone,
+//   isPaid,
+// }
 
 const Wrapper = styled.div`
 `;
@@ -77,6 +90,9 @@ const Order = () => {
   return (
     <Wrapper>
       <PickProducts updateCart={updateCart} />
+      <Details/>
+      <Payment />
+      <Summary />
     </Wrapper>
   );
 };

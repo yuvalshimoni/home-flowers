@@ -48,7 +48,9 @@ interface PickProdcutProps {
 
 const PickProdcut = ({ updateCart }: PickProdcutProps) => (
   <Wrapper>
-    <Title>בחר זרים</Title>
+    <Title>שלב בחירת זרים ויעד למשלוח</Title>
+
+
 
     <ProductsWrapper>
       {products.map(({ id, title, price }) => <Product onChange={updateCart} {...{ id, title, price }} />)}
