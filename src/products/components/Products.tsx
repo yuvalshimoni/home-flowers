@@ -34,9 +34,9 @@ const products: Array<ProductType> = [
   },
 ];
 
-interface PickProdcutProps {}
+interface ProductsProps {}
 
-const PickProducts = (): JSX.Element => (
+const Products = (): JSX.Element => (
   <Wrapper>
     <Title>שלב בחירת זרים ויעד למשלוח</Title>
 
@@ -48,4 +48,4 @@ const PickProducts = (): JSX.Element => (
   </Wrapper>
 );
 
-export default PickProducts;
+export default Products;

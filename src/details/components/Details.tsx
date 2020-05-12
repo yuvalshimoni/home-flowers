@@ -9,7 +9,7 @@ const Title = styled.h5`
   font-size: ${({ theme }) => theme.sizes.xl}px;
 `;
 
-const Details = () => (
+const Details = (): JSX.Element => (
   <Wrapper>
     <Title>שלב פרטים אישיים + תצוגת הסל</Title>
 

@@ -8,10 +8,10 @@ const Title = styled.h5`
   font-size: ${({ theme }) => theme.sizes.xl}px;
 `;
 
-const Payment = () => (
+const Summary = (): JSX.Element => (
   <Wrapper>
-    <Title>אייפרם תשלום</Title>
+    <Title>סיכום הזמנה</Title>
   </Wrapper>
 );
 
-export default Payment;
+export default Summary;

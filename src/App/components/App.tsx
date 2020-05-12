@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import { theme, GlobalStyle } from 'shared/theme';
-import Order from 'order';
 import { useAppState } from 'App/hooks/useAppState';
 import { AppContext, AppContextProvider } from 'App/context';
+import MainRouter from './MainRouter';
 
 const Layout = styled.div`
   width: 100%;
@@ -31,15 +31,7 @@ const App = (): JSX.Element => {
           <Layout>
             <h1>Home Flowers</h1>
 
-            <Switch>
-              <Route path="/check">
-                <div>Check</div>
-              </Route>
-              {/* This route should be placed last because it matches every possible route */}
-              <Route path="/">
-                <Order />
-              </Route>
-            </Switch>
+            <MainRouter />
           </Layout>
         </ThemeProvider>
       </Router>
