@@ -13,14 +13,18 @@ const Layout = styled.div`
 `;
 
 const App = (): JSX.Element => {
-  const state = useAppState();
+  const { cart, cartDispatch, costumerDetails, setCostumerDetails } = useAppState();
+
   const context = useMemo(
     (): AppContext => ({
       state: {
-        ...state,
+        cart,
+        cartDispatch,
+        costumerDetails,
+        setCostumerDetails,
       },
     }),
-    [],
+    [cart, costumerDetails],
   );
 
   return (

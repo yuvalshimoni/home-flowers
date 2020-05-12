@@ -90,4 +90,4 @@ const Product = ({ id, title, price, initialAmount = 0 }: ProductProps) => {
   );
 };
 
-export default Product;
+export default React.memo(Product);
