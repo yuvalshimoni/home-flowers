@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Product, ProductType } from 'shared/components';
-import {CartItemType} from './types';
+import {CartItemType} from '../types';
 
 const Wrapper = styled.div`
 `;

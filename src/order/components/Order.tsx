@@ -4,7 +4,7 @@ import PickProducts from './PickProducts';
 import Details from './Details';
 import Payment from './Payment';
 import Summary from './Summary';
-import {Cart, CartItemType} from './types';
+import {Cart, CartItemType} from '../types';
 
 // const orderShape = {
 //   cart = [],
@@ -90,7 +90,7 @@ const Order = () => {
   return (
     <Wrapper>
       <PickProducts updateCart={updateCart} />
-      <Details/>
+      <Details cart={cart}/>
       <Payment />
       <Summary />
     </Wrapper>
