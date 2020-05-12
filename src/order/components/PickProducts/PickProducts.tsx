@@ -36,7 +36,7 @@ const products: Array<ProductType> = [
 
 interface PickProdcutProps {}
 
-const PickProducts = () => (
+const PickProducts = (): JSX.Element => (
   <Wrapper>
     <Title>שלב בחירת זרים ויעד למשלוח</Title>
 
