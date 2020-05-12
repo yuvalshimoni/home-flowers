@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { useEffectOnUpdate } from 'shared/hooks';
 import { ProductType } from './types'
+import { useAppContext } from 'App/context';
 
 const Wrapper = styled.div`
   background-color: #ccc;
@@ -39,11 +40,11 @@ type onChangeProps = {
 
 interface ProductProps extends ProductType {
   initialAmount?: number;
-  onChange: ({ productId, amount, price }: onChangeProps) => void;
 }
 
-const Product = ({ id, title, price, initialAmount = 0, onChange }: ProductProps) => {
+const Product = ({ id, title, price, initialAmount = 0 }: ProductProps) => {
   const [amount, setAmount] = useState<number>(initialAmount);
+  const { state: { cartDispatch } } = useAppContext();
 
   const onIncrease = useCallback(
     () => {
@@ -60,7 +61,23 @@ const Product = ({ id, title, price, initialAmount = 0, onChange }: ProductProps
   );
 
   useEffectOnUpdate(() => {
-    onChange({ productId: id, amount, price })
+    if (amount > 0) {
+      cartDispatch({
+        type: 'UPDATE_CART_ITEM',
+        payload: {
+          productId: id,
+          amount,
+          price
+        },
+      });
+    } else {
+      cartDispatch({
+        type: 'REMOVE_ITEM_FROM_CART',
+        payload: {
+          productId: id,
+        }
+      })
+    }
   }, [amount])
 
   return (

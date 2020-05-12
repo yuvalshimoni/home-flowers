@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -7,6 +7,8 @@ import {
 import styled, { ThemeProvider } from 'styled-components';
 import { theme, GlobalStyle } from 'shared/theme';
 import Order from 'order';
+import { useAppState } from 'App/hooks/useAppState';
+import { AppContext, AppContextProvider } from 'App/context';
 
 const Layout = styled.div`
   width: 100%;
@@ -14,15 +16,37 @@ const Layout = styled.div`
   max-width: 1200px;
 `;
 
-const App = () => (
-  <ThemeProvider theme={{ ...theme }}>
-    <GlobalStyle />
-    <Layout>
-      <h1>Home Flowers</h1>
+const App = () => {
+  const { cart, cartDispatch } = useAppState();
+  const context = useMemo((): AppContext => ({
+    state: {
+      cart,
+      cartDispatch,
+    }
+  }), [cart, cartDispatch]);
 
-      <Order />
-    </Layout>
-  </ThemeProvider>
-);
+  return (
+    <AppContextProvider value={context}>
+      <Router>
+        <ThemeProvider theme={{ ...theme }}>
+          <GlobalStyle />
+          <Layout>
+            <h1>Home Flowers</h1>
+
+            <Switch>
+              <Route path="/check">
+                <div>Check</div>
+              </Route>
+              {/* This route should be placed last because it matches every possible route */}
+              <Route path="/">
+                <Order />
+              </Route>
+            </Switch>
+          </Layout>
+        </ThemeProvider>
+      </Router>
+    </AppContextProvider>
+  );
+};
 
 export default App;

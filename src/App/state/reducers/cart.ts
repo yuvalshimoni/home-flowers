@@ -1,26 +1,6 @@
-import React, { useReducer, useCallback } from 'react';
-import styled from 'styled-components';
-import PickProducts from './PickProducts';
-import Details from './Details';
-import Payment from './Payment';
-import Summary from './Summary';
-import { Cart, CartItemType } from '../types';
+import { Cart, CartItemType } from "order/types";
 
-// const orderShape = {
-//   cart = [],
-//   total,
-//   target,
-//   date,
-//   name, 
-//   phone,
-//   isPaid,
-// }
-
-const Wrapper = styled.div`
-`;
-
-
-type Action =
+export type CartAction =
   {
     type: 'UPDATE_CART_ITEM';
     payload: CartItemType;
@@ -32,8 +12,7 @@ type Action =
     };
   };
 
-
-const cartReducer = (state: Cart, action: Action) => {
+export const cartReducer = (state: Cart, action: CartAction) => {
   switch (action.type) {
     case 'UPDATE_CART_ITEM':
       {
@@ -58,18 +37,3 @@ const cartReducer = (state: Cart, action: Action) => {
       return state;
   }
 };
-
-type UpdateCart = ({ productId, amount, price }: CartItemType) => void;
-
-const Order = () => {
-  return (
-    <Wrapper>
-      <PickProducts />
-      {/* <Details cart={cart}/>
-      <Payment />
-      <Summary /> */}
-    </Wrapper>
-  );
-};
-
-export default Order;
