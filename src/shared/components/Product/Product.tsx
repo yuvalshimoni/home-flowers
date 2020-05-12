@@ -42,7 +42,7 @@ interface ProductProps extends ProductType {
   initialAmount?: number;
 }
 
-const Product = ({ id, title, price, initialAmount = 0 }: ProductProps) => {
+const Product = ({ id, title, price, initialAmount = 0 }: ProductProps): JSX.Element => {
   const [amount, setAmount] = useState<number>(initialAmount);
   const {
     state: { cartDispatch },

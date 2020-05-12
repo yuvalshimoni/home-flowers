@@ -1,13 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useAppContext } from 'App/context';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const Wrapper = styled.div``;
 
-const Title = styled.h5`
-  font-weight: bold;
-  font-size: ${({ theme }) => theme.sizes.xl}px;
-`;
+type CityType = {
+  name: string;
+};
+
+const cities: Array<CityType> = [
+  {
+    name: 'מירב',
+  },
+  {
+    name: 'אלון מורה',
+  },
+  {
+    name: 'תל אביב',
+  },
+];
 
 const SelectTarget = (): JSX.Element => {
   const {
@@ -15,9 +28,13 @@ const SelectTarget = (): JSX.Element => {
   } = useAppContext();
 
   return (
-    <Wrapper>
-      <Title>יעד למשלוח</Title>
-    </Wrapper>
+    <Autocomplete
+      id="combo-box-demo"
+      options={cities}
+      getOptionLabel={(option: CityType) => option.name}
+      style={{ width: 300 }}
+      renderInput={(params) => <TextField {...params} label="יעד למשלוח" variant="outlined" />}
+    />
   );
 };
 
