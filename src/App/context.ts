@@ -1,9 +1,9 @@
 import { createContext, useContext } from 'react';
-import { AppState } from "./state/types";
+import { AppState } from './state/types';
 
 export type AppContext = {
   state: AppState;
-}
+};
 
 const appContext = createContext<AppContext | undefined>(undefined);
 

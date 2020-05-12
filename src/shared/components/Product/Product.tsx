@@ -1,7 +1,7 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { useEffectOnUpdate } from 'shared/hooks';
-import { ProductType } from './types'
+import { ProductType } from './types';
 import { useAppContext } from 'App/context';
 
 const Wrapper = styled.div`
@@ -9,12 +9,12 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.h5`
- font-weight: bold;
- font-size: ${({ theme }) => theme.sizes.md}px;
+  font-weight: bold;
+  font-size: ${({ theme }) => theme.sizes.md}px;
 `;
 
 const Price = styled.h5`
- font-size: ${({ theme }) => theme.sizes.main}px;
+  font-size: ${({ theme }) => theme.sizes.main}px;
 `;
 
 const ButtonsWrapper = styled.div`
@@ -36,7 +36,7 @@ type onChangeProps = {
   productId: any;
   amount: number;
   price: number;
-}
+};
 
 interface ProductProps extends ProductType {
   initialAmount?: number;
@@ -44,21 +44,17 @@ interface ProductProps extends ProductType {
 
 const Product = ({ id, title, price, initialAmount = 0 }: ProductProps) => {
   const [amount, setAmount] = useState<number>(initialAmount);
-  const { state: { cartDispatch } } = useAppContext();
+  const {
+    state: { cartDispatch },
+  } = useAppContext();
 
-  const onIncrease = useCallback(
-    () => {
-      setAmount(prev => prev + 1);
-    },
-    [],
-  );
+  const onIncrease = useCallback(() => {
+    setAmount((prev) => prev + 1);
+  }, []);
 
-  const onDecrease = useCallback(
-    () => {
-      setAmount(prev => prev < 1 ? 0 : prev - 1);
-    },
-    [],
-  );
+  const onDecrease = useCallback(() => {
+    setAmount((prev) => (prev < 1 ? 0 : prev - 1));
+  }, []);
 
   useEffectOnUpdate(() => {
     if (amount > 0) {
@@ -67,7 +63,7 @@ const Product = ({ id, title, price, initialAmount = 0 }: ProductProps) => {
         payload: {
           productId: id,
           amount,
-          price
+          price,
         },
       });
     } else {
@@ -75,10 +71,10 @@ const Product = ({ id, title, price, initialAmount = 0 }: ProductProps) => {
         type: 'REMOVE_ITEM_FROM_CART',
         payload: {
           productId: id,
-        }
-      })
+        },
+      });
     }
-  }, [amount])
+  }, [amount]);
 
   return (
     <Wrapper>

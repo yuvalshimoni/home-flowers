@@ -7,45 +7,44 @@ import { useAppState } from 'App/hooks/useAppState';
 import { AppContext, AppContextProvider } from 'App/context';
 
 const Layout = styled.div`
-    width: 100%;
-    margin: 0 auto;
-    max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1200px;
 `;
 
-const App = () => {
-    const { cart, cartDispatch } = useAppState();
-    const context = useMemo(
-        (): AppContext => ({
-            state: {
-                cart,
-                cartDispatch,
-            },
-        }),
-        [cart, cartDispatch],
-    );
+const App = (): JSX.Element => {
+  const state = useAppState();
+  const context = useMemo(
+    (): AppContext => ({
+      state: {
+        ...state,
+      },
+    }),
+    [],
+  );
 
-    return (
-        <AppContextProvider value={context}>
-            <Router>
-                <ThemeProvider theme={{ ...theme }}>
-                    <GlobalStyle />
-                    <Layout>
-                        <h1>Home Flowers</h1>
+  return (
+    <AppContextProvider value={context}>
+      <Router>
+        <ThemeProvider theme={{ ...theme }}>
+          <GlobalStyle />
+          <Layout>
+            <h1>Home Flowers</h1>
 
-                        <Switch>
-                            <Route path="/check">
-                                <div>Check</div>
-                            </Route>
-                            {/* This route should be placed last because it matches every possible route */}
-                            <Route path="/">
-                                <Order />
-                            </Route>
-                        </Switch>
-                    </Layout>
-                </ThemeProvider>
-            </Router>
-        </AppContextProvider>
-    );
+            <Switch>
+              <Route path="/check">
+                <div>Check</div>
+              </Route>
+              {/* This route should be placed last because it matches every possible route */}
+              <Route path="/">
+                <Order />
+              </Route>
+            </Switch>
+          </Layout>
+        </ThemeProvider>
+      </Router>
+    </AppContextProvider>
+  );
 };
 
 export default App;

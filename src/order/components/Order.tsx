@@ -10,13 +10,12 @@ import Summary from './Summary';
 //   total,
 //   target,
 //   date,
-//   name, 
+//   name,
 //   phone,
 //   isPaid,
 // }
 
-const Wrapper = styled.div`
-`;
+const Wrapper = styled.div``;
 
 const Order = () => {
   return (

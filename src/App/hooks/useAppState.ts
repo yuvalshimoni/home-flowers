@@ -1,13 +1,22 @@
-import { useReducer } from 'react';
+import { useReducer, useState } from 'react';
 import { cartReducer } from 'App/state/reducers/cart';
-import { AppState } from 'App/state/types';
+import { AppState, CostumerDetails } from 'App/state/types';
+
+const initialCostumerDetails: CostumerDetails = {
+  target: '',
+  name: '',
+  phone: null,
+  deliveryDate: '',
+};
 
 export const useAppState = (): AppState => {
-    const [cart, cartDispatch] = useReducer(cartReducer, []);
-    console.log(cart);
+  const [cart, cartDispatch] = useReducer(cartReducer, []);
+  const [costumerDetails, setCostumerDetails] = useState<CostumerDetails>(initialCostumerDetails);
 
-    return {
-        cart,
-        cartDispatch,
-    };
+  return {
+    cart,
+    cartDispatch,
+    costumerDetails,
+    setCostumerDetails,
+  };
 };

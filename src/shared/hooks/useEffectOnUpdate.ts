@@ -1,18 +1,14 @@
 import { useRef, useEffect } from 'react';
 
-const useEffectOnUpdate = (func: () => void, deps: Array<any>) => {
+const useEffectOnUpdate = (func: () => void, deps: Array<any>): void => {
   const firstUpdate = useRef(true);
-  useEffect(
-    () => {
-      if (firstUpdate.current === true) {
-        firstUpdate.current = false;
-        return;
-      }
-      return func();
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    deps,
-  );
+  useEffect(() => {
+    if (firstUpdate.current === true) {
+      firstUpdate.current = false;
+      return;
+    }
+    return func();
+  }, deps);
 };
 
 export default useEffectOnUpdate;
