@@ -1,6 +1,6 @@
 import React, { useMemo, useState, useCallback } from 'react';
 import styled from 'styled-components';
-import { useAppContext } from 'App/context';
+import { useAppContext } from 'shared/hooks';
 import { Product, ProductType, FlexRowSpaceBetween } from 'shared/components';
 import { getTotalCart } from 'shared/utils';
 import SelectTarget from './SelectTarget';

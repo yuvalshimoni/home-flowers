@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { useEffectOnUpdate } from 'shared/hooks';
 import { ProductType } from './types';
-import { useAppContext } from 'App/context';
+import { useAppContext } from 'shared/hooks';
 
 const Wrapper = styled.div`
   background-color: #ccc;

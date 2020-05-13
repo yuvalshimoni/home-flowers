@@ -1,9 +1,8 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import { theme, GlobalStyle } from 'shared/theme';
-import { useAppState } from 'App/hooks/useAppState';
-import { AppContext, AppContextProvider } from 'App/context';
+import { AppContextProvider } from 'App/Context';
 import MainRouter from './MainRouter';
 
 const Layout = styled.div`
@@ -13,22 +12,8 @@ const Layout = styled.div`
 `;
 
 const App = (): JSX.Element => {
-  const { cart, cartDispatch, costumerDetails, setCostumerDetails } = useAppState();
-
-  const context = useMemo(
-    (): AppContext => ({
-      state: {
-        cart,
-        cartDispatch,
-        costumerDetails,
-        setCostumerDetails,
-      },
-    }),
-    [cart, costumerDetails],
-  );
-
   return (
-    <AppContextProvider value={context}>
+    <AppContextProvider>
       <Router>
         <ThemeProvider theme={{ ...theme }}>
           <GlobalStyle />

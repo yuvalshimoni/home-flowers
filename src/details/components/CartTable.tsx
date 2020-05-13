@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useAppContext } from 'App/context';
+import { useAppContext } from 'shared/hooks';
 
 const Wrapper = styled.div`
   display: flex;
