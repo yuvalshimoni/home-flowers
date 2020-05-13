@@ -1,6 +1,7 @@
 import React, { useMemo, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { useAppState } from 'shared/hooks';
+import { useHistory } from 'react-router-dom';
 import { Product, ProductType, FlexRowSpaceBetween } from 'shared/components';
 import { getTotalCart } from 'shared/utils';
 import SelectTarget from './SelectTarget';
@@ -19,7 +20,7 @@ const Total = styled.h3`
   font-size: ${({ theme }) => theme.sizes.xl}px;
 `;
 
-const Buttom = styled.div`
+const Button = styled.div`
   cursor: pointer;
   font-size: ${({ theme }) => theme.sizes.xl}px;
 `;
@@ -55,14 +56,22 @@ const products: Array<ProductType> = [
 ];
 
 const Products = (): JSX.Element => {
+  const history = useHistory();
   const {
     cart,
     costumerDetails: { target },
   } = useAppState();
 
-  const [displaySelectTarget, setDisplaySelectTarget] = useState<boolean>(!!target?.name);
+  const isTargetSelected = useMemo(() => !!target?.name, [target]);
+  const [displaySelectTarget, setDisplaySelectTarget] = useState<boolean>(isTargetSelected);
 
-  const showSelectTarget = useCallback(() => setDisplaySelectTarget(true), []);
+  const handleActionButton = useCallback(() => {
+    if (isTargetSelected) {
+      history.push('/details');
+    } else {
+      setDisplaySelectTarget(true);
+    }
+  }, [history, isTargetSelected]);
 
   const total = useMemo<number>(() => getTotalCart(cart), [cart]);
 
@@ -72,7 +81,9 @@ const Products = (): JSX.Element => {
         <div>{displaySelectTarget ? <SelectTarget /> : <Title>בחר זרים</Title>}</div>
 
         <div>
-          <Buttom onClick={showSelectTarget}>הזמן</Buttom>
+          {!!total && (
+            <Button onClick={handleActionButton}>{isTargetSelected ? 'המשך' : 'הזמן'}</Button>
+          )}
           <Total>סהכ: {total}</Total>
         </div>
       </Head>
