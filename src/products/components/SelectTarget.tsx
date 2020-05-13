@@ -38,11 +38,15 @@ const SelectTarget = (): JSX.Element => {
 
   const onSelect = useCallback(
     (event, values) => {
+      const newValue = values ? { name: values.name, cityId: values.cityId } : undefined;
       setCostumerDetails((prevState) => ({
         ...prevState,
         target: values ? { name: values.name, cityId: values.cityId } : undefined,
       }));
-      history.push('/details');
+
+      if (!!newValue) {
+        history.push('/details');
+      }
     },
     [history, setCostumerDetails],
   );

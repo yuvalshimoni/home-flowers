@@ -2,7 +2,7 @@ import React, { useMemo, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { useAppState } from 'shared/hooks';
 import { useHistory } from 'react-router-dom';
-import { Product, ProductType, FlexRowSpaceBetween } from 'shared/components';
+import { Product, ProductType, FlexRowSpaceBetween, ActionButton } from 'shared/components';
 import { getTotalCart } from 'shared/utils';
 import SelectTarget from './SelectTarget';
 
@@ -81,9 +81,10 @@ const Products = (): JSX.Element => {
         <div>{displaySelectTarget ? <SelectTarget /> : <Title>בחר זרים</Title>}</div>
 
         <div>
-          {!!total && (
-            <Button onClick={handleActionButton}>{isTargetSelected ? 'המשך' : 'הזמן'}</Button>
-          )}
+          <ActionButton disabled={!total} onClick={handleActionButton}>
+            {isTargetSelected ? 'המשך' : 'הזמן'}
+          </ActionButton>
+
           <Total>סהכ: {total}</Total>
         </div>
       </Head>

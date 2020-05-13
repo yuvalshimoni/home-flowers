@@ -1,13 +1,16 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { theme, GlobalStyle } from 'shared/theme';
+import { theme, GlobalStyle, themeMaterialConfig } from 'shared/theme';
 import styled, { ThemeProvider } from 'styled-components';
 
 import rtl from 'jss-rtl';
 import { create } from 'jss';
-import { StylesProvider, jssPreset } from '@material-ui/core/styles';
-
-import { createMuiTheme, ThemeProvider as MaterialThemeProvider } from '@material-ui/core/styles';
+import {
+  ThemeProvider as MaterialThemeProvider,
+  Theme,
+  StylesProvider,
+  jssPreset,
+} from '@material-ui/core/styles';
 
 import { AppContextProvider } from 'App/Context';
 
@@ -19,17 +22,13 @@ const Layout = styled.div`
   max-width: 1200px;
 `;
 
-const themeMaterial = createMuiTheme({
-  direction: 'rtl',
-});
-
 // Configure JSS
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 const App = (): JSX.Element => {
   return (
     <StylesProvider jss={jss}>
-      <MaterialThemeProvider theme={themeMaterial}>
+      <MaterialThemeProvider<Theme> theme={themeMaterialConfig}>
         <AppContextProvider>
           <Router>
             <ThemeProvider theme={{ ...theme }}>
