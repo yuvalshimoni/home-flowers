@@ -22,5 +22,5 @@ export interface AppState {
   cart: Cart;
   cartDispatch: React.Dispatch<CartAction>;
   costumerDetails: CostumerDetails;
-  setCostumerDetails: React.Dispatch<CostumerDetails>;
+  setCostumerDetails: React.Dispatch<React.SetStateAction<CostumerDetails>>;
 }

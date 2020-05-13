@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 import { useAppState } from 'shared/hooks';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -27,17 +28,23 @@ const cities: Array<CityType> = [
 ];
 
 const SelectTarget = (): JSX.Element => {
-  const { costumerDetails, setCostumerDetails } = useAppState();
-  const { target } = costumerDetails;
-  const [inputValue, setInputValue] = React.useState('');
+  const history = useHistory();
+  const {
+    costumerDetails: { target },
+    setCostumerDetails,
+  } = useAppState();
 
-  const handleChange = useCallback(
-    (event, values) =>
-      setCostumerDetails({
-        ...costumerDetails,
+  const [inputValue, setInputValue] = useState('');
+
+  const onSelect = useCallback(
+    (event, values) => {
+      setCostumerDetails((prevState) => ({
+        ...prevState,
         target: values ? { name: values.name, cityId: values.cityId } : undefined,
-      }),
-    [costumerDetails, setCostumerDetails],
+      }));
+      history.push('/details');
+    },
+    [history, setCostumerDetails],
   );
 
   const handleInputChange = useCallback((event, newInputValue) => {
@@ -54,9 +61,9 @@ const SelectTarget = (): JSX.Element => {
   return (
     <Autocomplete
       value={target}
-      inputValue={inputValue}
-      onChange={handleChange}
       options={cities}
+      inputValue={inputValue}
+      onChange={onSelect}
       style={{ width: 300 }}
       onInputChange={handleInputChange}
       getOptionLabel={getOptionLabel}

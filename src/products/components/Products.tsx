@@ -55,9 +55,12 @@ const products: Array<ProductType> = [
 ];
 
 const Products = (): JSX.Element => {
-  const { cart } = useAppState();
+  const {
+    cart,
+    costumerDetails: { target },
+  } = useAppState();
 
-  const [displaySelectTarget, setDisplaySelectTarget] = useState<boolean>(false);
+  const [displaySelectTarget, setDisplaySelectTarget] = useState<boolean>(!!target?.name);
 
   const showSelectTarget = useCallback(() => setDisplaySelectTarget(true), []);
 
