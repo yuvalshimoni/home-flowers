@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { useEffectOnUpdate } from 'shared/hooks';
 import { ProductType } from './types';
-import { useAppContext } from 'shared/hooks';
+import { useAppState } from 'shared/hooks';
 
 const Wrapper = styled.div`
   background-color: #ccc;
@@ -43,10 +43,8 @@ interface ProductProps extends ProductType {
 }
 
 const Product = ({ id, title, price, initialAmount = 0 }: ProductProps): JSX.Element => {
+  const { cartDispatch } = useAppState();
   const [amount, setAmount] = useState<number>(initialAmount);
-  const {
-    state: { cartDispatch },
-  } = useAppContext();
 
   const onIncrease = useCallback(() => {
     setAmount((prev) => prev + 1);

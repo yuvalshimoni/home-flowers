@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useAppContext } from 'shared/hooks';
+import { useAppState } from 'shared/hooks';
 
 const Wrapper = styled.div`
   display: flex;
@@ -15,9 +15,7 @@ const Title = styled.h5`
 const Row = styled.div``;
 
 const CartTable = (): JSX.Element => {
-  const {
-    state: { cart },
-  } = useAppContext();
+  const { cart } = useAppState();
 
   return (
     <Wrapper>

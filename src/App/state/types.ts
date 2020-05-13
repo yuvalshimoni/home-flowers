@@ -9,7 +9,10 @@ export type CartItemType = {
 export type Cart = Array<CartItemType>;
 
 export type CostumerDetails = {
-  target: string;
+  target?: {
+    cityId: string;
+    name: string;
+  };
   name: string;
   phone: number | null;
   deliveryDate: string;

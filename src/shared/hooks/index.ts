@@ -1,2 +1,2 @@
-export { default as useAppContext } from './useAppContext';
+export { default as useAppState } from './useAppState';
 export { default as useEffectOnUpdate } from './useEffectOnUpdate';

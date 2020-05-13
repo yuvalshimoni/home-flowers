@@ -1,6 +1,6 @@
 import React, { useMemo, useState, useCallback } from 'react';
 import styled from 'styled-components';
-import { useAppContext } from 'shared/hooks';
+import { useAppState } from 'shared/hooks';
 import { Product, ProductType, FlexRowSpaceBetween } from 'shared/components';
 import { getTotalCart } from 'shared/utils';
 import SelectTarget from './SelectTarget';
@@ -55,9 +55,7 @@ const products: Array<ProductType> = [
 ];
 
 const Products = (): JSX.Element => {
-  const {
-    state: { cart },
-  } = useAppContext();
+  const { cart } = useAppState();
 
   const [displaySelectTarget, setDisplaySelectTarget] = useState<boolean>(false);
 
