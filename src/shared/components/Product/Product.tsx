@@ -4,16 +4,22 @@ import { useEffectOnUpdate } from 'shared/hooks';
 import { ProductType } from './types';
 import { useAppState } from 'shared/hooks';
 
-const Wrapper = styled.div`
-  background-color: #ccc;
+const Wrapper = styled.div``;
+
+const Image = styled.img`
+  width: 80%;
+  height: auto;
+  margin: 0 auto;
+  object-fit: contain;
 `;
 
-const Title = styled.h5`
+const Title = styled.div`
   font-weight: bold;
-  font-size: ${({ theme }) => theme.sizes.md}px;
+  line-height: 32px;
+  font-size: ${({ theme }) => theme.sizes.main}px;
 `;
 
-const Price = styled.h5`
+const Price = styled.div`
   font-size: ${({ theme }) => theme.sizes.main}px;
 `;
 
@@ -42,7 +48,7 @@ interface ProductProps extends ProductType {
   initialAmount?: number;
 }
 
-const Product = ({ id, title, price, initialAmount = 0 }: ProductProps): JSX.Element => {
+const Product = ({ id, title, price, initialAmount = 0, image }: ProductProps): JSX.Element => {
   const { cartDispatch } = useAppState();
   const [amount, setAmount] = useState<number>(initialAmount);
 
@@ -76,8 +82,9 @@ const Product = ({ id, title, price, initialAmount = 0 }: ProductProps): JSX.Ele
 
   return (
     <Wrapper>
+      <Image src={image} />
       <Title>{title}</Title>
-      <Price>{price}</Price>
+      <Price>{`${price} ש"ח`} </Price>
       <Price>{amount} :כמות</Price>
 
       <ButtonsWrapper>

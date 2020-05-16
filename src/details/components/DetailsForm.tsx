@@ -1,16 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useForm, Controller } from 'react-hook-form';
-import { FlexRowSpaceBetween, ActionButton, FlexColumn } from 'shared/components';
+import { FlexRowSpaceBetween, ActionButton, FlexColumn, SubTitle } from 'shared/components';
 import TextField from '@material-ui/core/TextField';
 import { useAppState } from 'shared/hooks';
 import { useHistory } from 'react-router-dom';
 
 const FormWrapper = styled(FlexRowSpaceBetween)`
-  flex-wrap: wrap;
+  display: grid;
+  grid-gap: 50px;
+  align-items: start;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 `;
 
 const FieldWrapper = styled(FlexColumn)``;
+
+const SubmitWrapper = styled.div``;
 
 const Error = styled.div`
   height: 35px;
@@ -51,6 +56,7 @@ const DetailsForm = (): JSX.Element => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <SubTitle>פרטים ליצירת קשר</SubTitle>
       <FormWrapper>
         <FieldWrapper>
           <Controller
@@ -80,7 +86,9 @@ const DetailsForm = (): JSX.Element => {
           <Error>{errors.phone && errors.phone.message}</Error>
         </FieldWrapper>
 
-        <ActionButton type="submit">לתשלום</ActionButton>
+        <SubmitWrapper>
+          <ActionButton type="submit">לתשלום</ActionButton>
+        </SubmitWrapper>
       </FormWrapper>
     </form>
   );

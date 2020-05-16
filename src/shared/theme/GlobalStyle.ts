@@ -2,7 +2,7 @@ import { createGlobalStyle, css } from 'styled-components';
 
 const defaultStyles = css`
   margin: 0px;
-  font-size: 14px;
+  font-size: 18px;
   font-family: 'Roboto', sans-serif;
 `;
 
@@ -15,6 +15,7 @@ const GlobalStyle = createGlobalStyle`
     outline:none;
     box-sizing: border-box; 
     position: relative;
+    
     :focus {
       outline:none;
     } 
@@ -36,6 +37,7 @@ const GlobalStyle = createGlobalStyle`
     direction: rtl;
     ${defaultStyles};
   }
+
 
   #root {
     width: 100%;

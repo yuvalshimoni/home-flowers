@@ -19,7 +19,14 @@ import MainRouter from './MainRouter';
 const Layout = styled.div`
   width: 100%;
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1140px;
+`;
+
+const Logo = styled.h1`
+  top: 0;
+  left: 0;
+  position: absolute;
+  font-size: ${({ theme }) => theme.sizes.xxl}px;
 `;
 
 // Configure JSS
@@ -34,7 +41,7 @@ const App = (): JSX.Element => {
             <ThemeProvider theme={{ ...theme }}>
               <GlobalStyle />
               <Layout>
-                <h1>Home Flowers</h1>
+                <Logo>Home Flowers</Logo>
 
                 <MainRouter />
               </Layout>
