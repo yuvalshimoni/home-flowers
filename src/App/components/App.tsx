@@ -17,15 +17,17 @@ import { AppContextProvider } from 'App/Context';
 import MainRouter from './MainRouter';
 
 const Layout = styled.div`
+  position: relative;
   width: 100%;
   margin: 0 auto;
   max-width: 1140px;
 `;
 
 const Logo = styled.h1`
-  top: 0;
-  left: 0;
   position: absolute;
+  margin: 0;
+  left: 0;
+  top: 25px;
   font-size: ${({ theme }) => theme.sizes.xxl}px;
 `;
 

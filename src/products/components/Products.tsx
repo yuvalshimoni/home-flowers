@@ -8,7 +8,7 @@ import { getTotalCart } from 'shared/utils';
 import SelectTarget from './SelectTarget';
 
 const Wrapper = styled.div`
-  padding-bottom: 60px;
+  padding-bottom: 80px;
 `;
 
 const RightSide = styled(FlexColumn)`
@@ -22,6 +22,7 @@ const SelectTargetWrapper = styled(animated.div)`
   right: 0;
   bottom: 0;
   z-index: 10;
+  width: 500px;
 `;
 
 const Total = styled.div``;
@@ -37,7 +38,7 @@ const ButtonWrapper = styled(animated.div)`
 const ProductsWrapper = styled.div`
   display: grid;
   grid-gap: 50px;
-  margin-top: 50px;
+  margin-top: 85px;
   align-items: center;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 `;

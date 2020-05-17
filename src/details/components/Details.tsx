@@ -1,10 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import { HeadPage, MainTitle } from 'shared/components';
+import { HeadPage as HeadPageBase, MainTitle } from 'shared/components';
 import DetailsForm from './DetailsForm';
 import CartTable from './CartTable';
 
 const Wrapper = styled.div``;
+
+const HeadPage = styled(HeadPageBase)`
+  margin-bottom: 15px;
+  align-items: center;
+`;
 
 const Details = (): JSX.Element => (
   <Wrapper>
