@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useForm, Controller } from 'react-hook-form';
-import { FlexRowSpaceBetween, ActionButton, FlexColumn, SubTitle } from 'shared/components';
+import { FlexRowSpaceBetween, Button, FlexColumn, SubTitle, FadeIn } from 'shared/components';
 import TextField from '@material-ui/core/TextField';
 import { useAppState } from 'shared/hooks';
 import { useHistory } from 'react-router-dom';
@@ -55,42 +55,44 @@ const DetailsForm = (): JSX.Element => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <SubTitle>פרטים ליצירת קשר</SubTitle>
-      <FormWrapper>
-        <FieldWrapper>
-          <Controller
-            as={<TextField label="שם מלא" />}
-            name="name"
-            control={control}
-            rules={{ required: 'היי איך נדע איך קוראים לך?' }}
-            defaultValue=""
-          />
-          <Error>{errors.name && errors.name.message}</Error>
-        </FieldWrapper>
+    <FadeIn>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <SubTitle>פרטים ליצירת קשר</SubTitle>
+        <FormWrapper>
+          <FieldWrapper>
+            <Controller
+              as={<TextField label="שם מלא" />}
+              name="name"
+              control={control}
+              rules={{ required: 'היי איך נדע איך קוראים לך?' }}
+              defaultValue=""
+            />
+            <Error>{errors.name && errors.name.message}</Error>
+          </FieldWrapper>
 
-        <FieldWrapper>
-          <Controller
-            as={<TextField label="טלפון " />}
-            name="phone"
-            control={control}
-            rules={{
-              required: 'בלי טלפון לא נוכל לתאם משלוח..',
-              pattern: {
-                value: /^0\d([\d]{0,1})([-]{0,1})\d{7}$/,
-                message: 'מה זה עוזר הבאלגן הזה?',
-              },
-            }}
-            defaultValue=""
-          />
-          <Error>{errors.phone && errors.phone.message}</Error>
-        </FieldWrapper>
+          <FieldWrapper>
+            <Controller
+              as={<TextField label="טלפון " />}
+              name="phone"
+              control={control}
+              rules={{
+                required: 'בלי טלפון לא נוכל לתאם משלוח..',
+                pattern: {
+                  value: /^0\d([\d]{0,1})([-]{0,1})\d{7}$/,
+                  message: 'מה זה עוזר הבאלגן הזה?',
+                },
+              }}
+              defaultValue=""
+            />
+            <Error>{errors.phone && errors.phone.message}</Error>
+          </FieldWrapper>
 
-        <SubmitWrapper>
-          <ActionButton type="submit">לתשלום</ActionButton>
-        </SubmitWrapper>
-      </FormWrapper>
-    </form>
+          <SubmitWrapper>
+            <Button type="submit">לתשלום</Button>
+          </SubmitWrapper>
+        </FormWrapper>
+      </form>
+    </FadeIn>
   );
 };
 
