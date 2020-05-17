@@ -10,8 +10,8 @@ const Wrapper = styled.div``;
 
 const ButtonWrapper = styled.div`
   position: fixed;
-  bottom: 5px;
   width: 100%;
+  bottom: 5px;
   margin: 0 auto;
   max-width: 1140px;
 `;
@@ -85,8 +85,8 @@ const Products = (): JSX.Element => {
       </Wrapper>
 
       <ButtonWrapper>
-        <ActionButton disabled={!total} onClick={handleActionButton}>
-          {isTargetSelected ? 'המשך' : 'סיימתי'}
+        <ActionButton onClick={handleActionButton} disabled={!total}>
+          המשך
         </ActionButton>
       </ButtonWrapper>
     </>

@@ -7,6 +7,7 @@ import { useAppState } from 'shared/hooks';
 const Wrapper = styled.div``;
 
 const Image = styled.img`
+  display: block;
   width: 80%;
   height: auto;
   margin: 0 auto;
