@@ -60,7 +60,11 @@ const TotalWrapper = styled(Flex)`
   justify-content: flex-end;
 `;
 
-const CartTable = (): JSX.Element => {
+type CartTableProps = {
+  editable?: boolean;
+};
+
+const CartTable = ({ editable = true }: CartTableProps): JSX.Element => {
   const history = useHistory();
   const {
     cart,
@@ -99,7 +103,7 @@ const CartTable = (): JSX.Element => {
               item={products.find((p) => p.id === productId)!}
               amount={amount}
               price={price}
-              removeProduct={removeProduct}
+              removeProduct={editable ? removeProduct : undefined}
             />
           ))}
       </ItemsWrapper>

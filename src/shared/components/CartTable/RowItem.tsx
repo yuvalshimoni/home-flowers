@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { ProductType, FlexRowSpaceBetween } from 'shared/components';
 
@@ -34,7 +34,7 @@ type RowProps = {
   item: ProductType;
   amount: number;
   price: number;
-  removeProduct: (productId: ProductType['id']) => void;
+  removeProduct?: (productId: ProductType['id']) => void;
 };
 
 const RowItem = ({
@@ -42,14 +42,20 @@ const RowItem = ({
   price,
   amount,
   removeProduct,
-}: RowProps): JSX.Element => (
-  <RowWrapper>
-    <Image src={image} />
-    <Name>{title}</Name>
-    <Text>כמות: {amount} </Text>
-    <Text>{price * amount} ש"ח</Text>
-    <RemoveButton onClick={() => removeProduct(id)}>X</RemoveButton>
-  </RowWrapper>
-);
+}: RowProps): JSX.Element => {
+  const handleOnClick = useCallback(() => {
+    removeProduct?.(id);
+  }, []);
+
+  return (
+    <RowWrapper>
+      <Image src={image} />
+      <Name>{title}</Name>
+      <Text>כמות: {amount} </Text>
+      <Text>{price * amount} ש"ח</Text>
+      {removeProduct && <RemoveButton onClick={handleOnClick}>X</RemoveButton>}
+    </RowWrapper>
+  );
+};
 
 export default RowItem;
