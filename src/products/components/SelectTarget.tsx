@@ -16,12 +16,12 @@ const TextFieldStyled = styled(TextField)`
     height: 85px;
   }
   .MuiInput-input {
-    height: 90%;
-    font-size: 55px;
+    height: 90px;
+    font-size: 50px;
     font-weight: 100;
 
     @media (max-width: 500px) {
-      font-size: ${({ theme }) => theme.sizes.md}px;
+      font-size: 45px;
     }
   }
   .MuiInputLabel-root {
@@ -34,7 +34,11 @@ const TextFieldStyled = styled(TextField)`
   }
 
   .MuiInputLabel-formControl {
-    top: 20px;
+    top: 12px;
+
+    @media (max-width: 500px) {
+      top: 20px;
+    }
   }
 
   .MuiInputLabel-shrink {

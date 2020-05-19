@@ -29,6 +29,7 @@ const SubmitWrapper = styled.div``;
 const Error = styled.div`
   height: 35px;
   margin-top: 15px;
+  color: ${({ theme }) => theme.colors.error};
   font-size: ${({ theme }) => theme.sizes.small}px;
 `;
 

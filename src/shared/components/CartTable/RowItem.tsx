@@ -3,14 +3,19 @@ import styled from 'styled-components';
 import { ProductType, FlexRowSpaceBetween } from 'shared/components';
 
 const RowWrapper = styled(FlexRowSpaceBetween)`
-  height: 160px;
+  padding: 35px 0px;
   align-items: center;
+  flex-wrap: wrap;
 `;
 
 const Name = styled.div`
   font-weight: bold;
   line-height: 32px;
   font-size: ${({ theme }) => theme.sizes.main}px;
+
+  @media (max-width: 500px) {
+    width: 100%;
+  }
 `;
 
 const Text = styled.div`
@@ -22,6 +27,11 @@ const Image = styled.img`
   width: 126px;
   height: 126px;
   object-fit: contain;
+
+  @media (max-width: 500px) {
+    width: 85%;
+    height: 150px;
+  }
 `;
 
 const RemoveButton = styled.div`
