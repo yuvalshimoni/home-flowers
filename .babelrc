@@ -11,5 +11,5 @@
     "@babel/preset-react",
     "@babel/preset-flow"
   ],
-  "plugins": [["styled-components", { "displayName": true }]]
+  "plugins": ["babel-plugin-styled-components"]
 }
