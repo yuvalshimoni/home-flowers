@@ -22,6 +22,11 @@ const Layout = styled.div`
   margin: 0 auto;
   max-width: 1140px;
   padding-bottom: 100px;
+
+  @media (max-width: 500px) {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
 `;
 
 const Logo = styled.h1`
@@ -29,7 +34,12 @@ const Logo = styled.h1`
   margin: 0;
   left: 0;
   top: 25px;
-  font-size: ${({ theme }) => theme.sizes.xxl}px;
+  font-size: ${({ theme }) => theme.sizes.huge}px;
+
+  @media (max-width: 500px) {
+    left: 15px;
+    font-size: ${({ theme }) => theme.sizes.md}px;
+  }
 `;
 
 // Configure JSS

@@ -4,7 +4,11 @@ import { useEffectOnUpdate } from 'shared/hooks';
 import { ProductType } from './types';
 import { useAppState } from 'shared/hooks';
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  @media (max-width: 500px) {
+    border-bottom: 1px solid #ccc;
+  }
+`;
 
 const Image = styled.img`
   display: block;
@@ -12,6 +16,10 @@ const Image = styled.img`
   height: auto;
   margin: 0 auto;
   object-fit: contain;
+
+  @media (max-width: 500px) {
+    width: 60%;
+  }
 `;
 
 const Title = styled.div`

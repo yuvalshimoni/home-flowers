@@ -1,6 +1,7 @@
 const sizes = {
   // Titles
-  xxl: 60,
+  huge: 60,
+  big: 30,
   xl: 24,
   md: 22,
 

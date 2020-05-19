@@ -41,6 +41,10 @@ const Wrapper = styled.div`
   flex-direction: column;
   box-shadow: 0px 4px 10px #0000001f;
   background: #fcfcfc 0% 0% no-repeat padding-box;
+
+  @media (max-width: 500px) {
+    padding: 25px 20px;
+  }
 `;
 
 const TargetWrapper = styled.div`

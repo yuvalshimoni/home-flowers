@@ -16,8 +16,13 @@ import SelectTarget from './SelectTarget';
 
 const Wrapper = styled.div``;
 
-const RightSide = styled(FlexColumn)`
+const TextWrapper = styled(FlexColumn)`
   position: relative;
+  flex: 1;
+
+  @media (max-width: 500px) {
+    width: 100%;
+  }
 `;
 
 const MainTitleWrapper = styled(animated.div)``;
@@ -28,14 +33,24 @@ const SelectTargetWrapper = styled(animated.div)`
   bottom: 0;
   z-index: 10;
   width: 500px;
+
+  @media (max-width: 500px) {
+    left: 0;
+    width: auto;
+  }
 `;
 
 const ButtonWrapper = styled(animated.div)`
   position: fixed;
-  width: 100%;
+  right: 0;
+  left: 0;
   bottom: 5px;
   margin: 0 auto;
   max-width: 1140px;
+
+  @media (max-width: 500px) {
+    bottom: 0;
+  }
 `;
 
 const ProductsWrapper = styled.div`
@@ -44,6 +59,20 @@ const ProductsWrapper = styled.div`
   margin-top: 85px;
   align-items: center;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+
+  @media (max-width: 500px) {
+    margin-top: 40px;
+  }
+`;
+
+const TotalWrapper = styled.div<{ displaySelectTarget?: boolean }>`
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  @media (max-width: 500px) {
+    ${({ displaySelectTarget }) => displaySelectTarget && 'opacity: 0;'}
+  }
 `;
 
 const products: Array<ProductType> = [
@@ -110,17 +139,17 @@ const Products = (): JSX.Element => {
     <>
       <Wrapper>
         <HeadPage>
-          <RightSide>
-            <SelectTargetWrapper style={selectTargetAnimations}>
-              <SelectTarget />
-            </SelectTargetWrapper>
+          <SelectTargetWrapper style={selectTargetAnimations}>
+            <SelectTarget />
+          </SelectTargetWrapper>
 
-            <MainTitleWrapper style={MainTitleAnimations}>
-              <MainTitle>בחר זרים</MainTitle>
-            </MainTitleWrapper>
-          </RightSide>
+          <MainTitleWrapper style={MainTitleAnimations}>
+            <MainTitle>בחר זרים</MainTitle>
+          </MainTitleWrapper>
 
-          <TotalCart />
+          <TotalWrapper displaySelectTarget={displaySelectTarget}>
+            <TotalCart />
+          </TotalWrapper>
         </HeadPage>
 
         <ProductsWrapper>

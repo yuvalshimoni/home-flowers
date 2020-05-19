@@ -11,6 +11,11 @@ const FormWrapper = styled(FlexRowSpaceBetween)`
   grid-gap: 50px;
   align-items: start;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+
+  @media (max-width: 500px) {
+    grid-gap: 0px;
+    margin-bottom: 40px;
+  }
 `;
 
 const FormTitle = styled(SubTitle)`

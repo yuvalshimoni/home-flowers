@@ -6,13 +6,12 @@ import DetailsForm from './DetailsForm';
 const Wrapper = styled.div``;
 
 const HeadPage = styled(HeadPageBase)`
-  margin-bottom: 15px;
-  align-items: center;
+  margin-bottom: 20px;
 `;
 
 const Details = (): JSX.Element => (
   <Wrapper>
-    <HeadPage>
+    <HeadPage small>
       <MainTitle>סיום הזמנה</MainTitle>
     </HeadPage>
 
