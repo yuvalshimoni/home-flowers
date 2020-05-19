@@ -47,23 +47,23 @@ const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 const App = (): JSX.Element => {
   return (
-    <StylesProvider jss={jss}>
-      <GlobalStyle />
+    <ThemeProvider theme={{ ...theme }}>
+      <StylesProvider jss={jss}>
+        <GlobalStyle />
 
-      <MaterialThemeProvider<Theme> theme={themeMaterialConfig}>
-        <AppContextProvider>
-          <Router>
-            <ThemeProvider theme={{ ...theme }}>
+        <MaterialThemeProvider<Theme> theme={themeMaterialConfig}>
+          <AppContextProvider>
+            <Router>
               <Layout>
                 <Logo>Home Flowers</Logo>
 
                 <MainRouter />
               </Layout>
-            </ThemeProvider>
-          </Router>
-        </AppContextProvider>
-      </MaterialThemeProvider>
-    </StylesProvider>
+            </Router>
+          </AppContextProvider>
+        </MaterialThemeProvider>
+      </StylesProvider>
+    </ThemeProvider>
   );
 };
 
