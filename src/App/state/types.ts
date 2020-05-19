@@ -20,6 +20,7 @@ export type CostumerDetails = {
 
 export interface AppState {
   cart: Cart;
+  totalCart: number;
   cartDispatch: React.Dispatch<CartAction>;
   costumerDetails: CostumerDetails;
   setCostumerDetails: React.Dispatch<React.SetStateAction<CostumerDetails>>;

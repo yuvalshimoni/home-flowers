@@ -3,13 +3,18 @@ import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
 import { useAppState } from 'shared/hooks';
 import { useHistory } from 'react-router-dom';
-import { Product, ProductType, Button, MainTitle, HeadPage, FlexColumn } from 'shared/components';
-import { getTotalCart } from 'shared/utils';
+import {
+  Product,
+  TotalCart,
+  ProductType,
+  Button,
+  MainTitle,
+  HeadPage,
+  FlexColumn,
+} from 'shared/components';
 import SelectTarget from './SelectTarget';
 
-const Wrapper = styled.div`
-  padding-bottom: 80px;
-`;
+const Wrapper = styled.div``;
 
 const RightSide = styled(FlexColumn)`
   position: relative;
@@ -24,8 +29,6 @@ const SelectTargetWrapper = styled(animated.div)`
   z-index: 10;
   width: 500px;
 `;
-
-const Total = styled.div``;
 
 const ButtonWrapper = styled(animated.div)`
   position: fixed;
@@ -73,11 +76,11 @@ const products: Array<ProductType> = [
 const Products = (): JSX.Element => {
   const history = useHistory();
   const {
-    cart,
+    totalCart,
     costumerDetails: { target },
   } = useAppState();
 
-  const isTargetSelected = useMemo(() => !!target?.name, [target]);
+  const isTargetSelected = useMemo(() => !!target?.name, [target?.name]);
   const [displaySelectTarget, setDisplaySelectTarget] = useState<boolean>(isTargetSelected);
 
   const handleOnClick = useCallback(() => {
@@ -89,8 +92,6 @@ const Products = (): JSX.Element => {
       setDisplaySelectTarget(true);
     }
   }, [history, isTargetSelected]);
-
-  const total = useMemo<number>(() => getTotalCart(cart), [cart]);
 
   const MainTitleAnimations = useSpring({
     opacity: !displaySelectTarget ? 1 : 0,
@@ -119,9 +120,7 @@ const Products = (): JSX.Element => {
             </MainTitleWrapper>
           </RightSide>
 
-          <Total>
-            <strong>סה"כ {total}</strong> ש"ח
-          </Total>
+          <TotalCart />
         </HeadPage>
 
         <ProductsWrapper>
@@ -132,7 +131,7 @@ const Products = (): JSX.Element => {
       </Wrapper>
 
       <ButtonWrapper style={ButtonAnimations}>
-        <Button onClick={handleOnClick} disabled={!total}>
+        <Button onClick={handleOnClick} disabled={!totalCart}>
           המשך
         </Button>
       </ButtonWrapper>

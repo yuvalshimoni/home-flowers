@@ -13,6 +13,10 @@ const FormWrapper = styled(FlexRowSpaceBetween)`
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 `;
 
+const FormTitle = styled(SubTitle)`
+  margin-bottom: 20px;
+`;
+
 const FieldWrapper = styled(FlexColumn)``;
 
 const SubmitWrapper = styled.div``;
@@ -57,7 +61,8 @@ const DetailsForm = (): JSX.Element => {
   return (
     <FadeIn>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <SubTitle>פרטים ליצירת קשר</SubTitle>
+        <FormTitle>פרטים ליצירת קשר</FormTitle>
+
         <FormWrapper>
           <FieldWrapper>
             <Controller

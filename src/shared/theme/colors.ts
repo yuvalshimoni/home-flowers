@@ -4,7 +4,7 @@ export const WHITE = '#FFF';
 export const GREY = '#A3A3A3';
 export const DARK_GREY = '#7C7C7C';
 export const LIGHT_GREY = '#D1D1D1';
-export const RED_ERROR = '#DF1616';
+export const RED_ERROR = '#DE3131';
 export const RED_SECONDARY_ERROR = '#D14444';
 
 const colors = {

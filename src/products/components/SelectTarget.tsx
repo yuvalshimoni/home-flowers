@@ -2,8 +2,14 @@ import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useAppState } from 'shared/hooks';
+import { TextPrimary } from 'shared/components';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+
+const TextWrapper = styled.div`
+  margin-top: 10px;
+  text-align: left;
+`;
 
 const TextFieldStyled = styled(TextField)`
   .MuiInput-root {
@@ -84,17 +90,23 @@ const SelectTarget = (): JSX.Element => {
   );
 
   return (
-    <Autocomplete
-      fullWidth
-      value={target}
-      options={cities}
-      inputValue={inputValue}
-      onChange={onSelect}
-      style={{ width: '100%' }}
-      onInputChange={handleInputChange}
-      getOptionLabel={getOptionLabel}
-      renderInput={renderInput}
-    />
+    <>
+      <Autocomplete
+        fullWidth
+        value={target}
+        options={cities}
+        inputValue={inputValue}
+        onChange={onSelect}
+        style={{ width: '100%' }}
+        onInputChange={handleInputChange}
+        getOptionLabel={getOptionLabel}
+        renderInput={renderInput}
+      />
+
+      <TextWrapper>
+        <TextPrimary>חלוקה בתאריך 23.3.20 בשעה 20:00</TextPrimary>
+      </TextWrapper>
+    </>
   );
 };
 

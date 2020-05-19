@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { HeadPage as HeadPageBase, MainTitle } from 'shared/components';
+import { HeadPage as HeadPageBase, MainTitle, CartTable } from 'shared/components';
 import DetailsForm from './DetailsForm';
-import CartTable from './CartTable';
 
 const Wrapper = styled.div``;
 

@@ -1,8 +1,11 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
-import { ProductType, SubTitle, FlexRow, FlexRowSpaceBetween } from 'shared/components';
+import { TotalCart } from 'shared/components';
+import { useHistory } from 'react-router-dom';
+import { ProductType, SubTitle, TextPrimary, NormalText } from 'shared/components';
 import { useAppState } from 'shared/hooks';
-import { type } from 'os';
+import RowItem from './RowItem';
+import { Flex } from '../FlexHelper';
 
 const products: Array<ProductType> = [
   {
@@ -33,82 +36,65 @@ const products: Array<ProductType> = [
 
 const Wrapper = styled.div`
   display: flex;
-  padding: 20px 40px;
+  padding: 30px 40px;
   border-radius: 10px;
   flex-direction: column;
   box-shadow: 0px 4px 10px #0000001f;
   background: #fcfcfc 0% 0% no-repeat padding-box;
 `;
 
+const TargetWrapper = styled.div`
+  margin-top: 15px;
+`;
+
 const ItemsWrapper = styled.div`
   margin-top: 25px;
+  margin-bottom: 40px;
+
+  > div {
+    border-bottom: 1px solid #ccc;
+  }
 `;
 
-const RowWrapper = styled(FlexRowSpaceBetween)`
-  height: 160px;
-  align-items: center;
-  border-bottom: 1px solid #ccc;
+const TotalWrapper = styled(Flex)`
+  justify-content: flex-end;
 `;
-
-const Name = styled.div`
-  font-weight: bold;
-  line-height: 32px;
-  font-size: ${({ theme }) => theme.sizes.main}px;
-`;
-
-const Text = styled.div`
-  font-size: ${({ theme }) => theme.sizes.main}px;
-`;
-
-const Image = styled.img`
-  display: block;
-  width: 126px;
-  height: 126px;
-  object-fit: contain;
-`;
-
-const RemoveButton = styled.div`
-  cursor: pointer;
-  width: 30px;
-`;
-
-type RowProps = {
-  item: ProductType;
-  amount: number;
-  price: number;
-  removeProduct: (productId: ProductType['id']) => void;
-};
-
-const Row = ({
-  item: { id, image, title },
-  price,
-  amount,
-  removeProduct,
-}: RowProps): JSX.Element => (
-  <RowWrapper>
-    <Image src={image} />
-    <Name>{title}</Name>
-    <Text>{amount} כמות</Text>
-    <Text>{price}</Text>
-    <RemoveButton onClick={() => removeProduct(id)}>X</RemoveButton>
-  </RowWrapper>
-);
 
 const CartTable = (): JSX.Element => {
-  const { cart, cartDispatch } = useAppState();
+  const history = useHistory();
+  const {
+    cart,
+    totalCart,
+    cartDispatch,
+    costumerDetails: { target },
+  } = useAppState();
 
-  const removeProduct = useCallback((productId) => {
-    cartDispatch({ type: 'REMOVE_ITEM_FROM_CART', payload: { productId } });
-  }, []);
+  useEffect(() => {
+    if (!totalCart) {
+      history.push('/');
+    }
+  }, [totalCart, history]);
+
+  const removeProduct = useCallback(
+    (productId) => {
+      cartDispatch({ type: 'REMOVE_ITEM_FROM_CART', payload: { productId } });
+    },
+    [cartDispatch],
+  );
 
   return (
     <Wrapper>
       <SubTitle>פרוט הזמנה</SubTitle>
 
+      <TargetWrapper>
+        <NormalText>{target?.name}</NormalText>
+        <TextPrimary>חלוקה בתאריך 23.3.20 בשעה 20:00</TextPrimary>
+      </TargetWrapper>
+
       <ItemsWrapper>
         {cart?.length &&
           cart.map(({ productId, amount, price }) => (
-            <Row
+            <RowItem
               key={productId}
               item={products.find((p) => p.id === productId)!}
               amount={amount}
@@ -117,6 +103,10 @@ const CartTable = (): JSX.Element => {
             />
           ))}
       </ItemsWrapper>
+
+      <TotalWrapper>
+        <TotalCart />
+      </TotalWrapper>
     </Wrapper>
   );
 };

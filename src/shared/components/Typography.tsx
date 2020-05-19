@@ -12,6 +12,16 @@ const SubTitle = styled.h2`
   font-size: ${({ theme }) => theme.sizes.xl}px;
 `;
 
+const NormalText = styled.div`
+  font-weight: 100;
+  font-size: ${({ theme }) => theme.sizes.main}px;
+`;
+
+const TextPrimary = styled.div`
+  color: ${({ theme }) => theme.colors.primary};
+  font-size: ${({ theme }) => theme.sizes.main}px;
+`;
+
 const HeadPage = styled(FlexRow)`
   height: 160px;
   margin-bottom: 15px;
@@ -19,4 +29,4 @@ const HeadPage = styled(FlexRow)`
   justify-content: space-between;
 `;
 
-export { MainTitle, SubTitle, HeadPage };
+export { MainTitle, SubTitle, TextPrimary, NormalText, HeadPage };
