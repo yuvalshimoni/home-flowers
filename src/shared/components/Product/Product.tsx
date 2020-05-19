@@ -45,13 +45,13 @@ type onChangeProps = {
   price: number;
 };
 
-interface ProductProps extends ProductType {
-  initialAmount?: number;
-}
+type ProductProps = ProductType;
 
-const Product = ({ id, title, price, initialAmount = 0, image }: ProductProps): JSX.Element => {
-  const { cartDispatch } = useAppState();
-  const [amount, setAmount] = useState<number>(initialAmount);
+const Product = ({ id, title, price, image }: ProductProps): JSX.Element => {
+  const { cart, cartDispatch } = useAppState();
+  const [amount, setAmount] = useState<number>(
+    () => cart.find((i) => i.productId === id)?.amount || 0,
+  );
 
   const onIncrease = useCallback(() => {
     setAmount((prev) => prev + 1);

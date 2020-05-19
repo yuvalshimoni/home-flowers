@@ -82,7 +82,9 @@ const Products = (): JSX.Element => {
 
   const handleOnClick = useCallback(() => {
     if (isTargetSelected) {
-      history.push('/details');
+      setTimeout(() => {
+        history.push('/details');
+      }, 1500);
     } else {
       setDisplaySelectTarget(true);
     }
@@ -99,7 +101,7 @@ const Products = (): JSX.Element => {
     transform: displaySelectTarget ? `translateX(0)` : `translateX(110%)`,
   });
 
-  const ButtoAnimations = useSpring({
+  const ButtonAnimations = useSpring({
     opacity: !displaySelectTarget ? 1 : 0,
   });
 
@@ -129,7 +131,7 @@ const Products = (): JSX.Element => {
         </ProductsWrapper>
       </Wrapper>
 
-      <ButtonWrapper style={ButtoAnimations}>
+      <ButtonWrapper style={ButtonAnimations}>
         <Button onClick={handleOnClick} disabled={!total}>
           המשך
         </Button>
