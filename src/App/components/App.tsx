@@ -48,11 +48,12 @@ const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 const App = (): JSX.Element => {
   return (
     <StylesProvider jss={jss}>
+      <GlobalStyle />
+
       <MaterialThemeProvider<Theme> theme={themeMaterialConfig}>
         <AppContextProvider>
           <Router>
             <ThemeProvider theme={{ ...theme }}>
-              <GlobalStyle />
               <Layout>
                 <Logo>Home Flowers</Logo>
 
