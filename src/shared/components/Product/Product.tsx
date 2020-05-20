@@ -3,9 +3,12 @@ import styled from 'styled-components';
 import { useEffectOnUpdate } from 'shared/hooks';
 import { ProductType } from './types';
 import { useAppState } from 'shared/hooks';
+import { NormalText } from '../Typography';
+import { FlexRowSpaceBetween, FlexRow } from '../FlexHelper';
 
 const Wrapper = styled.div`
   @media (max-width: 500px) {
+    padding-bottom: 15px;
     border-bottom: 1px solid #ccc;
   }
 `;
@@ -28,23 +31,29 @@ const Title = styled.div`
   font-size: ${({ theme }) => theme.sizes.main}px;
 `;
 
-const Price = styled.div`
-  font-size: ${({ theme }) => theme.sizes.main}px;
+const Amount = styled(NormalText)`
+  margin: 0 7px;
 `;
 
-const ButtonsWrapper = styled.div`
-  display: flex;
-  justify-content: space-around;
+const Price = styled(NormalText)``;
+
+const BottomArea = styled(FlexRowSpaceBetween)`
+  padding: 0px 15px;
+  align-items: flex-end;
 `;
+
+const ButtonsWrapper = styled(FlexRow)``;
 
 const Button = styled.div`
-  width: 50px;
-  height: 40px;
+  width: 30px;
+  height: 20px;
   display: flex;
   cursor: pointer;
   align-items: center;
   justify-content: center;
-  border: 1px solid #000;
+  color: #fff;
+  border-radius: 6px;
+  background-color: ${({ theme }) => theme.colors.primary};
 `;
 
 type onChangeProps = {
@@ -92,14 +101,21 @@ const Product = ({ id, title, price, image }: ProductProps): JSX.Element => {
   return (
     <Wrapper>
       <Image src={image} />
-      <Title>{title}</Title>
-      <Price>{`${price} ש"ח`} </Price>
-      <Price>{amount} :כמות</Price>
 
-      <ButtonsWrapper>
-        <Button onClick={onIncrease}>+</Button>
-        <Button onClick={onDecrease}>-</Button>
-      </ButtonsWrapper>
+      <BottomArea>
+        <div>
+          <Title>{title}</Title>
+          <Price>{`${price} ש"ח`} </Price>
+        </div>
+
+        <ButtonsWrapper>
+          {/* <AmountText>כמות:</AmountText> */}
+
+          <Button onClick={onIncrease}>+</Button>
+          <Amount>{amount}</Amount>
+          <Button onClick={onDecrease}>-</Button>
+        </ButtonsWrapper>
+      </BottomArea>
     </Wrapper>
   );
 };

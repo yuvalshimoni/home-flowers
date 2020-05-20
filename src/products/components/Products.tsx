@@ -3,27 +3,10 @@ import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
 import { useAppState } from 'shared/hooks';
 import { useHistory } from 'react-router-dom';
-import {
-  Product,
-  TotalCart,
-  ProductType,
-  Button,
-  MainTitle,
-  HeadPage,
-  FlexColumn,
-} from 'shared/components';
+import { Product, TotalCart, ProductType, Button, MainTitle, HeadPage } from 'shared/components';
 import SelectTarget from './SelectTarget';
 
 const Wrapper = styled.div``;
-
-const TextWrapper = styled(FlexColumn)`
-  position: relative;
-  flex: 1;
-
-  @media (max-width: 500px) {
-    width: 100%;
-  }
-`;
 
 const MainTitleWrapper = styled(animated.div)``;
 
@@ -86,13 +69,13 @@ const products: Array<ProductType> = [
     id: '12dsdsfsdf324dsf',
     title: 'פריחת קיץ',
     price: 50,
-    image: 'http://174.138.32.210/uploads/flowers-1_ceaac651ef.png',
+    image: 'http://174.138.32.210/uploads/bouquet-roses-tendresse@2x_d1140ec205.png',
   },
   {
     id: '324dfgfdg',
     title: 'פריחת קיץ',
     price: 25,
-    image: 'http://174.138.32.210/uploads/flowers-1_ceaac651ef.png',
+    image: 'http://174.138.32.210/uploads/Postabloom---cutout_3_grande_15eb843564.png',
   },
   {
     id: '324dfgfsdfdg',

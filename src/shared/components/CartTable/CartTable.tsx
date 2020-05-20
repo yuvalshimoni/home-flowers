@@ -18,13 +18,13 @@ const products: Array<ProductType> = [
     id: '12dsdsfsdf324dsf',
     title: 'פריחת קיץ',
     price: 50,
-    image: 'http://174.138.32.210/uploads/flowers-1_ceaac651ef.png',
+    image: 'http://174.138.32.210/uploads/bouquet-roses-tendresse@2x_d1140ec205.png',
   },
   {
     id: '324dfgfdg',
     title: 'פריחת קיץ',
     price: 25,
-    image: 'http://174.138.32.210/uploads/flowers-1_ceaac651ef.png',
+    image: 'http://174.138.32.210/uploads/Postabloom---cutout_3_grande_15eb843564.png',
   },
   {
     id: '324dfgfsdfdg',

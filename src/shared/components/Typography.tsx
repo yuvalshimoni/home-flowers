@@ -33,7 +33,7 @@ const HeadPage = styled(FlexColumn)<{ small?: boolean }>`
   justify-content: flex-end;
 
   @media (max-width: 500px) {
-    height: ${({ small }) => (small ? 100 : 200)}px;
+    height: ${({ small }) => (small ? 140 : 200)}px;
   }
 `;
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { theme, GlobalStyle, themeMaterialConfig } from 'shared/theme';
 import styled, { ThemeProvider } from 'styled-components';
+import logo from 'shared/assets/logo.png';
 
 import rtl from 'jss-rtl';
 import { create } from 'jss';
@@ -21,28 +22,24 @@ const Layout = styled.div`
   width: 100%;
   margin: 0 auto;
   max-width: 1140px;
-  padding-bottom: 100px;
-
-  @media (max-width: 500px) {
-    padding-right: 15px;
-    padding-left: 15px;
-  }
+  padding: 0px 15px 100px 15px;
 `;
 
-const Logo = styled.h1`
+const Logo = styled.img`
   position: absolute;
   margin: 0;
   left: 0;
   top: 25px;
-  font-size: ${({ theme }) => theme.sizes.huge}px;
+  height: 70px;
+  width: auto;
 
   @media (max-width: 500px) {
     left: 15px;
-    font-size: ${({ theme }) => theme.sizes.md}px;
+    height: 50px;
   }
 `;
 
-// Configure JSS
+// Configure JSS for rtl
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 const App = (): JSX.Element => {
@@ -55,7 +52,7 @@ const App = (): JSX.Element => {
           <AppContextProvider>
             <Router>
               <Layout>
-                <Logo>Home Flowers</Logo>
+                <Logo src={logo} alt="Home Flowers Logo" />
 
                 <MainRouter />
               </Layout>
