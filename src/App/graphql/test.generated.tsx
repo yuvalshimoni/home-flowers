@@ -19,7 +19,7 @@ export type TestDoNotDeleteQuery = (
   { __typename?: 'Query' }
   & { city?: Types.Maybe<(
     { __typename?: 'Cities' }
-    & Pick<Types.Cities, 'id'>
+    & Pick<Types.Cities, 'id' | 'name'>
   )> }
 );
 
@@ -28,6 +28,7 @@ export const TestDoNotDeleteDocument = gql`
     query TestDoNotDelete {
   city(id: "5") {
     id
+    name
   }
 }
     `;

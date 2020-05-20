@@ -1,10 +1,10 @@
 import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import { useEffectOnUpdate } from 'shared/hooks';
-import { ProductType } from './types';
 import { useAppState } from 'shared/hooks';
 import { NormalText } from '../Typography';
 import { FlexRowSpaceBetween, FlexRow } from '../FlexHelper';
+import * as Types from 'graphql/types.generated';
 
 const Wrapper = styled.div`
   @media (max-width: 500px) {
@@ -57,14 +57,19 @@ const Button = styled.div`
 `;
 
 type onChangeProps = {
-  productId: any;
+  productId: Types.Products['id'];
   amount: number;
-  price: number;
+  price: Types.Products['price'];
 };
 
-type ProductProps = ProductType;
+type ProductProps = {
+  id: Types.Products['id'];
+  title: Types.Products['title'];
+  price: Types.Products['price'];
+  url: Types.UploadFile['url'];
+};
 
-const Product = ({ id, title, price, image }: ProductProps): JSX.Element => {
+const Product = ({ id, title, price, url }: ProductProps): JSX.Element => {
   const { cart, cartDispatch } = useAppState();
   const [amount, setAmount] = useState<number>(
     () => cart.find((i) => i.productId === id)?.amount || 0,
@@ -100,7 +105,7 @@ const Product = ({ id, title, price, image }: ProductProps): JSX.Element => {
 
   return (
     <Wrapper>
-      <Image src={image} />
+      <Image src={process.env.REACT_APP_STRAPI_URL + url} />
 
       <BottomArea>
         <div>

@@ -1,9 +1,10 @@
 import { CartAction } from './reducers/cart';
+import * as Types from 'graphql/types.generated';
 
 export type CartItemType = {
-  productId: any;
+  productId: Types.Products['id'];
   amount: number;
-  price: number;
+  price: Types.Products['price'];
 };
 
 export type Cart = Array<CartItemType>;

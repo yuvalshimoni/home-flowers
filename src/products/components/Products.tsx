@@ -5,22 +5,7 @@ import { useAppState } from 'shared/hooks';
 import { useHistory } from 'react-router-dom';
 import { Product, TotalCart, ProductType, Button, MainTitle, HeadPage } from 'shared/components';
 import SelectTarget from './SelectTarget';
-
-import { useQuery } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
-
-const PRODUCTS = gql`
-  {
-    products {
-      id
-      title
-      price
-      image {
-        url
-      }
-    }
-  }
-`;
+import { useProcustsQuery } from 'shared/graphql';
 
 const Wrapper = styled.div``;
 
@@ -75,7 +60,7 @@ const TotalWrapper = styled.div<{ displaySelectTarget?: boolean }>`
 `;
 
 const Products = (): JSX.Element => {
-  const { loading, error, data } = useQuery(PRODUCTS);
+  const { data, loading } = useProcustsQuery();
 
   const history = useHistory();
   const {
@@ -127,9 +112,10 @@ const Products = (): JSX.Element => {
         </HeadPage>
 
         <ProductsWrapper>
-          {data?.products.map(({ id, title, price, image: { url } }) => (
-            <Product key={id} id={id} title={title} price={price} image={url} />
-          ))}
+          {data?.products?.map((item) => {
+            const { id, title, price, image } = item!;
+            return <Product key={id} id={id} title={title} price={price} url={image?.url!} />;
+          })}
         </ProductsWrapper>
       </Wrapper>
 

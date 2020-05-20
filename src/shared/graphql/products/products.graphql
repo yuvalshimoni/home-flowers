@@ -1,0 +1,10 @@
+query Procusts {
+  products {
+    id
+    title
+    price
+    image {
+      url
+    }
+  }
+}

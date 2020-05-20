@@ -1,0 +1,6 @@
+query Cities {
+  cities(sort: "name:asc", where: { is_active: true }) {
+    id
+    name
+  }
+}

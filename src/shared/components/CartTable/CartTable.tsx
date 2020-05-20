@@ -6,6 +6,7 @@ import { ProductType, SubTitle, TextPrimary, NormalText } from 'shared/component
 import { useAppState } from 'shared/hooks';
 import RowItem from './RowItem';
 import { Flex } from '../FlexHelper';
+import { useProcustsQuery } from 'shared/graphql';
 
 const products: Array<ProductType> = [
   {
@@ -69,6 +70,8 @@ type CartTableProps = {
 };
 
 const CartTable = ({ editable = true }: CartTableProps): JSX.Element => {
+  const { data } = useProcustsQuery();
+
   const history = useHistory();
   const {
     cart,
@@ -104,7 +107,7 @@ const CartTable = ({ editable = true }: CartTableProps): JSX.Element => {
           cart.map(({ productId, amount, price }) => (
             <RowItem
               key={productId}
-              item={products.find((p) => p.id === productId)!}
+              item={data?.products.find((p) => p.id === productId)!}
               amount={amount}
               price={price}
               removeProduct={editable ? removeProduct : undefined}

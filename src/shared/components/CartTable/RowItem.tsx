@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { ProductType, FlexRowSpaceBetween } from 'shared/components';
+import * as Types from 'graphql/types.generated';
 
 const RowWrapper = styled(FlexRowSpaceBetween)`
   padding: 35px 0px;
@@ -59,7 +60,7 @@ const RowItem = ({
 
   return (
     <RowWrapper>
-      <Image src={image} />
+      <Image src={process.env.REACT_APP_STRAPI_URL + image.url!} />
       <Name>{title}</Name>
       <Text>כמות: {amount} </Text>
       <Text>{price * amount} ש"ח</Text>

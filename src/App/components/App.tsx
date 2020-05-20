@@ -15,6 +15,7 @@ import {
 import { AppContextProvider } from 'App/Context';
 import MainRouter from './MainRouter';
 import logo from 'shared/assets/logo.png';
+import { useTestDoNotDeleteQuery } from 'App/graphql/test.generated';
 
 const Layout = styled.div`
   position: relative;

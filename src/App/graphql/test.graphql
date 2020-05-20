@@ -1,5 +1,6 @@
 query TestDoNotDelete {
   city(id: "5") {
     id
+    name
   }
 }

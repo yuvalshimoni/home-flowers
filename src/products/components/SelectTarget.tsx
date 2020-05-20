@@ -5,6 +5,8 @@ import { useAppState } from 'shared/hooks';
 import { TextPrimary } from 'shared/components';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import * as Types from 'graphql/types.generated';
+import { useCitiesQuery } from '../graphql/cities.generated';
 
 const TextWrapper = styled.div`
   margin-top: 10px;
@@ -51,26 +53,12 @@ const TextFieldStyled = styled(TextField)`
 `;
 
 export type CityType = {
-  cityId: string;
-  name: string;
+  cityId: Types.Cities['id'];
+  name: Types.Cities['name'];
 };
 
-const cities: Array<CityType> = [
-  {
-    name: 'מירב',
-    cityId: 'sadasd',
-  },
-  {
-    name: 'אלון מורה',
-    cityId: 'd234dasd',
-  },
-  {
-    name: 'תל אביב',
-    cityId: 'sada324sd',
-  },
-];
-
 const SelectTarget = (): JSX.Element => {
+  const { data, loading } = useCitiesQuery();
   const history = useHistory();
   const {
     costumerDetails: { target },
@@ -81,10 +69,11 @@ const SelectTarget = (): JSX.Element => {
 
   const onSelect = useCallback(
     (event, values) => {
-      const newValue = values ? { name: values.name, cityId: values.cityId } : undefined;
+      console.log(values);
+      const newValue = values ? { name: values.name, cityId: values.id } : undefined;
       setCostumerDetails((prevState) => ({
         ...prevState,
-        target: values ? { name: values.name, cityId: values.cityId } : undefined,
+        target: values ? { name: values.name, cityId: values.id } : undefined,
       }));
 
       if (!!newValue) {
@@ -98,19 +87,23 @@ const SelectTarget = (): JSX.Element => {
     setInputValue(newInputValue);
   }, []);
 
-  const getOptionLabel = useCallback((option: CityType): string => option.name, []);
+  const getOptionLabel = useCallback((option: CityType): Types.Cities['name'] => option.name!, []);
 
   const renderInput = useCallback(
     (params): JSX.Element => <TextFieldStyled {...params} label="יעד למשלוח" />,
     [],
   );
 
+  if (loading) {
+    return null;
+  }
+
   return (
     <>
       <Autocomplete
         fullWidth
         value={target}
-        options={cities}
+        options={data.cities!}
         inputValue={inputValue}
         onChange={onSelect}
         style={{ width: '100%' }}
