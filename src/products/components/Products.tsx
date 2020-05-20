@@ -6,6 +6,22 @@ import { useHistory } from 'react-router-dom';
 import { Product, TotalCart, ProductType, Button, MainTitle, HeadPage } from 'shared/components';
 import SelectTarget from './SelectTarget';
 
+import { useQuery } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
+
+const PRODUCTS = gql`
+  {
+    products {
+      id
+      title
+      price
+      image {
+        url
+      }
+    }
+  }
+`;
+
 const Wrapper = styled.div``;
 
 const MainTitleWrapper = styled(animated.div)``;
@@ -58,34 +74,9 @@ const TotalWrapper = styled.div<{ displaySelectTarget?: boolean }>`
   }
 `;
 
-const products: Array<ProductType> = [
-  {
-    id: '12ds324dsf',
-    title: 'פריחת אביב',
-    price: 20,
-    image: 'http://174.138.32.210/uploads/flowers-1_ceaac651ef.png',
-  },
-  {
-    id: '12dsdsfsdf324dsf',
-    title: 'פריחת קיץ',
-    price: 50,
-    image: 'http://174.138.32.210/uploads/bouquet-roses-tendresse@2x_d1140ec205.png',
-  },
-  {
-    id: '324dfgfdg',
-    title: 'פריחת קיץ',
-    price: 25,
-    image: 'http://174.138.32.210/uploads/Postabloom---cutout_3_grande_15eb843564.png',
-  },
-  {
-    id: '324dfgfsdfdg',
-    title: 'פריחת קיץ',
-    price: 35,
-    image: 'http://174.138.32.210/uploads/flowers-1_ceaac651ef.png',
-  },
-];
-
 const Products = (): JSX.Element => {
+  const { loading, error, data } = useQuery(PRODUCTS);
+
   const history = useHistory();
   const {
     totalCart,
@@ -136,8 +127,8 @@ const Products = (): JSX.Element => {
         </HeadPage>
 
         <ProductsWrapper>
-          {products.map(({ id, title, price, image }) => (
-            <Product key={id} id={id} title={title} price={price} image={image} />
+          {data?.products.map(({ id, title, price, image: { url } }) => (
+            <Product key={id} id={id} title={title} price={price} image={url} />
           ))}
         </ProductsWrapper>
       </Wrapper>

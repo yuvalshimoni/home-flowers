@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { ApolloProvider } from '@apollo/react-hooks';
+import client from 'shared/services/apollo';
 import { theme, GlobalStyle, themeMaterialConfig } from 'shared/theme';
 import styled, { ThemeProvider } from 'styled-components';
-import logo from 'shared/assets/logo.png';
-
 import rtl from 'jss-rtl';
 import { create } from 'jss';
 import {
@@ -12,10 +12,9 @@ import {
   StylesProvider,
   jssPreset,
 } from '@material-ui/core/styles';
-
 import { AppContextProvider } from 'App/Context';
-
 import MainRouter from './MainRouter';
+import logo from 'shared/assets/logo.png';
 
 const Layout = styled.div`
   position: relative;
@@ -44,23 +43,25 @@ const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 const App = (): JSX.Element => {
   return (
-    <ThemeProvider theme={{ ...theme }}>
-      <StylesProvider jss={jss}>
-        <GlobalStyle />
+    <ApolloProvider client={client}>
+      <ThemeProvider theme={{ ...theme }}>
+        <StylesProvider jss={jss}>
+          <GlobalStyle />
 
-        <MaterialThemeProvider<Theme> theme={themeMaterialConfig}>
-          <AppContextProvider>
-            <Router>
-              <Layout>
-                <Logo src={logo} alt="Home Flowers Logo" />
+          <MaterialThemeProvider<Theme> theme={themeMaterialConfig}>
+            <AppContextProvider>
+              <Router>
+                <Layout>
+                  <Logo src={logo} alt="Home Flowers Logo" />
 
-                <MainRouter />
-              </Layout>
-            </Router>
-          </AppContextProvider>
-        </MaterialThemeProvider>
-      </StylesProvider>
-    </ThemeProvider>
+                  <MainRouter />
+                </Layout>
+              </Router>
+            </AppContextProvider>
+          </MaterialThemeProvider>
+        </StylesProvider>
+      </ThemeProvider>
+    </ApolloProvider>
   );
 };
 
