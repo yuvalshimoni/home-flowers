@@ -7,9 +7,7 @@ const defaultStyles = css`
 `;
 
 const GlobalStyle = createGlobalStyle`
- @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-  
   * { 
     min-height: 0;
     outline:none;
