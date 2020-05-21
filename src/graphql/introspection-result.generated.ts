@@ -68,6 +68,117 @@
             "name": "deleteCityPayload"
           },
           {
+            "name": "Order"
+          },
+          {
+            "name": "OrderConnection"
+          },
+          {
+            "name": "OrderAggregator"
+          },
+          {
+            "name": "OrderAggregatorSum"
+          },
+          {
+            "name": "OrderAggregatorAvg"
+          },
+          {
+            "name": "OrderAggregatorMin"
+          },
+          {
+            "name": "OrderAggregatorMax"
+          },
+          {
+            "name": "OrderGroupBy"
+          },
+          {
+            "name": "OrderConnectionId"
+          },
+          {
+            "name": "OrderConnectionCreated_at"
+          },
+          {
+            "name": "OrderConnectionUpdated_at"
+          },
+          {
+            "name": "OrderConnectionName"
+          },
+          {
+            "name": "OrderConnectionPhone"
+          },
+          {
+            "name": "OrderConnectionDeliveryDate"
+          },
+          {
+            "name": "OrderConnectionCity"
+          },
+          {
+            "name": "OrderConnectionTotal"
+          },
+          {
+            "name": "createOrderPayload"
+          },
+          {
+            "name": "updateOrderPayload"
+          },
+          {
+            "name": "deleteOrderPayload"
+          },
+          {
+            "name": "Orderitem"
+          },
+          {
+            "name": "OrderitemConnection"
+          },
+          {
+            "name": "OrderitemAggregator"
+          },
+          {
+            "name": "OrderitemAggregatorSum"
+          },
+          {
+            "name": "OrderitemAggregatorAvg"
+          },
+          {
+            "name": "OrderitemAggregatorMin"
+          },
+          {
+            "name": "OrderitemAggregatorMax"
+          },
+          {
+            "name": "OrderitemGroupBy"
+          },
+          {
+            "name": "OrderitemConnectionId"
+          },
+          {
+            "name": "OrderitemConnectionCreated_at"
+          },
+          {
+            "name": "OrderitemConnectionUpdated_at"
+          },
+          {
+            "name": "OrderitemConnectionProduct"
+          },
+          {
+            "name": "OrderitemConnectionPrice"
+          },
+          {
+            "name": "OrderitemConnectionQuantity"
+          },
+          {
+            "name": "OrderitemConnectionOrder_id"
+          },
+          {
+            "name": "createOrderitemPayload"
+          },
+          {
+            "name": "updateOrderitemPayload"
+          },
+          {
+            "name": "deleteOrderitemPayload"
+          },
+          {
             "name": "Product"
           },
           {

@@ -9,6 +9,18 @@ type Query {
   """"""
   citiesConnection(sort: String, limit: Int, start: Int, where: JSON): CityConnection
   """"""
+  order(id: ID!): Order
+  """"""
+  orders(sort: String, limit: Int, start: Int, where: JSON): [Order]
+  """"""
+  ordersConnection(sort: String, limit: Int, start: Int, where: JSON): OrderConnection
+  """"""
+  orderitem(id: ID!): Orderitem
+  """"""
+  orderitems(sort: String, limit: Int, start: Int, where: JSON): [Orderitem]
+  """"""
+  orderitemsConnection(sort: String, limit: Int, start: Int, where: JSON): OrderitemConnection
+  """"""
   product(id: ID!): Product
   """"""
   products(sort: String, limit: Int, start: Int, where: JSON): [Product]
@@ -115,6 +127,46 @@ type CityAggregator {
   totalCount: Int
 }
 """"""
+type Order {
+  """"""
+  id: ID!
+  """"""
+  created_at: DateTime!
+  """"""
+  updated_at: DateTime!
+  """"""
+  name: String!
+  """"""
+  phone: Float!
+  """"""
+  deliveryDate: Date!
+  """"""
+  city: City
+  """"""
+  total: Float!
+  """"""
+  orderitems(sort: String, limit: Int, start: Int, where: JSON): [Orderitem]
+}
+"""A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar."""
+scalar Date
+""""""
+type Orderitem {
+  """"""
+  id: ID!
+  """"""
+  created_at: DateTime!
+  """"""
+  updated_at: DateTime!
+  """"""
+  product: Product
+  """"""
+  price: Float!
+  """"""
+  quantity: Int!
+  """"""
+  order_id: Order
+}
+""""""
 type Product {
   """"""
   id: ID!
@@ -169,7 +221,7 @@ type UploadFile {
   related(sort: String, limit: Int, start: Int, where: JSON): [Morph]
 }
 """"""
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | ForgotPassword | City | CityConnection | CityAggregator | CityGroupBy | CityConnectionId | CityConnectionCreated_at | CityConnectionUpdated_at | CityConnectionName | CityConnectionIs_active | createCityPayload | updateCityPayload | deleteCityPayload | Product | ProductConnection | ProductAggregator | ProductAggregatorSum | ProductAggregatorAvg | ProductAggregatorMin | ProductAggregatorMax | ProductGroupBy | ProductConnectionId | ProductConnectionCreated_at | ProductConnectionUpdated_at | ProductConnectionTitle | ProductConnectionPrice | ProductConnectionImage | createProductPayload | updateProductPayload | deleteProductPayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | createUserPayload | updateUserPayload | deleteUserPayload
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | ForgotPassword | City | CityConnection | CityAggregator | CityGroupBy | CityConnectionId | CityConnectionCreated_at | CityConnectionUpdated_at | CityConnectionName | CityConnectionIs_active | createCityPayload | updateCityPayload | deleteCityPayload | Order | OrderConnection | OrderAggregator | OrderAggregatorSum | OrderAggregatorAvg | OrderAggregatorMin | OrderAggregatorMax | OrderGroupBy | OrderConnectionId | OrderConnectionCreated_at | OrderConnectionUpdated_at | OrderConnectionName | OrderConnectionPhone | OrderConnectionDeliveryDate | OrderConnectionCity | OrderConnectionTotal | createOrderPayload | updateOrderPayload | deleteOrderPayload | Orderitem | OrderitemConnection | OrderitemAggregator | OrderitemAggregatorSum | OrderitemAggregatorAvg | OrderitemAggregatorMin | OrderitemAggregatorMax | OrderitemGroupBy | OrderitemConnectionId | OrderitemConnectionCreated_at | OrderitemConnectionUpdated_at | OrderitemConnectionProduct | OrderitemConnectionPrice | OrderitemConnectionQuantity | OrderitemConnectionOrder_id | createOrderitemPayload | updateOrderitemPayload | deleteOrderitemPayload | Product | ProductConnection | ProductAggregator | ProductAggregatorSum | ProductAggregatorAvg | ProductAggregatorMin | ProductAggregatorMax | ProductGroupBy | ProductConnectionId | ProductConnectionCreated_at | ProductConnectionUpdated_at | ProductConnectionTitle | ProductConnectionPrice | ProductConnectionImage | createProductPayload | updateProductPayload | deleteProductPayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | createUserPayload | updateUserPayload | deleteUserPayload
 """"""
 type UsersPermissionsMe {
   """"""
@@ -222,6 +274,281 @@ type updateCityPayload {
 type deleteCityPayload {
   """"""
   city: City
+}
+""""""
+type OrderConnection {
+  """"""
+  values: [Order]
+  """"""
+  groupBy: OrderGroupBy
+  """"""
+  aggregate: OrderAggregator
+}
+""""""
+type OrderGroupBy {
+  """"""
+  id: [OrderConnectionId]
+  """"""
+  created_at: [OrderConnectionCreated_at]
+  """"""
+  updated_at: [OrderConnectionUpdated_at]
+  """"""
+  name: [OrderConnectionName]
+  """"""
+  phone: [OrderConnectionPhone]
+  """"""
+  deliveryDate: [OrderConnectionDeliveryDate]
+  """"""
+  city: [OrderConnectionCity]
+  """"""
+  total: [OrderConnectionTotal]
+}
+""""""
+type OrderConnectionId {
+  """"""
+  key: ID
+  """"""
+  connection: OrderConnection
+}
+""""""
+type OrderConnectionCreated_at {
+  """"""
+  key: DateTime
+  """"""
+  connection: OrderConnection
+}
+""""""
+type OrderConnectionUpdated_at {
+  """"""
+  key: DateTime
+  """"""
+  connection: OrderConnection
+}
+""""""
+type OrderConnectionName {
+  """"""
+  key: String
+  """"""
+  connection: OrderConnection
+}
+""""""
+type OrderConnectionPhone {
+  """"""
+  key: Float
+  """"""
+  connection: OrderConnection
+}
+""""""
+type OrderConnectionDeliveryDate {
+  """"""
+  key: ID
+  """"""
+  connection: OrderConnection
+}
+""""""
+type OrderConnectionCity {
+  """"""
+  key: ID
+  """"""
+  connection: OrderConnection
+}
+""""""
+type OrderConnectionTotal {
+  """"""
+  key: Float
+  """"""
+  connection: OrderConnection
+}
+""""""
+type OrderAggregator {
+  """"""
+  count: Int
+  """"""
+  totalCount: Int
+  """"""
+  sum: OrderAggregatorSum
+  """"""
+  avg: OrderAggregatorAvg
+  """"""
+  min: OrderAggregatorMin
+  """"""
+  max: OrderAggregatorMax
+}
+""""""
+type OrderAggregatorSum {
+  """"""
+  phone: Float
+  """"""
+  total: Float
+}
+""""""
+type OrderAggregatorAvg {
+  """"""
+  phone: Float
+  """"""
+  total: Float
+}
+""""""
+type OrderAggregatorMin {
+  """"""
+  phone: Float
+  """"""
+  total: Float
+}
+""""""
+type OrderAggregatorMax {
+  """"""
+  phone: Float
+  """"""
+  total: Float
+}
+""""""
+type createOrderPayload {
+  """"""
+  order: Order
+}
+""""""
+type updateOrderPayload {
+  """"""
+  order: Order
+}
+""""""
+type deleteOrderPayload {
+  """"""
+  order: Order
+}
+""""""
+type OrderitemConnection {
+  """"""
+  values: [Orderitem]
+  """"""
+  groupBy: OrderitemGroupBy
+  """"""
+  aggregate: OrderitemAggregator
+}
+""""""
+type OrderitemGroupBy {
+  """"""
+  id: [OrderitemConnectionId]
+  """"""
+  created_at: [OrderitemConnectionCreated_at]
+  """"""
+  updated_at: [OrderitemConnectionUpdated_at]
+  """"""
+  product: [OrderitemConnectionProduct]
+  """"""
+  price: [OrderitemConnectionPrice]
+  """"""
+  quantity: [OrderitemConnectionQuantity]
+  """"""
+  order_id: [OrderitemConnectionOrder_id]
+}
+""""""
+type OrderitemConnectionId {
+  """"""
+  key: ID
+  """"""
+  connection: OrderitemConnection
+}
+""""""
+type OrderitemConnectionCreated_at {
+  """"""
+  key: DateTime
+  """"""
+  connection: OrderitemConnection
+}
+""""""
+type OrderitemConnectionUpdated_at {
+  """"""
+  key: DateTime
+  """"""
+  connection: OrderitemConnection
+}
+""""""
+type OrderitemConnectionProduct {
+  """"""
+  key: ID
+  """"""
+  connection: OrderitemConnection
+}
+""""""
+type OrderitemConnectionPrice {
+  """"""
+  key: Float
+  """"""
+  connection: OrderitemConnection
+}
+""""""
+type OrderitemConnectionQuantity {
+  """"""
+  key: Int
+  """"""
+  connection: OrderitemConnection
+}
+""""""
+type OrderitemConnectionOrder_id {
+  """"""
+  key: ID
+  """"""
+  connection: OrderitemConnection
+}
+""""""
+type OrderitemAggregator {
+  """"""
+  count: Int
+  """"""
+  totalCount: Int
+  """"""
+  sum: OrderitemAggregatorSum
+  """"""
+  avg: OrderitemAggregatorAvg
+  """"""
+  min: OrderitemAggregatorMin
+  """"""
+  max: OrderitemAggregatorMax
+}
+""""""
+type OrderitemAggregatorSum {
+  """"""
+  price: Float
+  """"""
+  quantity: Float
+}
+""""""
+type OrderitemAggregatorAvg {
+  """"""
+  price: Float
+  """"""
+  quantity: Float
+}
+""""""
+type OrderitemAggregatorMin {
+  """"""
+  price: Float
+  """"""
+  quantity: Float
+}
+""""""
+type OrderitemAggregatorMax {
+  """"""
+  price: Float
+  """"""
+  quantity: Float
+}
+""""""
+type createOrderitemPayload {
+  """"""
+  orderitem: Orderitem
+}
+""""""
+type updateOrderitemPayload {
+  """"""
+  orderitem: Orderitem
+}
+""""""
+type deleteOrderitemPayload {
+  """"""
+  orderitem: Orderitem
 }
 """"""
 type ProductConnection {
@@ -802,6 +1129,18 @@ type Mutation {
   """"""
   deleteCity(input: deleteCityInput): deleteCityPayload
   """"""
+  createOrder(input: createOrderInput): createOrderPayload
+  """"""
+  updateOrder(input: updateOrderInput): updateOrderPayload
+  """"""
+  deleteOrder(input: deleteOrderInput): deleteOrderPayload
+  """"""
+  createOrderitem(input: createOrderitemInput): createOrderitemPayload
+  """"""
+  updateOrderitem(input: updateOrderitemInput): updateOrderitemPayload
+  """"""
+  deleteOrderitem(input: deleteOrderitemInput): deleteOrderitemPayload
+  """"""
   createProduct(input: createProductInput): createProductPayload
   """"""
   updateProduct(input: updateProductInput): updateProductPayload
@@ -867,6 +1206,92 @@ input editCityInput {
 }
 """"""
 input deleteCityInput {
+  """"""
+  where: InputID
+}
+""""""
+input createOrderInput {
+  """"""
+  data: OrderInput
+}
+""""""
+input OrderInput {
+  """"""
+  name: String!
+  """"""
+  phone: Float!
+  """"""
+  deliveryDate: Date!
+  """"""
+  city: ID
+  """"""
+  total: Float!
+  """"""
+  orderitems: [ID]
+}
+""""""
+input updateOrderInput {
+  """"""
+  where: InputID
+  """"""
+  data: editOrderInput
+}
+""""""
+input editOrderInput {
+  """"""
+  name: String
+  """"""
+  phone: Float
+  """"""
+  deliveryDate: Date
+  """"""
+  city: ID
+  """"""
+  total: Float
+  """"""
+  orderitems: [ID]
+}
+""""""
+input deleteOrderInput {
+  """"""
+  where: InputID
+}
+""""""
+input createOrderitemInput {
+  """"""
+  data: OrderitemInput
+}
+""""""
+input OrderitemInput {
+  """"""
+  product: ID
+  """"""
+  price: Float!
+  """"""
+  quantity: Int!
+  """"""
+  order_id: ID
+}
+""""""
+input updateOrderitemInput {
+  """"""
+  where: InputID
+  """"""
+  data: editOrderitemInput
+}
+""""""
+input editOrderitemInput {
+  """"""
+  product: ID
+  """"""
+  price: Float
+  """"""
+  quantity: Int
+  """"""
+  order_id: ID
+}
+""""""
+input deleteOrderitemInput {
   """"""
   where: InputID
 }
@@ -1082,8 +1507,6 @@ input editFileInput {
 }
 """A time string with format: HH:mm:ss.SSS"""
 scalar Time
-"""A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar."""
-scalar Date
 """The `Long` scalar type represents 52-bit integers"""
 scalar Long
 """"""

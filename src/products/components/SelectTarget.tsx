@@ -61,7 +61,7 @@ const SelectTarget = (): JSX.Element | null => {
   const { data, loading } = useCitiesQuery();
   const history = useHistory();
   const {
-    costumerDetails: { target },
+    costumerDetails: { target, deliveryDate },
     setCostumerDetails,
   } = useAppState();
 
@@ -113,7 +113,7 @@ const SelectTarget = (): JSX.Element | null => {
       />
 
       <TextWrapper>
-        <TextPrimary>חלוקה בתאריך 23.3.20 בשעה 20:00</TextPrimary>
+        <TextPrimary>{`חלוקה בתאריך ${deliveryDate} בשעות הערב`}</TextPrimary>
       </TextWrapper>
     </>
   );

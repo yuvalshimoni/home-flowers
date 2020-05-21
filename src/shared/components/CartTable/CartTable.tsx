@@ -6,7 +6,7 @@ import { ProductType, SubTitle, TextPrimary, NormalText } from 'shared/component
 import { useAppState } from 'shared/hooks';
 import RowItem from './RowItem';
 import { Flex } from '../FlexHelper';
-import { useProcustsQuery } from 'shared/graphql';
+import { useProductsQuery } from 'shared/graphql';
 
 const products: Array<ProductType> = [
   {
@@ -70,7 +70,7 @@ type CartTableProps = {
 };
 
 const CartTable = ({ editable = true }: CartTableProps): JSX.Element => {
-  const { data } = useProcustsQuery();
+  const { data } = useProductsQuery();
 
   const history = useHistory();
   const {

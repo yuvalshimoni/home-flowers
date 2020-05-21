@@ -5,7 +5,7 @@ import { useAppState } from 'shared/hooks';
 import { useHistory } from 'react-router-dom';
 import { Product, TotalCart, Button, MainTitle, HeadPage } from 'shared/components';
 import SelectTarget from './SelectTarget';
-import { useProcustsQuery } from 'shared/graphql';
+import { useProductsQuery } from 'shared/graphql';
 
 const Wrapper = styled.div``;
 
@@ -72,7 +72,7 @@ const TotalWrapper = styled.div<{ displaySelectTarget?: boolean }>`
 `;
 
 const Products = (): JSX.Element | null => {
-  const { data, loading } = useProcustsQuery();
+  const { data, loading } = useProductsQuery();
 
   const history = useHistory();
   const {

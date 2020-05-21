@@ -56,12 +56,6 @@ const Button = styled.div`
   background-color: ${({ theme }) => theme.colors.primary};
 `;
 
-type onChangeProps = {
-  productId: Types.Product['id'];
-  quantity: number;
-  price: Types.Product['price'];
-};
-
 type ProductProps = {
   id: Types.Product['id'];
   title: Types.Product['title'];

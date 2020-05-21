@@ -1,4 +1,4 @@
-query Procusts {
+query Products {
   products {
     id
     title

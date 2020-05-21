@@ -12,10 +12,10 @@ export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 
 
-export type ProcustsQueryVariables = {};
+export type ProductsQueryVariables = {};
 
 
-export type ProcustsQuery = (
+export type ProductsQuery = (
   { __typename?: 'Query' }
   & { products?: Types.Maybe<Array<Types.Maybe<(
     { __typename?: 'Product' }
@@ -28,8 +28,8 @@ export type ProcustsQuery = (
 );
 
 
-export const ProcustsDocument = gql`
-    query Procusts {
+export const ProductsDocument = gql`
+    query Products {
   products {
     id
     title
@@ -40,46 +40,46 @@ export const ProcustsDocument = gql`
   }
 }
     `;
-export type ProcustsComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<ProcustsQuery, ProcustsQueryVariables>, 'query'>;
+export type ProductsComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<ProductsQuery, ProductsQueryVariables>, 'query'>;
 
-    export const ProcustsComponent = (props: ProcustsComponentProps) => (
-      <ApolloReactComponents.Query<ProcustsQuery, ProcustsQueryVariables> query={ProcustsDocument} {...props} />
+    export const ProductsComponent = (props: ProductsComponentProps) => (
+      <ApolloReactComponents.Query<ProductsQuery, ProductsQueryVariables> query={ProductsDocument} {...props} />
     );
     
-export type ProcustsProps<TChildProps = {}, TDataName extends string = 'data'> = {
-      [key in TDataName]: ApolloReactHoc.DataValue<ProcustsQuery, ProcustsQueryVariables>
+export type ProductsProps<TChildProps = {}, TDataName extends string = 'data'> = {
+      [key in TDataName]: ApolloReactHoc.DataValue<ProductsQuery, ProductsQueryVariables>
     } & TChildProps;
-export function withProcusts<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
+export function withProducts<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
   TProps,
-  ProcustsQuery,
-  ProcustsQueryVariables,
-  ProcustsProps<TChildProps, TDataName>>) {
-    return ApolloReactHoc.withQuery<TProps, ProcustsQuery, ProcustsQueryVariables, ProcustsProps<TChildProps, TDataName>>(ProcustsDocument, {
-      alias: 'procusts',
+  ProductsQuery,
+  ProductsQueryVariables,
+  ProductsProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withQuery<TProps, ProductsQuery, ProductsQueryVariables, ProductsProps<TChildProps, TDataName>>(ProductsDocument, {
+      alias: 'products',
       ...operationOptions
     });
 };
 
 /**
- * __useProcustsQuery__
+ * __useProductsQuery__
  *
- * To run a query within a React component, call `useProcustsQuery` and pass it any options that fit your needs.
- * When your component renders, `useProcustsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useProductsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProductsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useProcustsQuery({
+ * const { data, loading, error } = useProductsQuery({
  *   variables: {
  *   },
  * });
  */
-export function useProcustsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<ProcustsQuery, ProcustsQueryVariables>) {
-        return ApolloReactHooks.useQuery<ProcustsQuery, ProcustsQueryVariables>(ProcustsDocument, baseOptions);
+export function useProductsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<ProductsQuery, ProductsQueryVariables>) {
+        return ApolloReactHooks.useQuery<ProductsQuery, ProductsQueryVariables>(ProductsDocument, baseOptions);
       }
-export function useProcustsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<ProcustsQuery, ProcustsQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<ProcustsQuery, ProcustsQueryVariables>(ProcustsDocument, baseOptions);
+export function useProductsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<ProductsQuery, ProductsQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<ProductsQuery, ProductsQueryVariables>(ProductsDocument, baseOptions);
         }
-export type ProcustsQueryHookResult = ReturnType<typeof useProcustsQuery>;
-export type ProcustsLazyQueryHookResult = ReturnType<typeof useProcustsLazyQuery>;
+export type ProductsQueryHookResult = ReturnType<typeof useProductsQuery>;
+export type ProductsLazyQueryHookResult = ReturnType<typeof useProductsLazyQuery>;

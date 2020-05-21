@@ -14,7 +14,7 @@ const initialCostumerDetails: CostumerDetails = {
   },
   name: '',
   phone: null,
-  deliveryDate: '',
+  deliveryDate: '21.05.2020',
 };
 
 interface AppContextProviderProps {
