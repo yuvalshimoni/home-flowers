@@ -104,11 +104,11 @@ const CartTable = ({ editable = true }: CartTableProps): JSX.Element => {
 
       <ItemsWrapper>
         {cart?.length &&
-          cart.map(({ productId, amount, price }) => (
+          cart.map(({ productId, quantity, price }) => (
             <RowItem
               key={productId}
               item={data?.products.find((p) => p.id === productId)!}
-              amount={amount}
+              quantity={quantity}
               price={price}
               removeProduct={editable ? removeProduct : undefined}
             />

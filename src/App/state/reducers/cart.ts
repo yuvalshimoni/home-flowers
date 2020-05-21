@@ -15,17 +15,17 @@ export type CartAction =
 export const cartReducer = (state: Cart, action: CartAction): Cart => {
   switch (action.type) {
     case 'UPDATE_CART_ITEM': {
-      const { productId, amount, price } = action.payload;
+      const { productId, quantity, price } = action.payload;
 
       return state.some((p) => p.productId === productId)
         ? state.map((product) => {
             if (product.productId === productId) {
-              return { ...product, amount };
+              return { ...product, quantity };
             } else {
               return product;
             }
           })
-        : state.concat([{ productId, amount: 1, price }]);
+        : state.concat([{ productId, quantity: 1, price }]);
     }
     case 'REMOVE_ITEM_FROM_CART': {
       const productId = action.payload.productId;

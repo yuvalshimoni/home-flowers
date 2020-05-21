@@ -31,7 +31,7 @@ const Title = styled.div`
   font-size: ${({ theme }) => theme.sizes.main}px;
 `;
 
-const Amount = styled(NormalText)`
+const Quantity = styled(NormalText)`
   margin: 0 7px;
 `;
 
@@ -58,7 +58,7 @@ const Button = styled.div`
 
 type onChangeProps = {
   productId: Types.Product['id'];
-  amount: number;
+  quantity: number;
   price: Types.Product['price'];
 };
 
@@ -71,25 +71,25 @@ type ProductProps = {
 
 const Product = ({ id, title, price, url }: ProductProps): JSX.Element => {
   const { cart, cartDispatch } = useAppState();
-  const [amount, setAmount] = useState<number>(
-    () => cart.find((i) => i.productId === id)?.amount || 0,
+  const [quantity, setQuantity] = useState<number>(
+    () => cart.find((i) => i.productId === id)?.quantity || 0,
   );
 
   const onIncrease = useCallback(() => {
-    setAmount((prev) => prev + 1);
+    setQuantity((prev) => prev + 1);
   }, []);
 
   const onDecrease = useCallback(() => {
-    setAmount((prev) => (prev < 1 ? 0 : prev - 1));
+    setQuantity((prev) => (prev < 1 ? 0 : prev - 1));
   }, []);
 
   useEffectOnUpdate(() => {
-    if (amount > 0) {
+    if (quantity > 0) {
       cartDispatch({
         type: 'UPDATE_CART_ITEM',
         payload: {
           productId: id,
-          amount,
+          quantity,
           price,
         },
       });
@@ -101,7 +101,7 @@ const Product = ({ id, title, price, url }: ProductProps): JSX.Element => {
         },
       });
     }
-  }, [amount]);
+  }, [quantity]);
 
   return (
     <Wrapper>
@@ -114,10 +114,8 @@ const Product = ({ id, title, price, url }: ProductProps): JSX.Element => {
         </div>
 
         <ButtonsWrapper>
-          {/* <AmountText>כמות:</AmountText> */}
-
           <Button onClick={onIncrease}>+</Button>
-          <Amount>{amount}</Amount>
+          <Quantity>{quantity}</Quantity>
           <Button onClick={onDecrease}>-</Button>
         </ButtonsWrapper>
       </BottomArea>

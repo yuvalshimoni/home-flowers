@@ -3,8 +3,8 @@ import * as Types from 'graphql/types.generated';
 
 export type CartItemType = {
   productId: Types.Product['id'];
-  amount: number;
   price: Types.Product['price'];
+  quantity: number;
 };
 
 export type Cart = Array<CartItemType>;

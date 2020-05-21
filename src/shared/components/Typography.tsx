@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import { FlexRow, FlexColumn, Flex } from './FlexHelper';
+import styled from 'styled-components';
+import { FlexColumn } from './FlexHelper';
 
 const MainTitle = styled.h1`
   margin: 0;
@@ -34,7 +34,7 @@ const HeadPage = styled(FlexColumn)<{ small?: boolean }>`
   justify-content: flex-end;
 
   @media (max-width: 500px) {
-    height: ${({ small }) => (small ? 140 : 200)}px;
+    height: ${({ small }) => (small ? 150 : 215)}px;
   }
 `;
 

@@ -43,7 +43,7 @@ const RemoveButton = styled.div`
 
 type RowProps = {
   item: ProductType;
-  amount: number;
+  quantity: number;
   price: number;
   removeProduct?: (productId: ProductType['id']) => void;
 };
@@ -51,7 +51,7 @@ type RowProps = {
 const RowItem = ({
   item: { id, image, title },
   price,
-  amount,
+  quantity,
   removeProduct,
 }: RowProps): JSX.Element => {
   const handleOnClick = useCallback(() => {
@@ -62,8 +62,8 @@ const RowItem = ({
     <RowWrapper>
       <Image src={process.env.REACT_APP_STRAPI_URL + image.url!} />
       <Name>{title}</Name>
-      <Text>כמות: {amount} </Text>
-      <Text>{price * amount} ש"ח</Text>
+      <Text>כמות: {quantity} </Text>
+      <Text>{price * quantity} ש"ח</Text>
       {removeProduct && <RemoveButton onClick={handleOnClick}>X</RemoveButton>}
     </RowWrapper>
   );

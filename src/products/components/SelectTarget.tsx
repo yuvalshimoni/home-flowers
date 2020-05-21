@@ -52,12 +52,12 @@ const TextFieldStyled = styled(TextField)`
   }
 `;
 
-export type CityType = {
-  cityId: Types.City['id'];
-  name: Types.City['name'];
+type CityType = {
+  cityId: string;
+  name: string;
 };
 
-const SelectTarget = (): JSX.Element => {
+const SelectTarget = (): JSX.Element | null => {
   const { data, loading } = useCitiesQuery();
   const history = useHistory();
   const {
@@ -86,7 +86,7 @@ const SelectTarget = (): JSX.Element => {
     setInputValue(newInputValue);
   }, []);
 
-  const getOptionLabel = useCallback((option: CityType): Types.City['name'] => option.name!, []);
+  const getOptionLabel = useCallback((option: CityType): string => option.name!, []);
 
   const renderInput = useCallback(
     (params): JSX.Element => <TextFieldStyled {...params} label="לאן לשלוח?" />,

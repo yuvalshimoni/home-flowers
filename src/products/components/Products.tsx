@@ -71,7 +71,7 @@ const TotalWrapper = styled.div<{ displaySelectTarget?: boolean }>`
   }
 `;
 
-const Products = (): JSX.Element => {
+const Products = (): JSX.Element | null => {
   const { data, loading } = useProcustsQuery();
 
   const history = useHistory();
@@ -116,6 +116,10 @@ const Products = (): JSX.Element => {
       clearTimeout(t);
     };
   }, []);
+
+  if (loading) {
+    return null;
+  }
 
   return (
     <>
