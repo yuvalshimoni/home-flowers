@@ -71,13 +71,17 @@ const Products = (): JSX.Element => {
   const isTargetSelected = useMemo(() => !!target?.name, [target?.name]);
   const [displaySelectTarget, setDisplaySelectTarget] = useState<boolean>(isTargetSelected);
 
-  const handleOnClick = useCallback(() => {
+  const handleOnClick = useCallback(async () => {
     if (isTargetSelected) {
       setTimeout(() => {
         history.push('/details');
       }, 1500);
     } else {
-      setDisplaySelectTarget(true);
+      await window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      setTimeout(() => {
+        setDisplaySelectTarget(true);
+      }, 100);
     }
   }, [history, isTargetSelected]);
 

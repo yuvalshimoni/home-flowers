@@ -89,7 +89,7 @@ const SelectTarget = (): JSX.Element => {
   const getOptionLabel = useCallback((option: CityType): Types.City['name'] => option.name!, []);
 
   const renderInput = useCallback(
-    (params): JSX.Element => <TextFieldStyled {...params} label="יעד למשלוח" />,
+    (params): JSX.Element => <TextFieldStyled {...params} label="לאן לשלוח?" />,
     [],
   );
 
@@ -101,6 +101,7 @@ const SelectTarget = (): JSX.Element => {
     <>
       <Autocomplete
         fullWidth
+        selectOnFocus
         value={target}
         options={data?.cities!}
         inputValue={inputValue}
