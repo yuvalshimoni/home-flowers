@@ -1,6 +1,6 @@
 /* tslint-disable */
 /* eslint-disable */
-import * as Types from '../../graphql/types.generated';
+import * as Types from '../../../graphql/types.generated';
 
 import gql from 'graphql-tag';
 import * as React from 'react';
@@ -18,8 +18,8 @@ export type ProcustsQueryVariables = {};
 export type ProcustsQuery = (
   { __typename?: 'Query' }
   & { products?: Types.Maybe<Array<Types.Maybe<(
-    { __typename?: 'Products' }
-    & Pick<Types.Products, 'id' | 'title' | 'price'>
+    { __typename?: 'Product' }
+    & Pick<Types.Product, 'id' | 'title' | 'price'>
     & { image?: Types.Maybe<(
       { __typename?: 'UploadFile' }
       & Pick<Types.UploadFile, 'url'>

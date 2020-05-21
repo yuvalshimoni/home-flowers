@@ -32,31 +32,31 @@
             "name": "ForgotPassword"
           },
           {
-            "name": "Cities"
+            "name": "City"
           },
           {
-            "name": "CitiesConnection"
+            "name": "CityConnection"
           },
           {
-            "name": "CitiesAggregator"
+            "name": "CityAggregator"
           },
           {
-            "name": "CitiesGroupBy"
+            "name": "CityGroupBy"
           },
           {
-            "name": "CitiesConnectionId"
+            "name": "CityConnectionId"
           },
           {
-            "name": "CitiesConnectionCreated_at"
+            "name": "CityConnectionCreated_at"
           },
           {
-            "name": "CitiesConnectionUpdated_at"
+            "name": "CityConnectionUpdated_at"
           },
           {
-            "name": "CitiesConnectionName"
+            "name": "CityConnectionName"
           },
           {
-            "name": "CitiesConnectionIs_active"
+            "name": "CityConnectionIs_active"
           },
           {
             "name": "createCityPayload"
@@ -68,109 +68,46 @@
             "name": "deleteCityPayload"
           },
           {
-            "name": "Orders"
+            "name": "Product"
           },
           {
-            "name": "OrdersConnection"
+            "name": "ProductConnection"
           },
           {
-            "name": "OrdersAggregator"
+            "name": "ProductAggregator"
           },
           {
-            "name": "OrdersAggregatorSum"
+            "name": "ProductAggregatorSum"
           },
           {
-            "name": "OrdersAggregatorAvg"
+            "name": "ProductAggregatorAvg"
           },
           {
-            "name": "OrdersAggregatorMin"
+            "name": "ProductAggregatorMin"
           },
           {
-            "name": "OrdersAggregatorMax"
+            "name": "ProductAggregatorMax"
           },
           {
-            "name": "OrdersGroupBy"
+            "name": "ProductGroupBy"
           },
           {
-            "name": "OrdersConnectionId"
+            "name": "ProductConnectionId"
           },
           {
-            "name": "OrdersConnectionCreated_at"
+            "name": "ProductConnectionCreated_at"
           },
           {
-            "name": "OrdersConnectionUpdated_at"
+            "name": "ProductConnectionUpdated_at"
           },
           {
-            "name": "OrdersConnectionName"
+            "name": "ProductConnectionTitle"
           },
           {
-            "name": "OrdersConnectionPhone"
+            "name": "ProductConnectionPrice"
           },
           {
-            "name": "OrdersConnectionDeliveryDate"
-          },
-          {
-            "name": "OrdersConnectionCity"
-          },
-          {
-            "name": "OrdersConnectionIs_paid"
-          },
-          {
-            "name": "createOrderPayload"
-          },
-          {
-            "name": "updateOrderPayload"
-          },
-          {
-            "name": "deleteOrderPayload"
-          },
-          {
-            "name": "Products"
-          },
-          {
-            "name": "ProductsConnection"
-          },
-          {
-            "name": "ProductsAggregator"
-          },
-          {
-            "name": "ProductsAggregatorSum"
-          },
-          {
-            "name": "ProductsAggregatorAvg"
-          },
-          {
-            "name": "ProductsAggregatorMin"
-          },
-          {
-            "name": "ProductsAggregatorMax"
-          },
-          {
-            "name": "ProductsGroupBy"
-          },
-          {
-            "name": "ProductsConnectionId"
-          },
-          {
-            "name": "ProductsConnectionCreated_at"
-          },
-          {
-            "name": "ProductsConnectionUpdated_at"
-          },
-          {
-            "name": "ProductsConnectionTitle"
-          },
-          {
-            "name": "ProductsConnectionPrice"
-          },
-          {
-            "name": "ProductsConnectionDescription"
-          },
-          {
-            "name": "ProductsConnectionImage"
-          },
-          {
-            "name": "ProductsConnectionIs_active"
+            "name": "ProductConnectionImage"
           },
           {
             "name": "createProductPayload"

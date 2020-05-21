@@ -3,23 +3,17 @@ mutation: Mutation }
 """"""
 type Query {
   """"""
-  city(id: ID!): Cities
+  city(id: ID!): City
   """"""
-  cities(sort: String, limit: Int, start: Int, where: JSON): [Cities]
+  cities(sort: String, limit: Int, start: Int, where: JSON): [City]
   """"""
-  citiesConnection(sort: String, limit: Int, start: Int, where: JSON): CitiesConnection
+  citiesConnection(sort: String, limit: Int, start: Int, where: JSON): CityConnection
   """"""
-  order(id: ID!): Orders
+  product(id: ID!): Product
   """"""
-  orders(sort: String, limit: Int, start: Int, where: JSON): [Orders]
+  products(sort: String, limit: Int, start: Int, where: JSON): [Product]
   """"""
-  ordersConnection(sort: String, limit: Int, start: Int, where: JSON): OrdersConnection
-  """"""
-  product(id: ID!): Products
-  """"""
-  products(sort: String, limit: Int, start: Int, where: JSON): [Products]
-  """"""
-  productsConnection(sort: String, limit: Int, start: Int, where: JSON): ProductsConnection
+  productsConnection(sort: String, limit: Int, start: Int, where: JSON): ProductConnection
   """"""
   files(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
   """"""
@@ -40,7 +34,7 @@ type Query {
   me: UsersPermissionsMe
 }
 """"""
-type Cities {
+type City {
   """"""
   id: ID!
   """"""
@@ -48,7 +42,7 @@ type Cities {
   """"""
   updated_at: DateTime!
   """"""
-  name: String
+  name: String!
   """"""
   is_active: Boolean!
 }
@@ -57,71 +51,71 @@ scalar DateTime
 """The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf)."""
 scalar JSON
 """"""
-type CitiesConnection {
+type CityConnection {
   """"""
-  values: [Cities]
+  values: [City]
   """"""
-  groupBy: CitiesGroupBy
+  groupBy: CityGroupBy
   """"""
-  aggregate: CitiesAggregator
+  aggregate: CityAggregator
 }
 """"""
-type CitiesGroupBy {
+type CityGroupBy {
   """"""
-  id: [CitiesConnectionId]
+  id: [CityConnectionId]
   """"""
-  created_at: [CitiesConnectionCreated_at]
+  created_at: [CityConnectionCreated_at]
   """"""
-  updated_at: [CitiesConnectionUpdated_at]
+  updated_at: [CityConnectionUpdated_at]
   """"""
-  name: [CitiesConnectionName]
+  name: [CityConnectionName]
   """"""
-  is_active: [CitiesConnectionIs_active]
+  is_active: [CityConnectionIs_active]
 }
 """"""
-type CitiesConnectionId {
+type CityConnectionId {
   """"""
   key: ID
   """"""
-  connection: CitiesConnection
+  connection: CityConnection
 }
 """"""
-type CitiesConnectionCreated_at {
+type CityConnectionCreated_at {
   """"""
   key: DateTime
   """"""
-  connection: CitiesConnection
+  connection: CityConnection
 }
 """"""
-type CitiesConnectionUpdated_at {
+type CityConnectionUpdated_at {
   """"""
   key: DateTime
   """"""
-  connection: CitiesConnection
+  connection: CityConnection
 }
 """"""
-type CitiesConnectionName {
+type CityConnectionName {
   """"""
   key: String
   """"""
-  connection: CitiesConnection
+  connection: CityConnection
 }
 """"""
-type CitiesConnectionIs_active {
+type CityConnectionIs_active {
   """"""
   key: Boolean
   """"""
-  connection: CitiesConnection
+  connection: CityConnection
 }
 """"""
-type CitiesAggregator {
+type CityAggregator {
   """"""
   count: Int
   """"""
   totalCount: Int
 }
 """"""
-type Orders {
+type Product {
   """"""
   id: ID!
   """"""
@@ -129,38 +123,11 @@ type Orders {
   """"""
   updated_at: DateTime!
   """"""
-  name: String
+  title: String!
   """"""
-  phone: Int!
-  """"""
-  deliveryDate: Date
-  """"""
-  city: Cities
-  """"""
-  is_paid: Boolean
-  """"""
-  products(sort: String, limit: Int, start: Int, where: JSON): [Products]
-}
-"""A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar."""
-scalar Date
-""""""
-type Products {
-  """"""
-  id: ID!
-  """"""
-  created_at: DateTime!
-  """"""
-  updated_at: DateTime!
-  """"""
-  title: String
-  """"""
-  price: Float
-  """"""
-  description: String
+  price: Float!
   """"""
   image: UploadFile
-  """"""
-  is_active: Boolean
 }
 """"""
 type UploadFile {
@@ -202,7 +169,7 @@ type UploadFile {
   related(sort: String, limit: Int, start: Int, where: JSON): [Morph]
 }
 """"""
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | ForgotPassword | Cities | CitiesConnection | CitiesAggregator | CitiesGroupBy | CitiesConnectionId | CitiesConnectionCreated_at | CitiesConnectionUpdated_at | CitiesConnectionName | CitiesConnectionIs_active | createCityPayload | updateCityPayload | deleteCityPayload | Orders | OrdersConnection | OrdersAggregator | OrdersAggregatorSum | OrdersAggregatorAvg | OrdersAggregatorMin | OrdersAggregatorMax | OrdersGroupBy | OrdersConnectionId | OrdersConnectionCreated_at | OrdersConnectionUpdated_at | OrdersConnectionName | OrdersConnectionPhone | OrdersConnectionDeliveryDate | OrdersConnectionCity | OrdersConnectionIs_paid | createOrderPayload | updateOrderPayload | deleteOrderPayload | Products | ProductsConnection | ProductsAggregator | ProductsAggregatorSum | ProductsAggregatorAvg | ProductsAggregatorMin | ProductsAggregatorMax | ProductsGroupBy | ProductsConnectionId | ProductsConnectionCreated_at | ProductsConnectionUpdated_at | ProductsConnectionTitle | ProductsConnectionPrice | ProductsConnectionDescription | ProductsConnectionImage | ProductsConnectionIs_active | createProductPayload | updateProductPayload | deleteProductPayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | createUserPayload | updateUserPayload | deleteUserPayload
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | ForgotPassword | City | CityConnection | CityAggregator | CityGroupBy | CityConnectionId | CityConnectionCreated_at | CityConnectionUpdated_at | CityConnectionName | CityConnectionIs_active | createCityPayload | updateCityPayload | deleteCityPayload | Product | ProductConnection | ProductAggregator | ProductAggregatorSum | ProductAggregatorAvg | ProductAggregatorMin | ProductAggregatorMax | ProductGroupBy | ProductConnectionId | ProductConnectionCreated_at | ProductConnectionUpdated_at | ProductConnectionTitle | ProductConnectionPrice | ProductConnectionImage | createProductPayload | updateProductPayload | deleteProductPayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | createUserPayload | updateUserPayload | deleteUserPayload
 """"""
 type UsersPermissionsMe {
   """"""
@@ -244,285 +211,133 @@ type ForgotPassword {
 """"""
 type createCityPayload {
   """"""
-  city: Cities
+  city: City
 }
 """"""
 type updateCityPayload {
   """"""
-  city: Cities
+  city: City
 }
 """"""
 type deleteCityPayload {
   """"""
-  city: Cities
+  city: City
 }
 """"""
-type OrdersConnection {
+type ProductConnection {
   """"""
-  values: [Orders]
+  values: [Product]
   """"""
-  groupBy: OrdersGroupBy
+  groupBy: ProductGroupBy
   """"""
-  aggregate: OrdersAggregator
+  aggregate: ProductAggregator
 }
 """"""
-type OrdersGroupBy {
+type ProductGroupBy {
   """"""
-  id: [OrdersConnectionId]
+  id: [ProductConnectionId]
   """"""
-  created_at: [OrdersConnectionCreated_at]
+  created_at: [ProductConnectionCreated_at]
   """"""
-  updated_at: [OrdersConnectionUpdated_at]
+  updated_at: [ProductConnectionUpdated_at]
   """"""
-  name: [OrdersConnectionName]
+  title: [ProductConnectionTitle]
   """"""
-  phone: [OrdersConnectionPhone]
+  price: [ProductConnectionPrice]
   """"""
-  deliveryDate: [OrdersConnectionDeliveryDate]
-  """"""
-  city: [OrdersConnectionCity]
-  """"""
-  is_paid: [OrdersConnectionIs_paid]
+  image: [ProductConnectionImage]
 }
 """"""
-type OrdersConnectionId {
+type ProductConnectionId {
   """"""
   key: ID
   """"""
-  connection: OrdersConnection
+  connection: ProductConnection
 }
 """"""
-type OrdersConnectionCreated_at {
+type ProductConnectionCreated_at {
   """"""
   key: DateTime
   """"""
-  connection: OrdersConnection
+  connection: ProductConnection
 }
 """"""
-type OrdersConnectionUpdated_at {
+type ProductConnectionUpdated_at {
   """"""
   key: DateTime
   """"""
-  connection: OrdersConnection
+  connection: ProductConnection
 }
 """"""
-type OrdersConnectionName {
+type ProductConnectionTitle {
   """"""
   key: String
   """"""
-  connection: OrdersConnection
+  connection: ProductConnection
 }
 """"""
-type OrdersConnectionPhone {
-  """"""
-  key: Int
-  """"""
-  connection: OrdersConnection
-}
-""""""
-type OrdersConnectionDeliveryDate {
-  """"""
-  key: ID
-  """"""
-  connection: OrdersConnection
-}
-""""""
-type OrdersConnectionCity {
-  """"""
-  key: ID
-  """"""
-  connection: OrdersConnection
-}
-""""""
-type OrdersConnectionIs_paid {
-  """"""
-  key: Boolean
-  """"""
-  connection: OrdersConnection
-}
-""""""
-type OrdersAggregator {
-  """"""
-  count: Int
-  """"""
-  totalCount: Int
-  """"""
-  sum: OrdersAggregatorSum
-  """"""
-  avg: OrdersAggregatorAvg
-  """"""
-  min: OrdersAggregatorMin
-  """"""
-  max: OrdersAggregatorMax
-}
-""""""
-type OrdersAggregatorSum {
-  """"""
-  phone: Float
-}
-""""""
-type OrdersAggregatorAvg {
-  """"""
-  phone: Float
-}
-""""""
-type OrdersAggregatorMin {
-  """"""
-  phone: Float
-}
-""""""
-type OrdersAggregatorMax {
-  """"""
-  phone: Float
-}
-""""""
-type createOrderPayload {
-  """"""
-  order: Orders
-}
-""""""
-type updateOrderPayload {
-  """"""
-  order: Orders
-}
-""""""
-type deleteOrderPayload {
-  """"""
-  order: Orders
-}
-""""""
-type ProductsConnection {
-  """"""
-  values: [Products]
-  """"""
-  groupBy: ProductsGroupBy
-  """"""
-  aggregate: ProductsAggregator
-}
-""""""
-type ProductsGroupBy {
-  """"""
-  id: [ProductsConnectionId]
-  """"""
-  created_at: [ProductsConnectionCreated_at]
-  """"""
-  updated_at: [ProductsConnectionUpdated_at]
-  """"""
-  title: [ProductsConnectionTitle]
-  """"""
-  price: [ProductsConnectionPrice]
-  """"""
-  description: [ProductsConnectionDescription]
-  """"""
-  image: [ProductsConnectionImage]
-  """"""
-  is_active: [ProductsConnectionIs_active]
-}
-""""""
-type ProductsConnectionId {
-  """"""
-  key: ID
-  """"""
-  connection: ProductsConnection
-}
-""""""
-type ProductsConnectionCreated_at {
-  """"""
-  key: DateTime
-  """"""
-  connection: ProductsConnection
-}
-""""""
-type ProductsConnectionUpdated_at {
-  """"""
-  key: DateTime
-  """"""
-  connection: ProductsConnection
-}
-""""""
-type ProductsConnectionTitle {
-  """"""
-  key: String
-  """"""
-  connection: ProductsConnection
-}
-""""""
-type ProductsConnectionPrice {
+type ProductConnectionPrice {
   """"""
   key: Float
   """"""
-  connection: ProductsConnection
+  connection: ProductConnection
 }
 """"""
-type ProductsConnectionDescription {
-  """"""
-  key: String
-  """"""
-  connection: ProductsConnection
-}
-""""""
-type ProductsConnectionImage {
+type ProductConnectionImage {
   """"""
   key: ID
   """"""
-  connection: ProductsConnection
+  connection: ProductConnection
 }
 """"""
-type ProductsConnectionIs_active {
-  """"""
-  key: Boolean
-  """"""
-  connection: ProductsConnection
-}
-""""""
-type ProductsAggregator {
+type ProductAggregator {
   """"""
   count: Int
   """"""
   totalCount: Int
   """"""
-  sum: ProductsAggregatorSum
+  sum: ProductAggregatorSum
   """"""
-  avg: ProductsAggregatorAvg
+  avg: ProductAggregatorAvg
   """"""
-  min: ProductsAggregatorMin
+  min: ProductAggregatorMin
   """"""
-  max: ProductsAggregatorMax
+  max: ProductAggregatorMax
 }
 """"""
-type ProductsAggregatorSum {
+type ProductAggregatorSum {
   """"""
   price: Float
 }
 """"""
-type ProductsAggregatorAvg {
+type ProductAggregatorAvg {
   """"""
   price: Float
 }
 """"""
-type ProductsAggregatorMin {
+type ProductAggregatorMin {
   """"""
   price: Float
 }
 """"""
-type ProductsAggregatorMax {
+type ProductAggregatorMax {
   """"""
   price: Float
 }
 """"""
 type createProductPayload {
   """"""
-  product: Products
+  product: Product
 }
 """"""
 type updateProductPayload {
   """"""
-  product: Products
+  product: Product
 }
 """"""
 type deleteProductPayload {
   """"""
-  product: Products
+  product: Product
 }
 """"""
 type UploadFileConnection {
@@ -987,12 +802,6 @@ type Mutation {
   """"""
   deleteCity(input: deleteCityInput): deleteCityPayload
   """"""
-  createOrder(input: createOrderInput): createOrderPayload
-  """"""
-  updateOrder(input: updateOrderInput): updateOrderPayload
-  """"""
-  deleteOrder(input: deleteOrderInput): deleteOrderPayload
-  """"""
   createProduct(input: createProductInput): createProductPayload
   """"""
   updateProduct(input: updateProductInput): updateProductPayload
@@ -1033,7 +842,7 @@ input createCityInput {
 """"""
 input CityInput {
   """"""
-  name: String
+  name: String!
   """"""
   is_active: Boolean!
 }
@@ -1062,53 +871,6 @@ input deleteCityInput {
   where: InputID
 }
 """"""
-input createOrderInput {
-  """"""
-  data: OrderInput
-}
-""""""
-input OrderInput {
-  """"""
-  name: String
-  """"""
-  phone: Int!
-  """"""
-  deliveryDate: Date
-  """"""
-  city: ID
-  """"""
-  products: [ID]
-  """"""
-  is_paid: Boolean
-}
-""""""
-input updateOrderInput {
-  """"""
-  where: InputID
-  """"""
-  data: editOrderInput
-}
-""""""
-input editOrderInput {
-  """"""
-  name: String
-  """"""
-  phone: Int
-  """"""
-  deliveryDate: Date
-  """"""
-  city: ID
-  """"""
-  products: [ID]
-  """"""
-  is_paid: Boolean
-}
-""""""
-input deleteOrderInput {
-  """"""
-  where: InputID
-}
-""""""
 input createProductInput {
   """"""
   data: ProductInput
@@ -1116,15 +878,11 @@ input createProductInput {
 """"""
 input ProductInput {
   """"""
-  title: String
+  title: String!
   """"""
-  price: Float
-  """"""
-  description: String
+  price: Float!
   """"""
   image: ID
-  """"""
-  is_active: Boolean
 }
 """"""
 input updateProductInput {
@@ -1140,11 +898,7 @@ input editProductInput {
   """"""
   price: Float
   """"""
-  description: String
-  """"""
   image: ID
-  """"""
-  is_active: Boolean
 }
 """"""
 input deleteProductInput {
@@ -1328,6 +1082,8 @@ input editFileInput {
 }
 """A time string with format: HH:mm:ss.SSS"""
 scalar Time
+"""A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar."""
+scalar Date
 """The `Long` scalar type represents 52-bit integers"""
 scalar Long
 """"""

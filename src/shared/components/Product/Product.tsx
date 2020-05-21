@@ -57,15 +57,15 @@ const Button = styled.div`
 `;
 
 type onChangeProps = {
-  productId: Types.Products['id'];
+  productId: Types.Product['id'];
   amount: number;
-  price: Types.Products['price'];
+  price: Types.Product['price'];
 };
 
 type ProductProps = {
-  id: Types.Products['id'];
-  title: Types.Products['title'];
-  price: Types.Products['price'];
+  id: Types.Product['id'];
+  title: Types.Product['title'];
+  price: Types.Product['price'];
   url: Types.UploadFile['url'];
 };
 

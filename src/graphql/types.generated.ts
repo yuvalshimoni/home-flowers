@@ -17,27 +17,24 @@ export type Scalars = {
   DateTime: any;
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any;
-  /** A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
-  Date: any;
   /** The `Upload` scalar type represents a file upload. */
   Upload: any;
   /** A time string with format: HH:mm:ss.SSS */
   Time: any;
+  /** A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
+  Date: any;
   /** The `Long` scalar type represents 52-bit integers */
   Long: any;
 };
 
 export type Query = {
   __typename?: 'Query';
-  city?: Maybe<Cities>;
-  cities?: Maybe<Array<Maybe<Cities>>>;
-  citiesConnection?: Maybe<CitiesConnection>;
-  order?: Maybe<Orders>;
-  orders?: Maybe<Array<Maybe<Orders>>>;
-  ordersConnection?: Maybe<OrdersConnection>;
-  product?: Maybe<Products>;
-  products?: Maybe<Array<Maybe<Products>>>;
-  productsConnection?: Maybe<ProductsConnection>;
+  city?: Maybe<City>;
+  cities?: Maybe<Array<Maybe<City>>>;
+  citiesConnection?: Maybe<CityConnection>;
+  product?: Maybe<Product>;
+  products?: Maybe<Array<Maybe<Product>>>;
+  productsConnection?: Maybe<ProductConnection>;
   files?: Maybe<Array<Maybe<UploadFile>>>;
   filesConnection?: Maybe<UploadFileConnection>;
   role?: Maybe<UsersPermissionsRole>;
@@ -65,27 +62,6 @@ export type QueryCitiesArgs = {
 
 
 export type QueryCitiesConnectionArgs = {
-  sort?: Maybe<Scalars['String']>;
-  limit?: Maybe<Scalars['Int']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
-};
-
-
-export type QueryOrderArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type QueryOrdersArgs = {
-  sort?: Maybe<Scalars['String']>;
-  limit?: Maybe<Scalars['Int']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
-};
-
-
-export type QueryOrdersConnectionArgs = {
   sort?: Maybe<Scalars['String']>;
   limit?: Maybe<Scalars['Int']>;
   start?: Maybe<Scalars['Int']>;
@@ -171,101 +147,77 @@ export type QueryUsersConnectionArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type Cities = {
-  __typename?: 'Cities';
+export type City = {
+  __typename?: 'City';
   id: Scalars['ID'];
   created_at: Scalars['DateTime'];
   updated_at: Scalars['DateTime'];
-  name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   is_active: Scalars['Boolean'];
 };
 
 
 
-export type CitiesConnection = {
-  __typename?: 'CitiesConnection';
-  values?: Maybe<Array<Maybe<Cities>>>;
-  groupBy?: Maybe<CitiesGroupBy>;
-  aggregate?: Maybe<CitiesAggregator>;
+export type CityConnection = {
+  __typename?: 'CityConnection';
+  values?: Maybe<Array<Maybe<City>>>;
+  groupBy?: Maybe<CityGroupBy>;
+  aggregate?: Maybe<CityAggregator>;
 };
 
-export type CitiesGroupBy = {
-  __typename?: 'CitiesGroupBy';
-  id?: Maybe<Array<Maybe<CitiesConnectionId>>>;
-  created_at?: Maybe<Array<Maybe<CitiesConnectionCreated_At>>>;
-  updated_at?: Maybe<Array<Maybe<CitiesConnectionUpdated_At>>>;
-  name?: Maybe<Array<Maybe<CitiesConnectionName>>>;
-  is_active?: Maybe<Array<Maybe<CitiesConnectionIs_Active>>>;
+export type CityGroupBy = {
+  __typename?: 'CityGroupBy';
+  id?: Maybe<Array<Maybe<CityConnectionId>>>;
+  created_at?: Maybe<Array<Maybe<CityConnectionCreated_At>>>;
+  updated_at?: Maybe<Array<Maybe<CityConnectionUpdated_At>>>;
+  name?: Maybe<Array<Maybe<CityConnectionName>>>;
+  is_active?: Maybe<Array<Maybe<CityConnectionIs_Active>>>;
 };
 
-export type CitiesConnectionId = {
-  __typename?: 'CitiesConnectionId';
+export type CityConnectionId = {
+  __typename?: 'CityConnectionId';
   key?: Maybe<Scalars['ID']>;
-  connection?: Maybe<CitiesConnection>;
+  connection?: Maybe<CityConnection>;
 };
 
-export type CitiesConnectionCreated_At = {
-  __typename?: 'CitiesConnectionCreated_at';
+export type CityConnectionCreated_At = {
+  __typename?: 'CityConnectionCreated_at';
   key?: Maybe<Scalars['DateTime']>;
-  connection?: Maybe<CitiesConnection>;
+  connection?: Maybe<CityConnection>;
 };
 
-export type CitiesConnectionUpdated_At = {
-  __typename?: 'CitiesConnectionUpdated_at';
+export type CityConnectionUpdated_At = {
+  __typename?: 'CityConnectionUpdated_at';
   key?: Maybe<Scalars['DateTime']>;
-  connection?: Maybe<CitiesConnection>;
+  connection?: Maybe<CityConnection>;
 };
 
-export type CitiesConnectionName = {
-  __typename?: 'CitiesConnectionName';
+export type CityConnectionName = {
+  __typename?: 'CityConnectionName';
   key?: Maybe<Scalars['String']>;
-  connection?: Maybe<CitiesConnection>;
+  connection?: Maybe<CityConnection>;
 };
 
-export type CitiesConnectionIs_Active = {
-  __typename?: 'CitiesConnectionIs_active';
+export type CityConnectionIs_Active = {
+  __typename?: 'CityConnectionIs_active';
   key?: Maybe<Scalars['Boolean']>;
-  connection?: Maybe<CitiesConnection>;
+  connection?: Maybe<CityConnection>;
 };
 
-export type CitiesAggregator = {
-  __typename?: 'CitiesAggregator';
+export type CityAggregator = {
+  __typename?: 'CityAggregator';
   count?: Maybe<Scalars['Int']>;
   totalCount?: Maybe<Scalars['Int']>;
 };
 
-export type Orders = {
-  __typename?: 'Orders';
+export type Product = {
+  __typename?: 'Product';
   id: Scalars['ID'];
   created_at: Scalars['DateTime'];
   updated_at: Scalars['DateTime'];
-  name?: Maybe<Scalars['String']>;
-  phone: Scalars['Int'];
-  deliveryDate?: Maybe<Scalars['Date']>;
-  city?: Maybe<Cities>;
-  is_paid?: Maybe<Scalars['Boolean']>;
-  products?: Maybe<Array<Maybe<Products>>>;
-};
-
-
-export type OrdersProductsArgs = {
-  sort?: Maybe<Scalars['String']>;
-  limit?: Maybe<Scalars['Int']>;
-  start?: Maybe<Scalars['Int']>;
-  where?: Maybe<Scalars['JSON']>;
-};
-
-
-export type Products = {
-  __typename?: 'Products';
-  id: Scalars['ID'];
-  created_at: Scalars['DateTime'];
-  updated_at: Scalars['DateTime'];
-  title?: Maybe<Scalars['String']>;
-  price?: Maybe<Scalars['Float']>;
-  description?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
+  price: Scalars['Float'];
   image?: Maybe<UploadFile>;
-  is_active?: Maybe<Scalars['Boolean']>;
 };
 
 export type UploadFile = {
@@ -298,7 +250,7 @@ export type UploadFileRelatedArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
-export type Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | ForgotPassword | Cities | CitiesConnection | CitiesAggregator | CitiesGroupBy | CitiesConnectionId | CitiesConnectionCreated_At | CitiesConnectionUpdated_At | CitiesConnectionName | CitiesConnectionIs_Active | CreateCityPayload | UpdateCityPayload | DeleteCityPayload | Orders | OrdersConnection | OrdersAggregator | OrdersAggregatorSum | OrdersAggregatorAvg | OrdersAggregatorMin | OrdersAggregatorMax | OrdersGroupBy | OrdersConnectionId | OrdersConnectionCreated_At | OrdersConnectionUpdated_At | OrdersConnectionName | OrdersConnectionPhone | OrdersConnectionDeliveryDate | OrdersConnectionCity | OrdersConnectionIs_Paid | CreateOrderPayload | UpdateOrderPayload | DeleteOrderPayload | Products | ProductsConnection | ProductsAggregator | ProductsAggregatorSum | ProductsAggregatorAvg | ProductsAggregatorMin | ProductsAggregatorMax | ProductsGroupBy | ProductsConnectionId | ProductsConnectionCreated_At | ProductsConnectionUpdated_At | ProductsConnectionTitle | ProductsConnectionPrice | ProductsConnectionDescription | ProductsConnectionImage | ProductsConnectionIs_Active | CreateProductPayload | UpdateProductPayload | DeleteProductPayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_At | UploadFileConnectionUpdated_At | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_Metadata | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | CreateRolePayload | UpdateRolePayload | DeleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_At | UsersPermissionsUserConnectionUpdated_At | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | CreateUserPayload | UpdateUserPayload | DeleteUserPayload;
+export type Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | ForgotPassword | City | CityConnection | CityAggregator | CityGroupBy | CityConnectionId | CityConnectionCreated_At | CityConnectionUpdated_At | CityConnectionName | CityConnectionIs_Active | CreateCityPayload | UpdateCityPayload | DeleteCityPayload | Product | ProductConnection | ProductAggregator | ProductAggregatorSum | ProductAggregatorAvg | ProductAggregatorMin | ProductAggregatorMax | ProductGroupBy | ProductConnectionId | ProductConnectionCreated_At | ProductConnectionUpdated_At | ProductConnectionTitle | ProductConnectionPrice | ProductConnectionImage | CreateProductPayload | UpdateProductPayload | DeleteProductPayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_At | UploadFileConnectionUpdated_At | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_Metadata | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | CreateRolePayload | UpdateRolePayload | DeleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_At | UsersPermissionsUserConnectionUpdated_At | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | CreateUserPayload | UpdateUserPayload | DeleteUserPayload;
 
 export type UsersPermissionsMe = {
   __typename?: 'UsersPermissionsMe';
@@ -331,241 +283,115 @@ export type ForgotPassword = {
 
 export type CreateCityPayload = {
   __typename?: 'createCityPayload';
-  city?: Maybe<Cities>;
+  city?: Maybe<City>;
 };
 
 export type UpdateCityPayload = {
   __typename?: 'updateCityPayload';
-  city?: Maybe<Cities>;
+  city?: Maybe<City>;
 };
 
 export type DeleteCityPayload = {
   __typename?: 'deleteCityPayload';
-  city?: Maybe<Cities>;
+  city?: Maybe<City>;
 };
 
-export type OrdersConnection = {
-  __typename?: 'OrdersConnection';
-  values?: Maybe<Array<Maybe<Orders>>>;
-  groupBy?: Maybe<OrdersGroupBy>;
-  aggregate?: Maybe<OrdersAggregator>;
+export type ProductConnection = {
+  __typename?: 'ProductConnection';
+  values?: Maybe<Array<Maybe<Product>>>;
+  groupBy?: Maybe<ProductGroupBy>;
+  aggregate?: Maybe<ProductAggregator>;
 };
 
-export type OrdersGroupBy = {
-  __typename?: 'OrdersGroupBy';
-  id?: Maybe<Array<Maybe<OrdersConnectionId>>>;
-  created_at?: Maybe<Array<Maybe<OrdersConnectionCreated_At>>>;
-  updated_at?: Maybe<Array<Maybe<OrdersConnectionUpdated_At>>>;
-  name?: Maybe<Array<Maybe<OrdersConnectionName>>>;
-  phone?: Maybe<Array<Maybe<OrdersConnectionPhone>>>;
-  deliveryDate?: Maybe<Array<Maybe<OrdersConnectionDeliveryDate>>>;
-  city?: Maybe<Array<Maybe<OrdersConnectionCity>>>;
-  is_paid?: Maybe<Array<Maybe<OrdersConnectionIs_Paid>>>;
+export type ProductGroupBy = {
+  __typename?: 'ProductGroupBy';
+  id?: Maybe<Array<Maybe<ProductConnectionId>>>;
+  created_at?: Maybe<Array<Maybe<ProductConnectionCreated_At>>>;
+  updated_at?: Maybe<Array<Maybe<ProductConnectionUpdated_At>>>;
+  title?: Maybe<Array<Maybe<ProductConnectionTitle>>>;
+  price?: Maybe<Array<Maybe<ProductConnectionPrice>>>;
+  image?: Maybe<Array<Maybe<ProductConnectionImage>>>;
 };
 
-export type OrdersConnectionId = {
-  __typename?: 'OrdersConnectionId';
+export type ProductConnectionId = {
+  __typename?: 'ProductConnectionId';
   key?: Maybe<Scalars['ID']>;
-  connection?: Maybe<OrdersConnection>;
+  connection?: Maybe<ProductConnection>;
 };
 
-export type OrdersConnectionCreated_At = {
-  __typename?: 'OrdersConnectionCreated_at';
+export type ProductConnectionCreated_At = {
+  __typename?: 'ProductConnectionCreated_at';
   key?: Maybe<Scalars['DateTime']>;
-  connection?: Maybe<OrdersConnection>;
+  connection?: Maybe<ProductConnection>;
 };
 
-export type OrdersConnectionUpdated_At = {
-  __typename?: 'OrdersConnectionUpdated_at';
+export type ProductConnectionUpdated_At = {
+  __typename?: 'ProductConnectionUpdated_at';
   key?: Maybe<Scalars['DateTime']>;
-  connection?: Maybe<OrdersConnection>;
+  connection?: Maybe<ProductConnection>;
 };
 
-export type OrdersConnectionName = {
-  __typename?: 'OrdersConnectionName';
+export type ProductConnectionTitle = {
+  __typename?: 'ProductConnectionTitle';
   key?: Maybe<Scalars['String']>;
-  connection?: Maybe<OrdersConnection>;
+  connection?: Maybe<ProductConnection>;
 };
 
-export type OrdersConnectionPhone = {
-  __typename?: 'OrdersConnectionPhone';
-  key?: Maybe<Scalars['Int']>;
-  connection?: Maybe<OrdersConnection>;
-};
-
-export type OrdersConnectionDeliveryDate = {
-  __typename?: 'OrdersConnectionDeliveryDate';
-  key?: Maybe<Scalars['ID']>;
-  connection?: Maybe<OrdersConnection>;
-};
-
-export type OrdersConnectionCity = {
-  __typename?: 'OrdersConnectionCity';
-  key?: Maybe<Scalars['ID']>;
-  connection?: Maybe<OrdersConnection>;
-};
-
-export type OrdersConnectionIs_Paid = {
-  __typename?: 'OrdersConnectionIs_paid';
-  key?: Maybe<Scalars['Boolean']>;
-  connection?: Maybe<OrdersConnection>;
-};
-
-export type OrdersAggregator = {
-  __typename?: 'OrdersAggregator';
-  count?: Maybe<Scalars['Int']>;
-  totalCount?: Maybe<Scalars['Int']>;
-  sum?: Maybe<OrdersAggregatorSum>;
-  avg?: Maybe<OrdersAggregatorAvg>;
-  min?: Maybe<OrdersAggregatorMin>;
-  max?: Maybe<OrdersAggregatorMax>;
-};
-
-export type OrdersAggregatorSum = {
-  __typename?: 'OrdersAggregatorSum';
-  phone?: Maybe<Scalars['Float']>;
-};
-
-export type OrdersAggregatorAvg = {
-  __typename?: 'OrdersAggregatorAvg';
-  phone?: Maybe<Scalars['Float']>;
-};
-
-export type OrdersAggregatorMin = {
-  __typename?: 'OrdersAggregatorMin';
-  phone?: Maybe<Scalars['Float']>;
-};
-
-export type OrdersAggregatorMax = {
-  __typename?: 'OrdersAggregatorMax';
-  phone?: Maybe<Scalars['Float']>;
-};
-
-export type CreateOrderPayload = {
-  __typename?: 'createOrderPayload';
-  order?: Maybe<Orders>;
-};
-
-export type UpdateOrderPayload = {
-  __typename?: 'updateOrderPayload';
-  order?: Maybe<Orders>;
-};
-
-export type DeleteOrderPayload = {
-  __typename?: 'deleteOrderPayload';
-  order?: Maybe<Orders>;
-};
-
-export type ProductsConnection = {
-  __typename?: 'ProductsConnection';
-  values?: Maybe<Array<Maybe<Products>>>;
-  groupBy?: Maybe<ProductsGroupBy>;
-  aggregate?: Maybe<ProductsAggregator>;
-};
-
-export type ProductsGroupBy = {
-  __typename?: 'ProductsGroupBy';
-  id?: Maybe<Array<Maybe<ProductsConnectionId>>>;
-  created_at?: Maybe<Array<Maybe<ProductsConnectionCreated_At>>>;
-  updated_at?: Maybe<Array<Maybe<ProductsConnectionUpdated_At>>>;
-  title?: Maybe<Array<Maybe<ProductsConnectionTitle>>>;
-  price?: Maybe<Array<Maybe<ProductsConnectionPrice>>>;
-  description?: Maybe<Array<Maybe<ProductsConnectionDescription>>>;
-  image?: Maybe<Array<Maybe<ProductsConnectionImage>>>;
-  is_active?: Maybe<Array<Maybe<ProductsConnectionIs_Active>>>;
-};
-
-export type ProductsConnectionId = {
-  __typename?: 'ProductsConnectionId';
-  key?: Maybe<Scalars['ID']>;
-  connection?: Maybe<ProductsConnection>;
-};
-
-export type ProductsConnectionCreated_At = {
-  __typename?: 'ProductsConnectionCreated_at';
-  key?: Maybe<Scalars['DateTime']>;
-  connection?: Maybe<ProductsConnection>;
-};
-
-export type ProductsConnectionUpdated_At = {
-  __typename?: 'ProductsConnectionUpdated_at';
-  key?: Maybe<Scalars['DateTime']>;
-  connection?: Maybe<ProductsConnection>;
-};
-
-export type ProductsConnectionTitle = {
-  __typename?: 'ProductsConnectionTitle';
-  key?: Maybe<Scalars['String']>;
-  connection?: Maybe<ProductsConnection>;
-};
-
-export type ProductsConnectionPrice = {
-  __typename?: 'ProductsConnectionPrice';
+export type ProductConnectionPrice = {
+  __typename?: 'ProductConnectionPrice';
   key?: Maybe<Scalars['Float']>;
-  connection?: Maybe<ProductsConnection>;
+  connection?: Maybe<ProductConnection>;
 };
 
-export type ProductsConnectionDescription = {
-  __typename?: 'ProductsConnectionDescription';
-  key?: Maybe<Scalars['String']>;
-  connection?: Maybe<ProductsConnection>;
-};
-
-export type ProductsConnectionImage = {
-  __typename?: 'ProductsConnectionImage';
+export type ProductConnectionImage = {
+  __typename?: 'ProductConnectionImage';
   key?: Maybe<Scalars['ID']>;
-  connection?: Maybe<ProductsConnection>;
+  connection?: Maybe<ProductConnection>;
 };
 
-export type ProductsConnectionIs_Active = {
-  __typename?: 'ProductsConnectionIs_active';
-  key?: Maybe<Scalars['Boolean']>;
-  connection?: Maybe<ProductsConnection>;
-};
-
-export type ProductsAggregator = {
-  __typename?: 'ProductsAggregator';
+export type ProductAggregator = {
+  __typename?: 'ProductAggregator';
   count?: Maybe<Scalars['Int']>;
   totalCount?: Maybe<Scalars['Int']>;
-  sum?: Maybe<ProductsAggregatorSum>;
-  avg?: Maybe<ProductsAggregatorAvg>;
-  min?: Maybe<ProductsAggregatorMin>;
-  max?: Maybe<ProductsAggregatorMax>;
+  sum?: Maybe<ProductAggregatorSum>;
+  avg?: Maybe<ProductAggregatorAvg>;
+  min?: Maybe<ProductAggregatorMin>;
+  max?: Maybe<ProductAggregatorMax>;
 };
 
-export type ProductsAggregatorSum = {
-  __typename?: 'ProductsAggregatorSum';
+export type ProductAggregatorSum = {
+  __typename?: 'ProductAggregatorSum';
   price?: Maybe<Scalars['Float']>;
 };
 
-export type ProductsAggregatorAvg = {
-  __typename?: 'ProductsAggregatorAvg';
+export type ProductAggregatorAvg = {
+  __typename?: 'ProductAggregatorAvg';
   price?: Maybe<Scalars['Float']>;
 };
 
-export type ProductsAggregatorMin = {
-  __typename?: 'ProductsAggregatorMin';
+export type ProductAggregatorMin = {
+  __typename?: 'ProductAggregatorMin';
   price?: Maybe<Scalars['Float']>;
 };
 
-export type ProductsAggregatorMax = {
-  __typename?: 'ProductsAggregatorMax';
+export type ProductAggregatorMax = {
+  __typename?: 'ProductAggregatorMax';
   price?: Maybe<Scalars['Float']>;
 };
 
 export type CreateProductPayload = {
   __typename?: 'createProductPayload';
-  product?: Maybe<Products>;
+  product?: Maybe<Product>;
 };
 
 export type UpdateProductPayload = {
   __typename?: 'updateProductPayload';
-  product?: Maybe<Products>;
+  product?: Maybe<Product>;
 };
 
 export type DeleteProductPayload = {
   __typename?: 'deleteProductPayload';
-  product?: Maybe<Products>;
+  product?: Maybe<Product>;
 };
 
 export type UploadFileConnection = {
@@ -946,9 +772,6 @@ export type Mutation = {
   createCity?: Maybe<CreateCityPayload>;
   updateCity?: Maybe<UpdateCityPayload>;
   deleteCity?: Maybe<DeleteCityPayload>;
-  createOrder?: Maybe<CreateOrderPayload>;
-  updateOrder?: Maybe<UpdateOrderPayload>;
-  deleteOrder?: Maybe<DeleteOrderPayload>;
   createProduct?: Maybe<CreateProductPayload>;
   updateProduct?: Maybe<UpdateProductPayload>;
   deleteProduct?: Maybe<DeleteProductPayload>;
@@ -986,21 +809,6 @@ export type MutationUpdateCityArgs = {
 
 export type MutationDeleteCityArgs = {
   input?: Maybe<DeleteCityInput>;
-};
-
-
-export type MutationCreateOrderArgs = {
-  input?: Maybe<CreateOrderInput>;
-};
-
-
-export type MutationUpdateOrderArgs = {
-  input?: Maybe<UpdateOrderInput>;
-};
-
-
-export type MutationDeleteOrderArgs = {
-  input?: Maybe<DeleteOrderInput>;
 };
 
 
@@ -1098,7 +906,7 @@ export type CreateCityInput = {
 };
 
 export type CityInput = {
-  name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   is_active: Scalars['Boolean'];
 };
 
@@ -1120,47 +928,14 @@ export type DeleteCityInput = {
   where?: Maybe<InputId>;
 };
 
-export type CreateOrderInput = {
-  data?: Maybe<OrderInput>;
-};
-
-export type OrderInput = {
-  name?: Maybe<Scalars['String']>;
-  phone: Scalars['Int'];
-  deliveryDate?: Maybe<Scalars['Date']>;
-  city?: Maybe<Scalars['ID']>;
-  products?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  is_paid?: Maybe<Scalars['Boolean']>;
-};
-
-export type UpdateOrderInput = {
-  where?: Maybe<InputId>;
-  data?: Maybe<EditOrderInput>;
-};
-
-export type EditOrderInput = {
-  name?: Maybe<Scalars['String']>;
-  phone?: Maybe<Scalars['Int']>;
-  deliveryDate?: Maybe<Scalars['Date']>;
-  city?: Maybe<Scalars['ID']>;
-  products?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  is_paid?: Maybe<Scalars['Boolean']>;
-};
-
-export type DeleteOrderInput = {
-  where?: Maybe<InputId>;
-};
-
 export type CreateProductInput = {
   data?: Maybe<ProductInput>;
 };
 
 export type ProductInput = {
-  title?: Maybe<Scalars['String']>;
-  price?: Maybe<Scalars['Float']>;
-  description?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
+  price: Scalars['Float'];
   image?: Maybe<Scalars['ID']>;
-  is_active?: Maybe<Scalars['Boolean']>;
 };
 
 export type UpdateProductInput = {
@@ -1171,9 +946,7 @@ export type UpdateProductInput = {
 export type EditProductInput = {
   title?: Maybe<Scalars['String']>;
   price?: Maybe<Scalars['Float']>;
-  description?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['ID']>;
-  is_active?: Maybe<Scalars['Boolean']>;
 };
 
 export type DeleteProductInput = {
@@ -1289,6 +1062,7 @@ export type EditFileInput = {
 
 
 
+
 export enum CacheControlScope {
   Public = 'PUBLIC',
   Private = 'PRIVATE'
@@ -1373,23 +1147,21 @@ export type ResolversTypes = ResolversObject<{
   Query: ResolverTypeWrapper<{}>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
-  Cities: ResolverTypeWrapper<Cities>;
+  City: ResolverTypeWrapper<City>;
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
   JSON: ResolverTypeWrapper<Scalars['JSON']>;
-  CitiesConnection: ResolverTypeWrapper<CitiesConnection>;
-  CitiesGroupBy: ResolverTypeWrapper<CitiesGroupBy>;
-  CitiesConnectionId: ResolverTypeWrapper<CitiesConnectionId>;
-  CitiesConnectionCreated_at: ResolverTypeWrapper<CitiesConnectionCreated_At>;
-  CitiesConnectionUpdated_at: ResolverTypeWrapper<CitiesConnectionUpdated_At>;
-  CitiesConnectionName: ResolverTypeWrapper<CitiesConnectionName>;
-  CitiesConnectionIs_active: ResolverTypeWrapper<CitiesConnectionIs_Active>;
-  CitiesAggregator: ResolverTypeWrapper<CitiesAggregator>;
-  Orders: ResolverTypeWrapper<Orders>;
-  Date: ResolverTypeWrapper<Scalars['Date']>;
-  Products: ResolverTypeWrapper<Products>;
+  CityConnection: ResolverTypeWrapper<CityConnection>;
+  CityGroupBy: ResolverTypeWrapper<CityGroupBy>;
+  CityConnectionId: ResolverTypeWrapper<CityConnectionId>;
+  CityConnectionCreated_at: ResolverTypeWrapper<CityConnectionCreated_At>;
+  CityConnectionUpdated_at: ResolverTypeWrapper<CityConnectionUpdated_At>;
+  CityConnectionName: ResolverTypeWrapper<CityConnectionName>;
+  CityConnectionIs_active: ResolverTypeWrapper<CityConnectionIs_Active>;
+  CityAggregator: ResolverTypeWrapper<CityAggregator>;
+  Product: ResolverTypeWrapper<Product>;
   Float: ResolverTypeWrapper<Scalars['Float']>;
   UploadFile: ResolverTypeWrapper<Omit<UploadFile, 'related'> & { related?: Maybe<Array<Maybe<ResolversTypes['Morph']>>> }>;
-  Morph: ResolversTypes['UsersPermissionsMe'] | ResolversTypes['UsersPermissionsMeRole'] | ResolversTypes['UsersPermissionsLoginPayload'] | ResolversTypes['ForgotPassword'] | ResolversTypes['Cities'] | ResolversTypes['CitiesConnection'] | ResolversTypes['CitiesAggregator'] | ResolversTypes['CitiesGroupBy'] | ResolversTypes['CitiesConnectionId'] | ResolversTypes['CitiesConnectionCreated_at'] | ResolversTypes['CitiesConnectionUpdated_at'] | ResolversTypes['CitiesConnectionName'] | ResolversTypes['CitiesConnectionIs_active'] | ResolversTypes['createCityPayload'] | ResolversTypes['updateCityPayload'] | ResolversTypes['deleteCityPayload'] | ResolversTypes['Orders'] | ResolversTypes['OrdersConnection'] | ResolversTypes['OrdersAggregator'] | ResolversTypes['OrdersAggregatorSum'] | ResolversTypes['OrdersAggregatorAvg'] | ResolversTypes['OrdersAggregatorMin'] | ResolversTypes['OrdersAggregatorMax'] | ResolversTypes['OrdersGroupBy'] | ResolversTypes['OrdersConnectionId'] | ResolversTypes['OrdersConnectionCreated_at'] | ResolversTypes['OrdersConnectionUpdated_at'] | ResolversTypes['OrdersConnectionName'] | ResolversTypes['OrdersConnectionPhone'] | ResolversTypes['OrdersConnectionDeliveryDate'] | ResolversTypes['OrdersConnectionCity'] | ResolversTypes['OrdersConnectionIs_paid'] | ResolversTypes['createOrderPayload'] | ResolversTypes['updateOrderPayload'] | ResolversTypes['deleteOrderPayload'] | ResolversTypes['Products'] | ResolversTypes['ProductsConnection'] | ResolversTypes['ProductsAggregator'] | ResolversTypes['ProductsAggregatorSum'] | ResolversTypes['ProductsAggregatorAvg'] | ResolversTypes['ProductsAggregatorMin'] | ResolversTypes['ProductsAggregatorMax'] | ResolversTypes['ProductsGroupBy'] | ResolversTypes['ProductsConnectionId'] | ResolversTypes['ProductsConnectionCreated_at'] | ResolversTypes['ProductsConnectionUpdated_at'] | ResolversTypes['ProductsConnectionTitle'] | ResolversTypes['ProductsConnectionPrice'] | ResolversTypes['ProductsConnectionDescription'] | ResolversTypes['ProductsConnectionImage'] | ResolversTypes['ProductsConnectionIs_active'] | ResolversTypes['createProductPayload'] | ResolversTypes['updateProductPayload'] | ResolversTypes['deleteProductPayload'] | ResolversTypes['UploadFile'] | ResolversTypes['UploadFileConnection'] | ResolversTypes['UploadFileAggregator'] | ResolversTypes['UploadFileAggregatorSum'] | ResolversTypes['UploadFileAggregatorAvg'] | ResolversTypes['UploadFileAggregatorMin'] | ResolversTypes['UploadFileAggregatorMax'] | ResolversTypes['UploadFileGroupBy'] | ResolversTypes['UploadFileConnectionId'] | ResolversTypes['UploadFileConnectionCreated_at'] | ResolversTypes['UploadFileConnectionUpdated_at'] | ResolversTypes['UploadFileConnectionName'] | ResolversTypes['UploadFileConnectionAlternativeText'] | ResolversTypes['UploadFileConnectionCaption'] | ResolversTypes['UploadFileConnectionWidth'] | ResolversTypes['UploadFileConnectionHeight'] | ResolversTypes['UploadFileConnectionFormats'] | ResolversTypes['UploadFileConnectionHash'] | ResolversTypes['UploadFileConnectionExt'] | ResolversTypes['UploadFileConnectionMime'] | ResolversTypes['UploadFileConnectionSize'] | ResolversTypes['UploadFileConnectionUrl'] | ResolversTypes['UploadFileConnectionPreviewUrl'] | ResolversTypes['UploadFileConnectionProvider'] | ResolversTypes['UploadFileConnectionProvider_metadata'] | ResolversTypes['UsersPermissionsPermission'] | ResolversTypes['UsersPermissionsRole'] | ResolversTypes['UsersPermissionsRoleConnection'] | ResolversTypes['UsersPermissionsRoleAggregator'] | ResolversTypes['UsersPermissionsRoleGroupBy'] | ResolversTypes['UsersPermissionsRoleConnectionId'] | ResolversTypes['UsersPermissionsRoleConnectionName'] | ResolversTypes['UsersPermissionsRoleConnectionDescription'] | ResolversTypes['UsersPermissionsRoleConnectionType'] | ResolversTypes['createRolePayload'] | ResolversTypes['updateRolePayload'] | ResolversTypes['deleteRolePayload'] | ResolversTypes['UsersPermissionsUser'] | ResolversTypes['UsersPermissionsUserConnection'] | ResolversTypes['UsersPermissionsUserAggregator'] | ResolversTypes['UsersPermissionsUserGroupBy'] | ResolversTypes['UsersPermissionsUserConnectionId'] | ResolversTypes['UsersPermissionsUserConnectionCreated_at'] | ResolversTypes['UsersPermissionsUserConnectionUpdated_at'] | ResolversTypes['UsersPermissionsUserConnectionUsername'] | ResolversTypes['UsersPermissionsUserConnectionEmail'] | ResolversTypes['UsersPermissionsUserConnectionProvider'] | ResolversTypes['UsersPermissionsUserConnectionConfirmed'] | ResolversTypes['UsersPermissionsUserConnectionBlocked'] | ResolversTypes['UsersPermissionsUserConnectionRole'] | ResolversTypes['createUserPayload'] | ResolversTypes['updateUserPayload'] | ResolversTypes['deleteUserPayload'];
+  Morph: ResolversTypes['UsersPermissionsMe'] | ResolversTypes['UsersPermissionsMeRole'] | ResolversTypes['UsersPermissionsLoginPayload'] | ResolversTypes['ForgotPassword'] | ResolversTypes['City'] | ResolversTypes['CityConnection'] | ResolversTypes['CityAggregator'] | ResolversTypes['CityGroupBy'] | ResolversTypes['CityConnectionId'] | ResolversTypes['CityConnectionCreated_at'] | ResolversTypes['CityConnectionUpdated_at'] | ResolversTypes['CityConnectionName'] | ResolversTypes['CityConnectionIs_active'] | ResolversTypes['createCityPayload'] | ResolversTypes['updateCityPayload'] | ResolversTypes['deleteCityPayload'] | ResolversTypes['Product'] | ResolversTypes['ProductConnection'] | ResolversTypes['ProductAggregator'] | ResolversTypes['ProductAggregatorSum'] | ResolversTypes['ProductAggregatorAvg'] | ResolversTypes['ProductAggregatorMin'] | ResolversTypes['ProductAggregatorMax'] | ResolversTypes['ProductGroupBy'] | ResolversTypes['ProductConnectionId'] | ResolversTypes['ProductConnectionCreated_at'] | ResolversTypes['ProductConnectionUpdated_at'] | ResolversTypes['ProductConnectionTitle'] | ResolversTypes['ProductConnectionPrice'] | ResolversTypes['ProductConnectionImage'] | ResolversTypes['createProductPayload'] | ResolversTypes['updateProductPayload'] | ResolversTypes['deleteProductPayload'] | ResolversTypes['UploadFile'] | ResolversTypes['UploadFileConnection'] | ResolversTypes['UploadFileAggregator'] | ResolversTypes['UploadFileAggregatorSum'] | ResolversTypes['UploadFileAggregatorAvg'] | ResolversTypes['UploadFileAggregatorMin'] | ResolversTypes['UploadFileAggregatorMax'] | ResolversTypes['UploadFileGroupBy'] | ResolversTypes['UploadFileConnectionId'] | ResolversTypes['UploadFileConnectionCreated_at'] | ResolversTypes['UploadFileConnectionUpdated_at'] | ResolversTypes['UploadFileConnectionName'] | ResolversTypes['UploadFileConnectionAlternativeText'] | ResolversTypes['UploadFileConnectionCaption'] | ResolversTypes['UploadFileConnectionWidth'] | ResolversTypes['UploadFileConnectionHeight'] | ResolversTypes['UploadFileConnectionFormats'] | ResolversTypes['UploadFileConnectionHash'] | ResolversTypes['UploadFileConnectionExt'] | ResolversTypes['UploadFileConnectionMime'] | ResolversTypes['UploadFileConnectionSize'] | ResolversTypes['UploadFileConnectionUrl'] | ResolversTypes['UploadFileConnectionPreviewUrl'] | ResolversTypes['UploadFileConnectionProvider'] | ResolversTypes['UploadFileConnectionProvider_metadata'] | ResolversTypes['UsersPermissionsPermission'] | ResolversTypes['UsersPermissionsRole'] | ResolversTypes['UsersPermissionsRoleConnection'] | ResolversTypes['UsersPermissionsRoleAggregator'] | ResolversTypes['UsersPermissionsRoleGroupBy'] | ResolversTypes['UsersPermissionsRoleConnectionId'] | ResolversTypes['UsersPermissionsRoleConnectionName'] | ResolversTypes['UsersPermissionsRoleConnectionDescription'] | ResolversTypes['UsersPermissionsRoleConnectionType'] | ResolversTypes['createRolePayload'] | ResolversTypes['updateRolePayload'] | ResolversTypes['deleteRolePayload'] | ResolversTypes['UsersPermissionsUser'] | ResolversTypes['UsersPermissionsUserConnection'] | ResolversTypes['UsersPermissionsUserAggregator'] | ResolversTypes['UsersPermissionsUserGroupBy'] | ResolversTypes['UsersPermissionsUserConnectionId'] | ResolversTypes['UsersPermissionsUserConnectionCreated_at'] | ResolversTypes['UsersPermissionsUserConnectionUpdated_at'] | ResolversTypes['UsersPermissionsUserConnectionUsername'] | ResolversTypes['UsersPermissionsUserConnectionEmail'] | ResolversTypes['UsersPermissionsUserConnectionProvider'] | ResolversTypes['UsersPermissionsUserConnectionConfirmed'] | ResolversTypes['UsersPermissionsUserConnectionBlocked'] | ResolversTypes['UsersPermissionsUserConnectionRole'] | ResolversTypes['createUserPayload'] | ResolversTypes['updateUserPayload'] | ResolversTypes['deleteUserPayload'];
   UsersPermissionsMe: ResolverTypeWrapper<UsersPermissionsMe>;
   UsersPermissionsMeRole: ResolverTypeWrapper<UsersPermissionsMeRole>;
   UsersPermissionsLoginPayload: ResolverTypeWrapper<UsersPermissionsLoginPayload>;
@@ -1397,39 +1169,19 @@ export type ResolversTypes = ResolversObject<{
   createCityPayload: ResolverTypeWrapper<CreateCityPayload>;
   updateCityPayload: ResolverTypeWrapper<UpdateCityPayload>;
   deleteCityPayload: ResolverTypeWrapper<DeleteCityPayload>;
-  OrdersConnection: ResolverTypeWrapper<OrdersConnection>;
-  OrdersGroupBy: ResolverTypeWrapper<OrdersGroupBy>;
-  OrdersConnectionId: ResolverTypeWrapper<OrdersConnectionId>;
-  OrdersConnectionCreated_at: ResolverTypeWrapper<OrdersConnectionCreated_At>;
-  OrdersConnectionUpdated_at: ResolverTypeWrapper<OrdersConnectionUpdated_At>;
-  OrdersConnectionName: ResolverTypeWrapper<OrdersConnectionName>;
-  OrdersConnectionPhone: ResolverTypeWrapper<OrdersConnectionPhone>;
-  OrdersConnectionDeliveryDate: ResolverTypeWrapper<OrdersConnectionDeliveryDate>;
-  OrdersConnectionCity: ResolverTypeWrapper<OrdersConnectionCity>;
-  OrdersConnectionIs_paid: ResolverTypeWrapper<OrdersConnectionIs_Paid>;
-  OrdersAggregator: ResolverTypeWrapper<OrdersAggregator>;
-  OrdersAggregatorSum: ResolverTypeWrapper<OrdersAggregatorSum>;
-  OrdersAggregatorAvg: ResolverTypeWrapper<OrdersAggregatorAvg>;
-  OrdersAggregatorMin: ResolverTypeWrapper<OrdersAggregatorMin>;
-  OrdersAggregatorMax: ResolverTypeWrapper<OrdersAggregatorMax>;
-  createOrderPayload: ResolverTypeWrapper<CreateOrderPayload>;
-  updateOrderPayload: ResolverTypeWrapper<UpdateOrderPayload>;
-  deleteOrderPayload: ResolverTypeWrapper<DeleteOrderPayload>;
-  ProductsConnection: ResolverTypeWrapper<ProductsConnection>;
-  ProductsGroupBy: ResolverTypeWrapper<ProductsGroupBy>;
-  ProductsConnectionId: ResolverTypeWrapper<ProductsConnectionId>;
-  ProductsConnectionCreated_at: ResolverTypeWrapper<ProductsConnectionCreated_At>;
-  ProductsConnectionUpdated_at: ResolverTypeWrapper<ProductsConnectionUpdated_At>;
-  ProductsConnectionTitle: ResolverTypeWrapper<ProductsConnectionTitle>;
-  ProductsConnectionPrice: ResolverTypeWrapper<ProductsConnectionPrice>;
-  ProductsConnectionDescription: ResolverTypeWrapper<ProductsConnectionDescription>;
-  ProductsConnectionImage: ResolverTypeWrapper<ProductsConnectionImage>;
-  ProductsConnectionIs_active: ResolverTypeWrapper<ProductsConnectionIs_Active>;
-  ProductsAggregator: ResolverTypeWrapper<ProductsAggregator>;
-  ProductsAggregatorSum: ResolverTypeWrapper<ProductsAggregatorSum>;
-  ProductsAggregatorAvg: ResolverTypeWrapper<ProductsAggregatorAvg>;
-  ProductsAggregatorMin: ResolverTypeWrapper<ProductsAggregatorMin>;
-  ProductsAggregatorMax: ResolverTypeWrapper<ProductsAggregatorMax>;
+  ProductConnection: ResolverTypeWrapper<ProductConnection>;
+  ProductGroupBy: ResolverTypeWrapper<ProductGroupBy>;
+  ProductConnectionId: ResolverTypeWrapper<ProductConnectionId>;
+  ProductConnectionCreated_at: ResolverTypeWrapper<ProductConnectionCreated_At>;
+  ProductConnectionUpdated_at: ResolverTypeWrapper<ProductConnectionUpdated_At>;
+  ProductConnectionTitle: ResolverTypeWrapper<ProductConnectionTitle>;
+  ProductConnectionPrice: ResolverTypeWrapper<ProductConnectionPrice>;
+  ProductConnectionImage: ResolverTypeWrapper<ProductConnectionImage>;
+  ProductAggregator: ResolverTypeWrapper<ProductAggregator>;
+  ProductAggregatorSum: ResolverTypeWrapper<ProductAggregatorSum>;
+  ProductAggregatorAvg: ResolverTypeWrapper<ProductAggregatorAvg>;
+  ProductAggregatorMin: ResolverTypeWrapper<ProductAggregatorMin>;
+  ProductAggregatorMax: ResolverTypeWrapper<ProductAggregatorMax>;
   createProductPayload: ResolverTypeWrapper<CreateProductPayload>;
   updateProductPayload: ResolverTypeWrapper<UpdateProductPayload>;
   deleteProductPayload: ResolverTypeWrapper<DeleteProductPayload>;
@@ -1492,11 +1244,6 @@ export type ResolversTypes = ResolversObject<{
   InputID: InputId;
   editCityInput: EditCityInput;
   deleteCityInput: DeleteCityInput;
-  createOrderInput: CreateOrderInput;
-  OrderInput: OrderInput;
-  updateOrderInput: UpdateOrderInput;
-  editOrderInput: EditOrderInput;
-  deleteOrderInput: DeleteOrderInput;
   createProductInput: CreateProductInput;
   ProductInput: ProductInput;
   updateProductInput: UpdateProductInput;
@@ -1517,6 +1264,7 @@ export type ResolversTypes = ResolversObject<{
   FileInput: FileInput;
   editFileInput: EditFileInput;
   Time: ResolverTypeWrapper<Scalars['Time']>;
+  Date: ResolverTypeWrapper<Scalars['Date']>;
   Long: ResolverTypeWrapper<Scalars['Long']>;
   CacheControlScope: CacheControlScope;
 }>;
@@ -1528,23 +1276,21 @@ export type ResolversParentTypes = ResolversObject<{
   Query: {};
   ID: Scalars['ID'];
   Int: Scalars['Int'];
-  Cities: Cities;
+  City: City;
   DateTime: Scalars['DateTime'];
   JSON: Scalars['JSON'];
-  CitiesConnection: CitiesConnection;
-  CitiesGroupBy: CitiesGroupBy;
-  CitiesConnectionId: CitiesConnectionId;
-  CitiesConnectionCreated_at: CitiesConnectionCreated_At;
-  CitiesConnectionUpdated_at: CitiesConnectionUpdated_At;
-  CitiesConnectionName: CitiesConnectionName;
-  CitiesConnectionIs_active: CitiesConnectionIs_Active;
-  CitiesAggregator: CitiesAggregator;
-  Orders: Orders;
-  Date: Scalars['Date'];
-  Products: Products;
+  CityConnection: CityConnection;
+  CityGroupBy: CityGroupBy;
+  CityConnectionId: CityConnectionId;
+  CityConnectionCreated_at: CityConnectionCreated_At;
+  CityConnectionUpdated_at: CityConnectionUpdated_At;
+  CityConnectionName: CityConnectionName;
+  CityConnectionIs_active: CityConnectionIs_Active;
+  CityAggregator: CityAggregator;
+  Product: Product;
   Float: Scalars['Float'];
   UploadFile: Omit<UploadFile, 'related'> & { related?: Maybe<Array<Maybe<ResolversParentTypes['Morph']>>> };
-  Morph: ResolversParentTypes['UsersPermissionsMe'] | ResolversParentTypes['UsersPermissionsMeRole'] | ResolversParentTypes['UsersPermissionsLoginPayload'] | ResolversParentTypes['ForgotPassword'] | ResolversParentTypes['Cities'] | ResolversParentTypes['CitiesConnection'] | ResolversParentTypes['CitiesAggregator'] | ResolversParentTypes['CitiesGroupBy'] | ResolversParentTypes['CitiesConnectionId'] | ResolversParentTypes['CitiesConnectionCreated_at'] | ResolversParentTypes['CitiesConnectionUpdated_at'] | ResolversParentTypes['CitiesConnectionName'] | ResolversParentTypes['CitiesConnectionIs_active'] | ResolversParentTypes['createCityPayload'] | ResolversParentTypes['updateCityPayload'] | ResolversParentTypes['deleteCityPayload'] | ResolversParentTypes['Orders'] | ResolversParentTypes['OrdersConnection'] | ResolversParentTypes['OrdersAggregator'] | ResolversParentTypes['OrdersAggregatorSum'] | ResolversParentTypes['OrdersAggregatorAvg'] | ResolversParentTypes['OrdersAggregatorMin'] | ResolversParentTypes['OrdersAggregatorMax'] | ResolversParentTypes['OrdersGroupBy'] | ResolversParentTypes['OrdersConnectionId'] | ResolversParentTypes['OrdersConnectionCreated_at'] | ResolversParentTypes['OrdersConnectionUpdated_at'] | ResolversParentTypes['OrdersConnectionName'] | ResolversParentTypes['OrdersConnectionPhone'] | ResolversParentTypes['OrdersConnectionDeliveryDate'] | ResolversParentTypes['OrdersConnectionCity'] | ResolversParentTypes['OrdersConnectionIs_paid'] | ResolversParentTypes['createOrderPayload'] | ResolversParentTypes['updateOrderPayload'] | ResolversParentTypes['deleteOrderPayload'] | ResolversParentTypes['Products'] | ResolversParentTypes['ProductsConnection'] | ResolversParentTypes['ProductsAggregator'] | ResolversParentTypes['ProductsAggregatorSum'] | ResolversParentTypes['ProductsAggregatorAvg'] | ResolversParentTypes['ProductsAggregatorMin'] | ResolversParentTypes['ProductsAggregatorMax'] | ResolversParentTypes['ProductsGroupBy'] | ResolversParentTypes['ProductsConnectionId'] | ResolversParentTypes['ProductsConnectionCreated_at'] | ResolversParentTypes['ProductsConnectionUpdated_at'] | ResolversParentTypes['ProductsConnectionTitle'] | ResolversParentTypes['ProductsConnectionPrice'] | ResolversParentTypes['ProductsConnectionDescription'] | ResolversParentTypes['ProductsConnectionImage'] | ResolversParentTypes['ProductsConnectionIs_active'] | ResolversParentTypes['createProductPayload'] | ResolversParentTypes['updateProductPayload'] | ResolversParentTypes['deleteProductPayload'] | ResolversParentTypes['UploadFile'] | ResolversParentTypes['UploadFileConnection'] | ResolversParentTypes['UploadFileAggregator'] | ResolversParentTypes['UploadFileAggregatorSum'] | ResolversParentTypes['UploadFileAggregatorAvg'] | ResolversParentTypes['UploadFileAggregatorMin'] | ResolversParentTypes['UploadFileAggregatorMax'] | ResolversParentTypes['UploadFileGroupBy'] | ResolversParentTypes['UploadFileConnectionId'] | ResolversParentTypes['UploadFileConnectionCreated_at'] | ResolversParentTypes['UploadFileConnectionUpdated_at'] | ResolversParentTypes['UploadFileConnectionName'] | ResolversParentTypes['UploadFileConnectionAlternativeText'] | ResolversParentTypes['UploadFileConnectionCaption'] | ResolversParentTypes['UploadFileConnectionWidth'] | ResolversParentTypes['UploadFileConnectionHeight'] | ResolversParentTypes['UploadFileConnectionFormats'] | ResolversParentTypes['UploadFileConnectionHash'] | ResolversParentTypes['UploadFileConnectionExt'] | ResolversParentTypes['UploadFileConnectionMime'] | ResolversParentTypes['UploadFileConnectionSize'] | ResolversParentTypes['UploadFileConnectionUrl'] | ResolversParentTypes['UploadFileConnectionPreviewUrl'] | ResolversParentTypes['UploadFileConnectionProvider'] | ResolversParentTypes['UploadFileConnectionProvider_metadata'] | ResolversParentTypes['UsersPermissionsPermission'] | ResolversParentTypes['UsersPermissionsRole'] | ResolversParentTypes['UsersPermissionsRoleConnection'] | ResolversParentTypes['UsersPermissionsRoleAggregator'] | ResolversParentTypes['UsersPermissionsRoleGroupBy'] | ResolversParentTypes['UsersPermissionsRoleConnectionId'] | ResolversParentTypes['UsersPermissionsRoleConnectionName'] | ResolversParentTypes['UsersPermissionsRoleConnectionDescription'] | ResolversParentTypes['UsersPermissionsRoleConnectionType'] | ResolversParentTypes['createRolePayload'] | ResolversParentTypes['updateRolePayload'] | ResolversParentTypes['deleteRolePayload'] | ResolversParentTypes['UsersPermissionsUser'] | ResolversParentTypes['UsersPermissionsUserConnection'] | ResolversParentTypes['UsersPermissionsUserAggregator'] | ResolversParentTypes['UsersPermissionsUserGroupBy'] | ResolversParentTypes['UsersPermissionsUserConnectionId'] | ResolversParentTypes['UsersPermissionsUserConnectionCreated_at'] | ResolversParentTypes['UsersPermissionsUserConnectionUpdated_at'] | ResolversParentTypes['UsersPermissionsUserConnectionUsername'] | ResolversParentTypes['UsersPermissionsUserConnectionEmail'] | ResolversParentTypes['UsersPermissionsUserConnectionProvider'] | ResolversParentTypes['UsersPermissionsUserConnectionConfirmed'] | ResolversParentTypes['UsersPermissionsUserConnectionBlocked'] | ResolversParentTypes['UsersPermissionsUserConnectionRole'] | ResolversParentTypes['createUserPayload'] | ResolversParentTypes['updateUserPayload'] | ResolversParentTypes['deleteUserPayload'];
+  Morph: ResolversParentTypes['UsersPermissionsMe'] | ResolversParentTypes['UsersPermissionsMeRole'] | ResolversParentTypes['UsersPermissionsLoginPayload'] | ResolversParentTypes['ForgotPassword'] | ResolversParentTypes['City'] | ResolversParentTypes['CityConnection'] | ResolversParentTypes['CityAggregator'] | ResolversParentTypes['CityGroupBy'] | ResolversParentTypes['CityConnectionId'] | ResolversParentTypes['CityConnectionCreated_at'] | ResolversParentTypes['CityConnectionUpdated_at'] | ResolversParentTypes['CityConnectionName'] | ResolversParentTypes['CityConnectionIs_active'] | ResolversParentTypes['createCityPayload'] | ResolversParentTypes['updateCityPayload'] | ResolversParentTypes['deleteCityPayload'] | ResolversParentTypes['Product'] | ResolversParentTypes['ProductConnection'] | ResolversParentTypes['ProductAggregator'] | ResolversParentTypes['ProductAggregatorSum'] | ResolversParentTypes['ProductAggregatorAvg'] | ResolversParentTypes['ProductAggregatorMin'] | ResolversParentTypes['ProductAggregatorMax'] | ResolversParentTypes['ProductGroupBy'] | ResolversParentTypes['ProductConnectionId'] | ResolversParentTypes['ProductConnectionCreated_at'] | ResolversParentTypes['ProductConnectionUpdated_at'] | ResolversParentTypes['ProductConnectionTitle'] | ResolversParentTypes['ProductConnectionPrice'] | ResolversParentTypes['ProductConnectionImage'] | ResolversParentTypes['createProductPayload'] | ResolversParentTypes['updateProductPayload'] | ResolversParentTypes['deleteProductPayload'] | ResolversParentTypes['UploadFile'] | ResolversParentTypes['UploadFileConnection'] | ResolversParentTypes['UploadFileAggregator'] | ResolversParentTypes['UploadFileAggregatorSum'] | ResolversParentTypes['UploadFileAggregatorAvg'] | ResolversParentTypes['UploadFileAggregatorMin'] | ResolversParentTypes['UploadFileAggregatorMax'] | ResolversParentTypes['UploadFileGroupBy'] | ResolversParentTypes['UploadFileConnectionId'] | ResolversParentTypes['UploadFileConnectionCreated_at'] | ResolversParentTypes['UploadFileConnectionUpdated_at'] | ResolversParentTypes['UploadFileConnectionName'] | ResolversParentTypes['UploadFileConnectionAlternativeText'] | ResolversParentTypes['UploadFileConnectionCaption'] | ResolversParentTypes['UploadFileConnectionWidth'] | ResolversParentTypes['UploadFileConnectionHeight'] | ResolversParentTypes['UploadFileConnectionFormats'] | ResolversParentTypes['UploadFileConnectionHash'] | ResolversParentTypes['UploadFileConnectionExt'] | ResolversParentTypes['UploadFileConnectionMime'] | ResolversParentTypes['UploadFileConnectionSize'] | ResolversParentTypes['UploadFileConnectionUrl'] | ResolversParentTypes['UploadFileConnectionPreviewUrl'] | ResolversParentTypes['UploadFileConnectionProvider'] | ResolversParentTypes['UploadFileConnectionProvider_metadata'] | ResolversParentTypes['UsersPermissionsPermission'] | ResolversParentTypes['UsersPermissionsRole'] | ResolversParentTypes['UsersPermissionsRoleConnection'] | ResolversParentTypes['UsersPermissionsRoleAggregator'] | ResolversParentTypes['UsersPermissionsRoleGroupBy'] | ResolversParentTypes['UsersPermissionsRoleConnectionId'] | ResolversParentTypes['UsersPermissionsRoleConnectionName'] | ResolversParentTypes['UsersPermissionsRoleConnectionDescription'] | ResolversParentTypes['UsersPermissionsRoleConnectionType'] | ResolversParentTypes['createRolePayload'] | ResolversParentTypes['updateRolePayload'] | ResolversParentTypes['deleteRolePayload'] | ResolversParentTypes['UsersPermissionsUser'] | ResolversParentTypes['UsersPermissionsUserConnection'] | ResolversParentTypes['UsersPermissionsUserAggregator'] | ResolversParentTypes['UsersPermissionsUserGroupBy'] | ResolversParentTypes['UsersPermissionsUserConnectionId'] | ResolversParentTypes['UsersPermissionsUserConnectionCreated_at'] | ResolversParentTypes['UsersPermissionsUserConnectionUpdated_at'] | ResolversParentTypes['UsersPermissionsUserConnectionUsername'] | ResolversParentTypes['UsersPermissionsUserConnectionEmail'] | ResolversParentTypes['UsersPermissionsUserConnectionProvider'] | ResolversParentTypes['UsersPermissionsUserConnectionConfirmed'] | ResolversParentTypes['UsersPermissionsUserConnectionBlocked'] | ResolversParentTypes['UsersPermissionsUserConnectionRole'] | ResolversParentTypes['createUserPayload'] | ResolversParentTypes['updateUserPayload'] | ResolversParentTypes['deleteUserPayload'];
   UsersPermissionsMe: UsersPermissionsMe;
   UsersPermissionsMeRole: UsersPermissionsMeRole;
   UsersPermissionsLoginPayload: UsersPermissionsLoginPayload;
@@ -1552,39 +1298,19 @@ export type ResolversParentTypes = ResolversObject<{
   createCityPayload: CreateCityPayload;
   updateCityPayload: UpdateCityPayload;
   deleteCityPayload: DeleteCityPayload;
-  OrdersConnection: OrdersConnection;
-  OrdersGroupBy: OrdersGroupBy;
-  OrdersConnectionId: OrdersConnectionId;
-  OrdersConnectionCreated_at: OrdersConnectionCreated_At;
-  OrdersConnectionUpdated_at: OrdersConnectionUpdated_At;
-  OrdersConnectionName: OrdersConnectionName;
-  OrdersConnectionPhone: OrdersConnectionPhone;
-  OrdersConnectionDeliveryDate: OrdersConnectionDeliveryDate;
-  OrdersConnectionCity: OrdersConnectionCity;
-  OrdersConnectionIs_paid: OrdersConnectionIs_Paid;
-  OrdersAggregator: OrdersAggregator;
-  OrdersAggregatorSum: OrdersAggregatorSum;
-  OrdersAggregatorAvg: OrdersAggregatorAvg;
-  OrdersAggregatorMin: OrdersAggregatorMin;
-  OrdersAggregatorMax: OrdersAggregatorMax;
-  createOrderPayload: CreateOrderPayload;
-  updateOrderPayload: UpdateOrderPayload;
-  deleteOrderPayload: DeleteOrderPayload;
-  ProductsConnection: ProductsConnection;
-  ProductsGroupBy: ProductsGroupBy;
-  ProductsConnectionId: ProductsConnectionId;
-  ProductsConnectionCreated_at: ProductsConnectionCreated_At;
-  ProductsConnectionUpdated_at: ProductsConnectionUpdated_At;
-  ProductsConnectionTitle: ProductsConnectionTitle;
-  ProductsConnectionPrice: ProductsConnectionPrice;
-  ProductsConnectionDescription: ProductsConnectionDescription;
-  ProductsConnectionImage: ProductsConnectionImage;
-  ProductsConnectionIs_active: ProductsConnectionIs_Active;
-  ProductsAggregator: ProductsAggregator;
-  ProductsAggregatorSum: ProductsAggregatorSum;
-  ProductsAggregatorAvg: ProductsAggregatorAvg;
-  ProductsAggregatorMin: ProductsAggregatorMin;
-  ProductsAggregatorMax: ProductsAggregatorMax;
+  ProductConnection: ProductConnection;
+  ProductGroupBy: ProductGroupBy;
+  ProductConnectionId: ProductConnectionId;
+  ProductConnectionCreated_at: ProductConnectionCreated_At;
+  ProductConnectionUpdated_at: ProductConnectionUpdated_At;
+  ProductConnectionTitle: ProductConnectionTitle;
+  ProductConnectionPrice: ProductConnectionPrice;
+  ProductConnectionImage: ProductConnectionImage;
+  ProductAggregator: ProductAggregator;
+  ProductAggregatorSum: ProductAggregatorSum;
+  ProductAggregatorAvg: ProductAggregatorAvg;
+  ProductAggregatorMin: ProductAggregatorMin;
+  ProductAggregatorMax: ProductAggregatorMax;
   createProductPayload: CreateProductPayload;
   updateProductPayload: UpdateProductPayload;
   deleteProductPayload: DeleteProductPayload;
@@ -1647,11 +1373,6 @@ export type ResolversParentTypes = ResolversObject<{
   InputID: InputId;
   editCityInput: EditCityInput;
   deleteCityInput: DeleteCityInput;
-  createOrderInput: CreateOrderInput;
-  OrderInput: OrderInput;
-  updateOrderInput: UpdateOrderInput;
-  editOrderInput: EditOrderInput;
-  deleteOrderInput: DeleteOrderInput;
   createProductInput: CreateProductInput;
   ProductInput: ProductInput;
   updateProductInput: UpdateProductInput;
@@ -1672,20 +1393,18 @@ export type ResolversParentTypes = ResolversObject<{
   FileInput: FileInput;
   editFileInput: EditFileInput;
   Time: Scalars['Time'];
+  Date: Scalars['Date'];
   Long: Scalars['Long'];
   CacheControlScope: CacheControlScope;
 }>;
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
-  city?: Resolver<Maybe<ResolversTypes['Cities']>, ParentType, ContextType, RequireFields<QueryCityArgs, 'id'>>;
-  cities?: Resolver<Maybe<Array<Maybe<ResolversTypes['Cities']>>>, ParentType, ContextType, RequireFields<QueryCitiesArgs, never>>;
-  citiesConnection?: Resolver<Maybe<ResolversTypes['CitiesConnection']>, ParentType, ContextType, RequireFields<QueryCitiesConnectionArgs, never>>;
-  order?: Resolver<Maybe<ResolversTypes['Orders']>, ParentType, ContextType, RequireFields<QueryOrderArgs, 'id'>>;
-  orders?: Resolver<Maybe<Array<Maybe<ResolversTypes['Orders']>>>, ParentType, ContextType, RequireFields<QueryOrdersArgs, never>>;
-  ordersConnection?: Resolver<Maybe<ResolversTypes['OrdersConnection']>, ParentType, ContextType, RequireFields<QueryOrdersConnectionArgs, never>>;
-  product?: Resolver<Maybe<ResolversTypes['Products']>, ParentType, ContextType, RequireFields<QueryProductArgs, 'id'>>;
-  products?: Resolver<Maybe<Array<Maybe<ResolversTypes['Products']>>>, ParentType, ContextType, RequireFields<QueryProductsArgs, never>>;
-  productsConnection?: Resolver<Maybe<ResolversTypes['ProductsConnection']>, ParentType, ContextType, RequireFields<QueryProductsConnectionArgs, never>>;
+  city?: Resolver<Maybe<ResolversTypes['City']>, ParentType, ContextType, RequireFields<QueryCityArgs, 'id'>>;
+  cities?: Resolver<Maybe<Array<Maybe<ResolversTypes['City']>>>, ParentType, ContextType, RequireFields<QueryCitiesArgs, never>>;
+  citiesConnection?: Resolver<Maybe<ResolversTypes['CityConnection']>, ParentType, ContextType, RequireFields<QueryCitiesConnectionArgs, never>>;
+  product?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType, RequireFields<QueryProductArgs, 'id'>>;
+  products?: Resolver<Maybe<Array<Maybe<ResolversTypes['Product']>>>, ParentType, ContextType, RequireFields<QueryProductsArgs, never>>;
+  productsConnection?: Resolver<Maybe<ResolversTypes['ProductConnection']>, ParentType, ContextType, RequireFields<QueryProductsConnectionArgs, never>>;
   files?: Resolver<Maybe<Array<Maybe<ResolversTypes['UploadFile']>>>, ParentType, ContextType, RequireFields<QueryFilesArgs, never>>;
   filesConnection?: Resolver<Maybe<ResolversTypes['UploadFileConnection']>, ParentType, ContextType, RequireFields<QueryFilesConnectionArgs, never>>;
   role?: Resolver<Maybe<ResolversTypes['UsersPermissionsRole']>, ParentType, ContextType, RequireFields<QueryRoleArgs, 'id'>>;
@@ -1697,11 +1416,11 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   me?: Resolver<Maybe<ResolversTypes['UsersPermissionsMe']>, ParentType, ContextType>;
 }>;
 
-export type CitiesResolvers<ContextType = any, ParentType extends ResolversParentTypes['Cities'] = ResolversParentTypes['Cities']> = ResolversObject<{
+export type CityResolvers<ContextType = any, ParentType extends ResolversParentTypes['City'] = ResolversParentTypes['City']> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   created_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   updated_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   is_active?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
@@ -1714,84 +1433,65 @@ export interface JsonScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
   name: 'JSON';
 }
 
-export type CitiesConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['CitiesConnection'] = ResolversParentTypes['CitiesConnection']> = ResolversObject<{
-  values?: Resolver<Maybe<Array<Maybe<ResolversTypes['Cities']>>>, ParentType, ContextType>;
-  groupBy?: Resolver<Maybe<ResolversTypes['CitiesGroupBy']>, ParentType, ContextType>;
-  aggregate?: Resolver<Maybe<ResolversTypes['CitiesAggregator']>, ParentType, ContextType>;
+export type CityConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['CityConnection'] = ResolversParentTypes['CityConnection']> = ResolversObject<{
+  values?: Resolver<Maybe<Array<Maybe<ResolversTypes['City']>>>, ParentType, ContextType>;
+  groupBy?: Resolver<Maybe<ResolversTypes['CityGroupBy']>, ParentType, ContextType>;
+  aggregate?: Resolver<Maybe<ResolversTypes['CityAggregator']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
-export type CitiesGroupByResolvers<ContextType = any, ParentType extends ResolversParentTypes['CitiesGroupBy'] = ResolversParentTypes['CitiesGroupBy']> = ResolversObject<{
-  id?: Resolver<Maybe<Array<Maybe<ResolversTypes['CitiesConnectionId']>>>, ParentType, ContextType>;
-  created_at?: Resolver<Maybe<Array<Maybe<ResolversTypes['CitiesConnectionCreated_at']>>>, ParentType, ContextType>;
-  updated_at?: Resolver<Maybe<Array<Maybe<ResolversTypes['CitiesConnectionUpdated_at']>>>, ParentType, ContextType>;
-  name?: Resolver<Maybe<Array<Maybe<ResolversTypes['CitiesConnectionName']>>>, ParentType, ContextType>;
-  is_active?: Resolver<Maybe<Array<Maybe<ResolversTypes['CitiesConnectionIs_active']>>>, ParentType, ContextType>;
+export type CityGroupByResolvers<ContextType = any, ParentType extends ResolversParentTypes['CityGroupBy'] = ResolversParentTypes['CityGroupBy']> = ResolversObject<{
+  id?: Resolver<Maybe<Array<Maybe<ResolversTypes['CityConnectionId']>>>, ParentType, ContextType>;
+  created_at?: Resolver<Maybe<Array<Maybe<ResolversTypes['CityConnectionCreated_at']>>>, ParentType, ContextType>;
+  updated_at?: Resolver<Maybe<Array<Maybe<ResolversTypes['CityConnectionUpdated_at']>>>, ParentType, ContextType>;
+  name?: Resolver<Maybe<Array<Maybe<ResolversTypes['CityConnectionName']>>>, ParentType, ContextType>;
+  is_active?: Resolver<Maybe<Array<Maybe<ResolversTypes['CityConnectionIs_active']>>>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
-export type CitiesConnectionIdResolvers<ContextType = any, ParentType extends ResolversParentTypes['CitiesConnectionId'] = ResolversParentTypes['CitiesConnectionId']> = ResolversObject<{
+export type CityConnectionIdResolvers<ContextType = any, ParentType extends ResolversParentTypes['CityConnectionId'] = ResolversParentTypes['CityConnectionId']> = ResolversObject<{
   key?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  connection?: Resolver<Maybe<ResolversTypes['CitiesConnection']>, ParentType, ContextType>;
+  connection?: Resolver<Maybe<ResolversTypes['CityConnection']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
-export type CitiesConnectionCreated_AtResolvers<ContextType = any, ParentType extends ResolversParentTypes['CitiesConnectionCreated_at'] = ResolversParentTypes['CitiesConnectionCreated_at']> = ResolversObject<{
+export type CityConnectionCreated_AtResolvers<ContextType = any, ParentType extends ResolversParentTypes['CityConnectionCreated_at'] = ResolversParentTypes['CityConnectionCreated_at']> = ResolversObject<{
   key?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  connection?: Resolver<Maybe<ResolversTypes['CitiesConnection']>, ParentType, ContextType>;
+  connection?: Resolver<Maybe<ResolversTypes['CityConnection']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
-export type CitiesConnectionUpdated_AtResolvers<ContextType = any, ParentType extends ResolversParentTypes['CitiesConnectionUpdated_at'] = ResolversParentTypes['CitiesConnectionUpdated_at']> = ResolversObject<{
+export type CityConnectionUpdated_AtResolvers<ContextType = any, ParentType extends ResolversParentTypes['CityConnectionUpdated_at'] = ResolversParentTypes['CityConnectionUpdated_at']> = ResolversObject<{
   key?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  connection?: Resolver<Maybe<ResolversTypes['CitiesConnection']>, ParentType, ContextType>;
+  connection?: Resolver<Maybe<ResolversTypes['CityConnection']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
-export type CitiesConnectionNameResolvers<ContextType = any, ParentType extends ResolversParentTypes['CitiesConnectionName'] = ResolversParentTypes['CitiesConnectionName']> = ResolversObject<{
+export type CityConnectionNameResolvers<ContextType = any, ParentType extends ResolversParentTypes['CityConnectionName'] = ResolversParentTypes['CityConnectionName']> = ResolversObject<{
   key?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  connection?: Resolver<Maybe<ResolversTypes['CitiesConnection']>, ParentType, ContextType>;
+  connection?: Resolver<Maybe<ResolversTypes['CityConnection']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
-export type CitiesConnectionIs_ActiveResolvers<ContextType = any, ParentType extends ResolversParentTypes['CitiesConnectionIs_active'] = ResolversParentTypes['CitiesConnectionIs_active']> = ResolversObject<{
+export type CityConnectionIs_ActiveResolvers<ContextType = any, ParentType extends ResolversParentTypes['CityConnectionIs_active'] = ResolversParentTypes['CityConnectionIs_active']> = ResolversObject<{
   key?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  connection?: Resolver<Maybe<ResolversTypes['CitiesConnection']>, ParentType, ContextType>;
+  connection?: Resolver<Maybe<ResolversTypes['CityConnection']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
-export type CitiesAggregatorResolvers<ContextType = any, ParentType extends ResolversParentTypes['CitiesAggregator'] = ResolversParentTypes['CitiesAggregator']> = ResolversObject<{
+export type CityAggregatorResolvers<ContextType = any, ParentType extends ResolversParentTypes['CityAggregator'] = ResolversParentTypes['CityAggregator']> = ResolversObject<{
   count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   totalCount?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
-export type OrdersResolvers<ContextType = any, ParentType extends ResolversParentTypes['Orders'] = ResolversParentTypes['Orders']> = ResolversObject<{
+export type ProductResolvers<ContextType = any, ParentType extends ResolversParentTypes['Product'] = ResolversParentTypes['Product']> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   created_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   updated_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  phone?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  deliveryDate?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
-  city?: Resolver<Maybe<ResolversTypes['Cities']>, ParentType, ContextType>;
-  is_paid?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  products?: Resolver<Maybe<Array<Maybe<ResolversTypes['Products']>>>, ParentType, ContextType, RequireFields<OrdersProductsArgs, never>>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
-}>;
-
-export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Date'], any> {
-  name: 'Date';
-}
-
-export type ProductsResolvers<ContextType = any, ParentType extends ResolversParentTypes['Products'] = ResolversParentTypes['Products']> = ResolversObject<{
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  created_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  updated_at?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
-  title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  price?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   image?: Resolver<Maybe<ResolversTypes['UploadFile']>, ParentType, ContextType>;
-  is_active?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
@@ -1818,7 +1518,7 @@ export type UploadFileResolvers<ContextType = any, ParentType extends ResolversP
 }>;
 
 export type MorphResolvers<ContextType = any, ParentType extends ResolversParentTypes['Morph'] = ResolversParentTypes['Morph']> = ResolversObject<{
-  __resolveType: TypeResolveFn<'UsersPermissionsMe' | 'UsersPermissionsMeRole' | 'UsersPermissionsLoginPayload' | 'ForgotPassword' | 'Cities' | 'CitiesConnection' | 'CitiesAggregator' | 'CitiesGroupBy' | 'CitiesConnectionId' | 'CitiesConnectionCreated_at' | 'CitiesConnectionUpdated_at' | 'CitiesConnectionName' | 'CitiesConnectionIs_active' | 'createCityPayload' | 'updateCityPayload' | 'deleteCityPayload' | 'Orders' | 'OrdersConnection' | 'OrdersAggregator' | 'OrdersAggregatorSum' | 'OrdersAggregatorAvg' | 'OrdersAggregatorMin' | 'OrdersAggregatorMax' | 'OrdersGroupBy' | 'OrdersConnectionId' | 'OrdersConnectionCreated_at' | 'OrdersConnectionUpdated_at' | 'OrdersConnectionName' | 'OrdersConnectionPhone' | 'OrdersConnectionDeliveryDate' | 'OrdersConnectionCity' | 'OrdersConnectionIs_paid' | 'createOrderPayload' | 'updateOrderPayload' | 'deleteOrderPayload' | 'Products' | 'ProductsConnection' | 'ProductsAggregator' | 'ProductsAggregatorSum' | 'ProductsAggregatorAvg' | 'ProductsAggregatorMin' | 'ProductsAggregatorMax' | 'ProductsGroupBy' | 'ProductsConnectionId' | 'ProductsConnectionCreated_at' | 'ProductsConnectionUpdated_at' | 'ProductsConnectionTitle' | 'ProductsConnectionPrice' | 'ProductsConnectionDescription' | 'ProductsConnectionImage' | 'ProductsConnectionIs_active' | 'createProductPayload' | 'updateProductPayload' | 'deleteProductPayload' | 'UploadFile' | 'UploadFileConnection' | 'UploadFileAggregator' | 'UploadFileAggregatorSum' | 'UploadFileAggregatorAvg' | 'UploadFileAggregatorMin' | 'UploadFileAggregatorMax' | 'UploadFileGroupBy' | 'UploadFileConnectionId' | 'UploadFileConnectionCreated_at' | 'UploadFileConnectionUpdated_at' | 'UploadFileConnectionName' | 'UploadFileConnectionAlternativeText' | 'UploadFileConnectionCaption' | 'UploadFileConnectionWidth' | 'UploadFileConnectionHeight' | 'UploadFileConnectionFormats' | 'UploadFileConnectionHash' | 'UploadFileConnectionExt' | 'UploadFileConnectionMime' | 'UploadFileConnectionSize' | 'UploadFileConnectionUrl' | 'UploadFileConnectionPreviewUrl' | 'UploadFileConnectionProvider' | 'UploadFileConnectionProvider_metadata' | 'UsersPermissionsPermission' | 'UsersPermissionsRole' | 'UsersPermissionsRoleConnection' | 'UsersPermissionsRoleAggregator' | 'UsersPermissionsRoleGroupBy' | 'UsersPermissionsRoleConnectionId' | 'UsersPermissionsRoleConnectionName' | 'UsersPermissionsRoleConnectionDescription' | 'UsersPermissionsRoleConnectionType' | 'createRolePayload' | 'updateRolePayload' | 'deleteRolePayload' | 'UsersPermissionsUser' | 'UsersPermissionsUserConnection' | 'UsersPermissionsUserAggregator' | 'UsersPermissionsUserGroupBy' | 'UsersPermissionsUserConnectionId' | 'UsersPermissionsUserConnectionCreated_at' | 'UsersPermissionsUserConnectionUpdated_at' | 'UsersPermissionsUserConnectionUsername' | 'UsersPermissionsUserConnectionEmail' | 'UsersPermissionsUserConnectionProvider' | 'UsersPermissionsUserConnectionConfirmed' | 'UsersPermissionsUserConnectionBlocked' | 'UsersPermissionsUserConnectionRole' | 'createUserPayload' | 'updateUserPayload' | 'deleteUserPayload', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'UsersPermissionsMe' | 'UsersPermissionsMeRole' | 'UsersPermissionsLoginPayload' | 'ForgotPassword' | 'City' | 'CityConnection' | 'CityAggregator' | 'CityGroupBy' | 'CityConnectionId' | 'CityConnectionCreated_at' | 'CityConnectionUpdated_at' | 'CityConnectionName' | 'CityConnectionIs_active' | 'createCityPayload' | 'updateCityPayload' | 'deleteCityPayload' | 'Product' | 'ProductConnection' | 'ProductAggregator' | 'ProductAggregatorSum' | 'ProductAggregatorAvg' | 'ProductAggregatorMin' | 'ProductAggregatorMax' | 'ProductGroupBy' | 'ProductConnectionId' | 'ProductConnectionCreated_at' | 'ProductConnectionUpdated_at' | 'ProductConnectionTitle' | 'ProductConnectionPrice' | 'ProductConnectionImage' | 'createProductPayload' | 'updateProductPayload' | 'deleteProductPayload' | 'UploadFile' | 'UploadFileConnection' | 'UploadFileAggregator' | 'UploadFileAggregatorSum' | 'UploadFileAggregatorAvg' | 'UploadFileAggregatorMin' | 'UploadFileAggregatorMax' | 'UploadFileGroupBy' | 'UploadFileConnectionId' | 'UploadFileConnectionCreated_at' | 'UploadFileConnectionUpdated_at' | 'UploadFileConnectionName' | 'UploadFileConnectionAlternativeText' | 'UploadFileConnectionCaption' | 'UploadFileConnectionWidth' | 'UploadFileConnectionHeight' | 'UploadFileConnectionFormats' | 'UploadFileConnectionHash' | 'UploadFileConnectionExt' | 'UploadFileConnectionMime' | 'UploadFileConnectionSize' | 'UploadFileConnectionUrl' | 'UploadFileConnectionPreviewUrl' | 'UploadFileConnectionProvider' | 'UploadFileConnectionProvider_metadata' | 'UsersPermissionsPermission' | 'UsersPermissionsRole' | 'UsersPermissionsRoleConnection' | 'UsersPermissionsRoleAggregator' | 'UsersPermissionsRoleGroupBy' | 'UsersPermissionsRoleConnectionId' | 'UsersPermissionsRoleConnectionName' | 'UsersPermissionsRoleConnectionDescription' | 'UsersPermissionsRoleConnectionType' | 'createRolePayload' | 'updateRolePayload' | 'deleteRolePayload' | 'UsersPermissionsUser' | 'UsersPermissionsUserConnection' | 'UsersPermissionsUserAggregator' | 'UsersPermissionsUserGroupBy' | 'UsersPermissionsUserConnectionId' | 'UsersPermissionsUserConnectionCreated_at' | 'UsersPermissionsUserConnectionUpdated_at' | 'UsersPermissionsUserConnectionUsername' | 'UsersPermissionsUserConnectionEmail' | 'UsersPermissionsUserConnectionProvider' | 'UsersPermissionsUserConnectionConfirmed' | 'UsersPermissionsUserConnectionBlocked' | 'UsersPermissionsUserConnectionRole' | 'createUserPayload' | 'updateUserPayload' | 'deleteUserPayload', ParentType, ContextType>;
 }>;
 
 export type UsersPermissionsMeResolvers<ContextType = any, ParentType extends ResolversParentTypes['UsersPermissionsMe'] = ResolversParentTypes['UsersPermissionsMe']> = ResolversObject<{
@@ -1851,241 +1551,115 @@ export type ForgotPasswordResolvers<ContextType = any, ParentType extends Resolv
 }>;
 
 export type CreateCityPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['createCityPayload'] = ResolversParentTypes['createCityPayload']> = ResolversObject<{
-  city?: Resolver<Maybe<ResolversTypes['Cities']>, ParentType, ContextType>;
+  city?: Resolver<Maybe<ResolversTypes['City']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
 export type UpdateCityPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['updateCityPayload'] = ResolversParentTypes['updateCityPayload']> = ResolversObject<{
-  city?: Resolver<Maybe<ResolversTypes['Cities']>, ParentType, ContextType>;
+  city?: Resolver<Maybe<ResolversTypes['City']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
 export type DeleteCityPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['deleteCityPayload'] = ResolversParentTypes['deleteCityPayload']> = ResolversObject<{
-  city?: Resolver<Maybe<ResolversTypes['Cities']>, ParentType, ContextType>;
+  city?: Resolver<Maybe<ResolversTypes['City']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
-export type OrdersConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrdersConnection'] = ResolversParentTypes['OrdersConnection']> = ResolversObject<{
-  values?: Resolver<Maybe<Array<Maybe<ResolversTypes['Orders']>>>, ParentType, ContextType>;
-  groupBy?: Resolver<Maybe<ResolversTypes['OrdersGroupBy']>, ParentType, ContextType>;
-  aggregate?: Resolver<Maybe<ResolversTypes['OrdersAggregator']>, ParentType, ContextType>;
+export type ProductConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductConnection'] = ResolversParentTypes['ProductConnection']> = ResolversObject<{
+  values?: Resolver<Maybe<Array<Maybe<ResolversTypes['Product']>>>, ParentType, ContextType>;
+  groupBy?: Resolver<Maybe<ResolversTypes['ProductGroupBy']>, ParentType, ContextType>;
+  aggregate?: Resolver<Maybe<ResolversTypes['ProductAggregator']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
-export type OrdersGroupByResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrdersGroupBy'] = ResolversParentTypes['OrdersGroupBy']> = ResolversObject<{
-  id?: Resolver<Maybe<Array<Maybe<ResolversTypes['OrdersConnectionId']>>>, ParentType, ContextType>;
-  created_at?: Resolver<Maybe<Array<Maybe<ResolversTypes['OrdersConnectionCreated_at']>>>, ParentType, ContextType>;
-  updated_at?: Resolver<Maybe<Array<Maybe<ResolversTypes['OrdersConnectionUpdated_at']>>>, ParentType, ContextType>;
-  name?: Resolver<Maybe<Array<Maybe<ResolversTypes['OrdersConnectionName']>>>, ParentType, ContextType>;
-  phone?: Resolver<Maybe<Array<Maybe<ResolversTypes['OrdersConnectionPhone']>>>, ParentType, ContextType>;
-  deliveryDate?: Resolver<Maybe<Array<Maybe<ResolversTypes['OrdersConnectionDeliveryDate']>>>, ParentType, ContextType>;
-  city?: Resolver<Maybe<Array<Maybe<ResolversTypes['OrdersConnectionCity']>>>, ParentType, ContextType>;
-  is_paid?: Resolver<Maybe<Array<Maybe<ResolversTypes['OrdersConnectionIs_paid']>>>, ParentType, ContextType>;
+export type ProductGroupByResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductGroupBy'] = ResolversParentTypes['ProductGroupBy']> = ResolversObject<{
+  id?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProductConnectionId']>>>, ParentType, ContextType>;
+  created_at?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProductConnectionCreated_at']>>>, ParentType, ContextType>;
+  updated_at?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProductConnectionUpdated_at']>>>, ParentType, ContextType>;
+  title?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProductConnectionTitle']>>>, ParentType, ContextType>;
+  price?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProductConnectionPrice']>>>, ParentType, ContextType>;
+  image?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProductConnectionImage']>>>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
-export type OrdersConnectionIdResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrdersConnectionId'] = ResolversParentTypes['OrdersConnectionId']> = ResolversObject<{
+export type ProductConnectionIdResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductConnectionId'] = ResolversParentTypes['ProductConnectionId']> = ResolversObject<{
   key?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  connection?: Resolver<Maybe<ResolversTypes['OrdersConnection']>, ParentType, ContextType>;
+  connection?: Resolver<Maybe<ResolversTypes['ProductConnection']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
-export type OrdersConnectionCreated_AtResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrdersConnectionCreated_at'] = ResolversParentTypes['OrdersConnectionCreated_at']> = ResolversObject<{
+export type ProductConnectionCreated_AtResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductConnectionCreated_at'] = ResolversParentTypes['ProductConnectionCreated_at']> = ResolversObject<{
   key?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  connection?: Resolver<Maybe<ResolversTypes['OrdersConnection']>, ParentType, ContextType>;
+  connection?: Resolver<Maybe<ResolversTypes['ProductConnection']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
-export type OrdersConnectionUpdated_AtResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrdersConnectionUpdated_at'] = ResolversParentTypes['OrdersConnectionUpdated_at']> = ResolversObject<{
+export type ProductConnectionUpdated_AtResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductConnectionUpdated_at'] = ResolversParentTypes['ProductConnectionUpdated_at']> = ResolversObject<{
   key?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  connection?: Resolver<Maybe<ResolversTypes['OrdersConnection']>, ParentType, ContextType>;
+  connection?: Resolver<Maybe<ResolversTypes['ProductConnection']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
-export type OrdersConnectionNameResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrdersConnectionName'] = ResolversParentTypes['OrdersConnectionName']> = ResolversObject<{
+export type ProductConnectionTitleResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductConnectionTitle'] = ResolversParentTypes['ProductConnectionTitle']> = ResolversObject<{
   key?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  connection?: Resolver<Maybe<ResolversTypes['OrdersConnection']>, ParentType, ContextType>;
+  connection?: Resolver<Maybe<ResolversTypes['ProductConnection']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
-export type OrdersConnectionPhoneResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrdersConnectionPhone'] = ResolversParentTypes['OrdersConnectionPhone']> = ResolversObject<{
-  key?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  connection?: Resolver<Maybe<ResolversTypes['OrdersConnection']>, ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
-}>;
-
-export type OrdersConnectionDeliveryDateResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrdersConnectionDeliveryDate'] = ResolversParentTypes['OrdersConnectionDeliveryDate']> = ResolversObject<{
-  key?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  connection?: Resolver<Maybe<ResolversTypes['OrdersConnection']>, ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
-}>;
-
-export type OrdersConnectionCityResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrdersConnectionCity'] = ResolversParentTypes['OrdersConnectionCity']> = ResolversObject<{
-  key?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  connection?: Resolver<Maybe<ResolversTypes['OrdersConnection']>, ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
-}>;
-
-export type OrdersConnectionIs_PaidResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrdersConnectionIs_paid'] = ResolversParentTypes['OrdersConnectionIs_paid']> = ResolversObject<{
-  key?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  connection?: Resolver<Maybe<ResolversTypes['OrdersConnection']>, ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
-}>;
-
-export type OrdersAggregatorResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrdersAggregator'] = ResolversParentTypes['OrdersAggregator']> = ResolversObject<{
-  count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  totalCount?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  sum?: Resolver<Maybe<ResolversTypes['OrdersAggregatorSum']>, ParentType, ContextType>;
-  avg?: Resolver<Maybe<ResolversTypes['OrdersAggregatorAvg']>, ParentType, ContextType>;
-  min?: Resolver<Maybe<ResolversTypes['OrdersAggregatorMin']>, ParentType, ContextType>;
-  max?: Resolver<Maybe<ResolversTypes['OrdersAggregatorMax']>, ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
-}>;
-
-export type OrdersAggregatorSumResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrdersAggregatorSum'] = ResolversParentTypes['OrdersAggregatorSum']> = ResolversObject<{
-  phone?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
-}>;
-
-export type OrdersAggregatorAvgResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrdersAggregatorAvg'] = ResolversParentTypes['OrdersAggregatorAvg']> = ResolversObject<{
-  phone?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
-}>;
-
-export type OrdersAggregatorMinResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrdersAggregatorMin'] = ResolversParentTypes['OrdersAggregatorMin']> = ResolversObject<{
-  phone?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
-}>;
-
-export type OrdersAggregatorMaxResolvers<ContextType = any, ParentType extends ResolversParentTypes['OrdersAggregatorMax'] = ResolversParentTypes['OrdersAggregatorMax']> = ResolversObject<{
-  phone?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
-}>;
-
-export type CreateOrderPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['createOrderPayload'] = ResolversParentTypes['createOrderPayload']> = ResolversObject<{
-  order?: Resolver<Maybe<ResolversTypes['Orders']>, ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
-}>;
-
-export type UpdateOrderPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['updateOrderPayload'] = ResolversParentTypes['updateOrderPayload']> = ResolversObject<{
-  order?: Resolver<Maybe<ResolversTypes['Orders']>, ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
-}>;
-
-export type DeleteOrderPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['deleteOrderPayload'] = ResolversParentTypes['deleteOrderPayload']> = ResolversObject<{
-  order?: Resolver<Maybe<ResolversTypes['Orders']>, ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
-}>;
-
-export type ProductsConnectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductsConnection'] = ResolversParentTypes['ProductsConnection']> = ResolversObject<{
-  values?: Resolver<Maybe<Array<Maybe<ResolversTypes['Products']>>>, ParentType, ContextType>;
-  groupBy?: Resolver<Maybe<ResolversTypes['ProductsGroupBy']>, ParentType, ContextType>;
-  aggregate?: Resolver<Maybe<ResolversTypes['ProductsAggregator']>, ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
-}>;
-
-export type ProductsGroupByResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductsGroupBy'] = ResolversParentTypes['ProductsGroupBy']> = ResolversObject<{
-  id?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProductsConnectionId']>>>, ParentType, ContextType>;
-  created_at?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProductsConnectionCreated_at']>>>, ParentType, ContextType>;
-  updated_at?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProductsConnectionUpdated_at']>>>, ParentType, ContextType>;
-  title?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProductsConnectionTitle']>>>, ParentType, ContextType>;
-  price?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProductsConnectionPrice']>>>, ParentType, ContextType>;
-  description?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProductsConnectionDescription']>>>, ParentType, ContextType>;
-  image?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProductsConnectionImage']>>>, ParentType, ContextType>;
-  is_active?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProductsConnectionIs_active']>>>, ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
-}>;
-
-export type ProductsConnectionIdResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductsConnectionId'] = ResolversParentTypes['ProductsConnectionId']> = ResolversObject<{
-  key?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  connection?: Resolver<Maybe<ResolversTypes['ProductsConnection']>, ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
-}>;
-
-export type ProductsConnectionCreated_AtResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductsConnectionCreated_at'] = ResolversParentTypes['ProductsConnectionCreated_at']> = ResolversObject<{
-  key?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  connection?: Resolver<Maybe<ResolversTypes['ProductsConnection']>, ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
-}>;
-
-export type ProductsConnectionUpdated_AtResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductsConnectionUpdated_at'] = ResolversParentTypes['ProductsConnectionUpdated_at']> = ResolversObject<{
-  key?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
-  connection?: Resolver<Maybe<ResolversTypes['ProductsConnection']>, ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
-}>;
-
-export type ProductsConnectionTitleResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductsConnectionTitle'] = ResolversParentTypes['ProductsConnectionTitle']> = ResolversObject<{
-  key?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  connection?: Resolver<Maybe<ResolversTypes['ProductsConnection']>, ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
-}>;
-
-export type ProductsConnectionPriceResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductsConnectionPrice'] = ResolversParentTypes['ProductsConnectionPrice']> = ResolversObject<{
+export type ProductConnectionPriceResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductConnectionPrice'] = ResolversParentTypes['ProductConnectionPrice']> = ResolversObject<{
   key?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  connection?: Resolver<Maybe<ResolversTypes['ProductsConnection']>, ParentType, ContextType>;
+  connection?: Resolver<Maybe<ResolversTypes['ProductConnection']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
-export type ProductsConnectionDescriptionResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductsConnectionDescription'] = ResolversParentTypes['ProductsConnectionDescription']> = ResolversObject<{
-  key?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  connection?: Resolver<Maybe<ResolversTypes['ProductsConnection']>, ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
-}>;
-
-export type ProductsConnectionImageResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductsConnectionImage'] = ResolversParentTypes['ProductsConnectionImage']> = ResolversObject<{
+export type ProductConnectionImageResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductConnectionImage'] = ResolversParentTypes['ProductConnectionImage']> = ResolversObject<{
   key?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  connection?: Resolver<Maybe<ResolversTypes['ProductsConnection']>, ParentType, ContextType>;
+  connection?: Resolver<Maybe<ResolversTypes['ProductConnection']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
-export type ProductsConnectionIs_ActiveResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductsConnectionIs_active'] = ResolversParentTypes['ProductsConnectionIs_active']> = ResolversObject<{
-  key?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  connection?: Resolver<Maybe<ResolversTypes['ProductsConnection']>, ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
-}>;
-
-export type ProductsAggregatorResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductsAggregator'] = ResolversParentTypes['ProductsAggregator']> = ResolversObject<{
+export type ProductAggregatorResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductAggregator'] = ResolversParentTypes['ProductAggregator']> = ResolversObject<{
   count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   totalCount?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  sum?: Resolver<Maybe<ResolversTypes['ProductsAggregatorSum']>, ParentType, ContextType>;
-  avg?: Resolver<Maybe<ResolversTypes['ProductsAggregatorAvg']>, ParentType, ContextType>;
-  min?: Resolver<Maybe<ResolversTypes['ProductsAggregatorMin']>, ParentType, ContextType>;
-  max?: Resolver<Maybe<ResolversTypes['ProductsAggregatorMax']>, ParentType, ContextType>;
+  sum?: Resolver<Maybe<ResolversTypes['ProductAggregatorSum']>, ParentType, ContextType>;
+  avg?: Resolver<Maybe<ResolversTypes['ProductAggregatorAvg']>, ParentType, ContextType>;
+  min?: Resolver<Maybe<ResolversTypes['ProductAggregatorMin']>, ParentType, ContextType>;
+  max?: Resolver<Maybe<ResolversTypes['ProductAggregatorMax']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
-export type ProductsAggregatorSumResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductsAggregatorSum'] = ResolversParentTypes['ProductsAggregatorSum']> = ResolversObject<{
+export type ProductAggregatorSumResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductAggregatorSum'] = ResolversParentTypes['ProductAggregatorSum']> = ResolversObject<{
   price?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
-export type ProductsAggregatorAvgResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductsAggregatorAvg'] = ResolversParentTypes['ProductsAggregatorAvg']> = ResolversObject<{
+export type ProductAggregatorAvgResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductAggregatorAvg'] = ResolversParentTypes['ProductAggregatorAvg']> = ResolversObject<{
   price?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
-export type ProductsAggregatorMinResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductsAggregatorMin'] = ResolversParentTypes['ProductsAggregatorMin']> = ResolversObject<{
+export type ProductAggregatorMinResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductAggregatorMin'] = ResolversParentTypes['ProductAggregatorMin']> = ResolversObject<{
   price?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
-export type ProductsAggregatorMaxResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductsAggregatorMax'] = ResolversParentTypes['ProductsAggregatorMax']> = ResolversObject<{
+export type ProductAggregatorMaxResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProductAggregatorMax'] = ResolversParentTypes['ProductAggregatorMax']> = ResolversObject<{
   price?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
 export type CreateProductPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['createProductPayload'] = ResolversParentTypes['createProductPayload']> = ResolversObject<{
-  product?: Resolver<Maybe<ResolversTypes['Products']>, ParentType, ContextType>;
+  product?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
 export type UpdateProductPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['updateProductPayload'] = ResolversParentTypes['updateProductPayload']> = ResolversObject<{
-  product?: Resolver<Maybe<ResolversTypes['Products']>, ParentType, ContextType>;
+  product?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
 export type DeleteProductPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['deleteProductPayload'] = ResolversParentTypes['deleteProductPayload']> = ResolversObject<{
-  product?: Resolver<Maybe<ResolversTypes['Products']>, ParentType, ContextType>;
+  product?: Resolver<Maybe<ResolversTypes['Product']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
@@ -2450,9 +2024,6 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createCity?: Resolver<Maybe<ResolversTypes['createCityPayload']>, ParentType, ContextType, RequireFields<MutationCreateCityArgs, never>>;
   updateCity?: Resolver<Maybe<ResolversTypes['updateCityPayload']>, ParentType, ContextType, RequireFields<MutationUpdateCityArgs, never>>;
   deleteCity?: Resolver<Maybe<ResolversTypes['deleteCityPayload']>, ParentType, ContextType, RequireFields<MutationDeleteCityArgs, never>>;
-  createOrder?: Resolver<Maybe<ResolversTypes['createOrderPayload']>, ParentType, ContextType, RequireFields<MutationCreateOrderArgs, never>>;
-  updateOrder?: Resolver<Maybe<ResolversTypes['updateOrderPayload']>, ParentType, ContextType, RequireFields<MutationUpdateOrderArgs, never>>;
-  deleteOrder?: Resolver<Maybe<ResolversTypes['deleteOrderPayload']>, ParentType, ContextType, RequireFields<MutationDeleteOrderArgs, never>>;
   createProduct?: Resolver<Maybe<ResolversTypes['createProductPayload']>, ParentType, ContextType, RequireFields<MutationCreateProductArgs, never>>;
   updateProduct?: Resolver<Maybe<ResolversTypes['updateProductPayload']>, ParentType, ContextType, RequireFields<MutationUpdateProductArgs, never>>;
   deleteProduct?: Resolver<Maybe<ResolversTypes['deleteProductPayload']>, ParentType, ContextType, RequireFields<MutationDeleteProductArgs, never>>;
@@ -2479,26 +2050,28 @@ export interface TimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
   name: 'Time';
 }
 
+export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Date'], any> {
+  name: 'Date';
+}
+
 export interface LongScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Long'], any> {
   name: 'Long';
 }
 
 export type Resolvers<ContextType = any> = ResolversObject<{
   Query?: QueryResolvers<ContextType>;
-  Cities?: CitiesResolvers<ContextType>;
+  City?: CityResolvers<ContextType>;
   DateTime?: GraphQLScalarType;
   JSON?: GraphQLScalarType;
-  CitiesConnection?: CitiesConnectionResolvers<ContextType>;
-  CitiesGroupBy?: CitiesGroupByResolvers<ContextType>;
-  CitiesConnectionId?: CitiesConnectionIdResolvers<ContextType>;
-  CitiesConnectionCreated_at?: CitiesConnectionCreated_AtResolvers<ContextType>;
-  CitiesConnectionUpdated_at?: CitiesConnectionUpdated_AtResolvers<ContextType>;
-  CitiesConnectionName?: CitiesConnectionNameResolvers<ContextType>;
-  CitiesConnectionIs_active?: CitiesConnectionIs_ActiveResolvers<ContextType>;
-  CitiesAggregator?: CitiesAggregatorResolvers<ContextType>;
-  Orders?: OrdersResolvers<ContextType>;
-  Date?: GraphQLScalarType;
-  Products?: ProductsResolvers<ContextType>;
+  CityConnection?: CityConnectionResolvers<ContextType>;
+  CityGroupBy?: CityGroupByResolvers<ContextType>;
+  CityConnectionId?: CityConnectionIdResolvers<ContextType>;
+  CityConnectionCreated_at?: CityConnectionCreated_AtResolvers<ContextType>;
+  CityConnectionUpdated_at?: CityConnectionUpdated_AtResolvers<ContextType>;
+  CityConnectionName?: CityConnectionNameResolvers<ContextType>;
+  CityConnectionIs_active?: CityConnectionIs_ActiveResolvers<ContextType>;
+  CityAggregator?: CityAggregatorResolvers<ContextType>;
+  Product?: ProductResolvers<ContextType>;
   UploadFile?: UploadFileResolvers<ContextType>;
   Morph?: MorphResolvers;
   UsersPermissionsMe?: UsersPermissionsMeResolvers<ContextType>;
@@ -2508,39 +2081,19 @@ export type Resolvers<ContextType = any> = ResolversObject<{
   createCityPayload?: CreateCityPayloadResolvers<ContextType>;
   updateCityPayload?: UpdateCityPayloadResolvers<ContextType>;
   deleteCityPayload?: DeleteCityPayloadResolvers<ContextType>;
-  OrdersConnection?: OrdersConnectionResolvers<ContextType>;
-  OrdersGroupBy?: OrdersGroupByResolvers<ContextType>;
-  OrdersConnectionId?: OrdersConnectionIdResolvers<ContextType>;
-  OrdersConnectionCreated_at?: OrdersConnectionCreated_AtResolvers<ContextType>;
-  OrdersConnectionUpdated_at?: OrdersConnectionUpdated_AtResolvers<ContextType>;
-  OrdersConnectionName?: OrdersConnectionNameResolvers<ContextType>;
-  OrdersConnectionPhone?: OrdersConnectionPhoneResolvers<ContextType>;
-  OrdersConnectionDeliveryDate?: OrdersConnectionDeliveryDateResolvers<ContextType>;
-  OrdersConnectionCity?: OrdersConnectionCityResolvers<ContextType>;
-  OrdersConnectionIs_paid?: OrdersConnectionIs_PaidResolvers<ContextType>;
-  OrdersAggregator?: OrdersAggregatorResolvers<ContextType>;
-  OrdersAggregatorSum?: OrdersAggregatorSumResolvers<ContextType>;
-  OrdersAggregatorAvg?: OrdersAggregatorAvgResolvers<ContextType>;
-  OrdersAggregatorMin?: OrdersAggregatorMinResolvers<ContextType>;
-  OrdersAggregatorMax?: OrdersAggregatorMaxResolvers<ContextType>;
-  createOrderPayload?: CreateOrderPayloadResolvers<ContextType>;
-  updateOrderPayload?: UpdateOrderPayloadResolvers<ContextType>;
-  deleteOrderPayload?: DeleteOrderPayloadResolvers<ContextType>;
-  ProductsConnection?: ProductsConnectionResolvers<ContextType>;
-  ProductsGroupBy?: ProductsGroupByResolvers<ContextType>;
-  ProductsConnectionId?: ProductsConnectionIdResolvers<ContextType>;
-  ProductsConnectionCreated_at?: ProductsConnectionCreated_AtResolvers<ContextType>;
-  ProductsConnectionUpdated_at?: ProductsConnectionUpdated_AtResolvers<ContextType>;
-  ProductsConnectionTitle?: ProductsConnectionTitleResolvers<ContextType>;
-  ProductsConnectionPrice?: ProductsConnectionPriceResolvers<ContextType>;
-  ProductsConnectionDescription?: ProductsConnectionDescriptionResolvers<ContextType>;
-  ProductsConnectionImage?: ProductsConnectionImageResolvers<ContextType>;
-  ProductsConnectionIs_active?: ProductsConnectionIs_ActiveResolvers<ContextType>;
-  ProductsAggregator?: ProductsAggregatorResolvers<ContextType>;
-  ProductsAggregatorSum?: ProductsAggregatorSumResolvers<ContextType>;
-  ProductsAggregatorAvg?: ProductsAggregatorAvgResolvers<ContextType>;
-  ProductsAggregatorMin?: ProductsAggregatorMinResolvers<ContextType>;
-  ProductsAggregatorMax?: ProductsAggregatorMaxResolvers<ContextType>;
+  ProductConnection?: ProductConnectionResolvers<ContextType>;
+  ProductGroupBy?: ProductGroupByResolvers<ContextType>;
+  ProductConnectionId?: ProductConnectionIdResolvers<ContextType>;
+  ProductConnectionCreated_at?: ProductConnectionCreated_AtResolvers<ContextType>;
+  ProductConnectionUpdated_at?: ProductConnectionUpdated_AtResolvers<ContextType>;
+  ProductConnectionTitle?: ProductConnectionTitleResolvers<ContextType>;
+  ProductConnectionPrice?: ProductConnectionPriceResolvers<ContextType>;
+  ProductConnectionImage?: ProductConnectionImageResolvers<ContextType>;
+  ProductAggregator?: ProductAggregatorResolvers<ContextType>;
+  ProductAggregatorSum?: ProductAggregatorSumResolvers<ContextType>;
+  ProductAggregatorAvg?: ProductAggregatorAvgResolvers<ContextType>;
+  ProductAggregatorMin?: ProductAggregatorMinResolvers<ContextType>;
+  ProductAggregatorMax?: ProductAggregatorMaxResolvers<ContextType>;
   createProductPayload?: CreateProductPayloadResolvers<ContextType>;
   updateProductPayload?: UpdateProductPayloadResolvers<ContextType>;
   deleteProductPayload?: DeleteProductPayloadResolvers<ContextType>;
@@ -2599,6 +2152,7 @@ export type Resolvers<ContextType = any> = ResolversObject<{
   Mutation?: MutationResolvers<ContextType>;
   Upload?: GraphQLScalarType;
   Time?: GraphQLScalarType;
+  Date?: GraphQLScalarType;
   Long?: GraphQLScalarType;
 }>;
 

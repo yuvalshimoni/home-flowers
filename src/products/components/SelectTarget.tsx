@@ -53,8 +53,8 @@ const TextFieldStyled = styled(TextField)`
 `;
 
 export type CityType = {
-  cityId: Types.Cities['id'];
-  name: Types.Cities['name'];
+  cityId: Types.City['id'];
+  name: Types.City['name'];
 };
 
 const SelectTarget = (): JSX.Element => {
@@ -69,7 +69,6 @@ const SelectTarget = (): JSX.Element => {
 
   const onSelect = useCallback(
     (event, values) => {
-      console.log(values);
       const newValue = values ? { name: values.name, cityId: values.id } : undefined;
       setCostumerDetails((prevState) => ({
         ...prevState,
@@ -87,7 +86,7 @@ const SelectTarget = (): JSX.Element => {
     setInputValue(newInputValue);
   }, []);
 
-  const getOptionLabel = useCallback((option: CityType): Types.Cities['name'] => option.name!, []);
+  const getOptionLabel = useCallback((option: CityType): Types.City['name'] => option.name!, []);
 
   const renderInput = useCallback(
     (params): JSX.Element => <TextFieldStyled {...params} label="יעד למשלוח" />,
@@ -103,7 +102,7 @@ const SelectTarget = (): JSX.Element => {
       <Autocomplete
         fullWidth
         value={target}
-        options={data.cities!}
+        options={data?.cities!}
         inputValue={inputValue}
         onChange={onSelect}
         style={{ width: '100%' }}

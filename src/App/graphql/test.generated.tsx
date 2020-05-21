@@ -18,8 +18,8 @@ export type TestDoNotDeleteQueryVariables = {};
 export type TestDoNotDeleteQuery = (
   { __typename?: 'Query' }
   & { city?: Types.Maybe<(
-    { __typename?: 'Cities' }
-    & Pick<Types.Cities, 'id' | 'name'>
+    { __typename?: 'City' }
+    & Pick<Types.City, 'id' | 'name'>
   )> }
 );
 

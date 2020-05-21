@@ -18,8 +18,8 @@ export type CitiesQueryVariables = {};
 export type CitiesQuery = (
   { __typename?: 'Query' }
   & { cities?: Types.Maybe<Array<Types.Maybe<(
-    { __typename?: 'Cities' }
-    & Pick<Types.Cities, 'id' | 'name'>
+    { __typename?: 'City' }
+    & Pick<Types.City, 'id' | 'name'>
   )>>> }
 );
 
