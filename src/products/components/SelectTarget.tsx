@@ -102,7 +102,7 @@ const SelectTarget = (): JSX.Element => {
       <Autocomplete
         fullWidth
         selectOnFocus
-        value={target}
+        value={!!target?.cityId ? target : undefined}
         options={data?.cities!}
         inputValue={inputValue}
         onChange={onSelect}

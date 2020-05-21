@@ -1,9 +1,9 @@
-import React, { useMemo, useState, useCallback } from 'react';
-import styled from 'styled-components';
+import React, { useMemo, useState, useCallback, useEffect } from 'react';
+import styled, { css } from 'styled-components';
 import { useSpring, animated } from 'react-spring';
 import { useAppState } from 'shared/hooks';
 import { useHistory } from 'react-router-dom';
-import { Product, TotalCart, ProductType, Button, MainTitle, HeadPage } from 'shared/components';
+import { Product, TotalCart, Button, MainTitle, HeadPage } from 'shared/components';
 import SelectTarget from './SelectTarget';
 import { useProcustsQuery } from 'shared/graphql';
 
@@ -24,13 +24,25 @@ const SelectTargetWrapper = styled(animated.div)`
   }
 `;
 
-const ButtonWrapper = styled(animated.div)`
+const ButtonWrapper = styled.div<{ visible: boolean }>`
   position: fixed;
   right: 0;
   left: 0;
   bottom: 5px;
   margin: 0 auto;
   max-width: 1140px;
+  transition: opacity, transform, 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+  ${({ visible }) =>
+    visible
+      ? css`
+          opacity: 1;
+          transform: translateY(0);
+        `
+      : css`
+          opacity: 0;
+          transform: translateY(100%);
+        `};
 
   @media (max-width: 500px) {
     bottom: 0;
@@ -68,14 +80,12 @@ const Products = (): JSX.Element => {
     costumerDetails: { target },
   } = useAppState();
 
-  const isTargetSelected = useMemo(() => !!target?.name, [target?.name]);
+  const isTargetSelected = useMemo(() => !!target?.cityId, [target?.cityId]);
   const [displaySelectTarget, setDisplaySelectTarget] = useState<boolean>(isTargetSelected);
 
   const handleOnClick = useCallback(async () => {
     if (isTargetSelected) {
-      setTimeout(() => {
-        history.push('/details');
-      }, 1500);
+      history.push('/details');
     } else {
       await window.scrollTo({ top: 0, behavior: 'smooth' });
 
@@ -92,10 +102,6 @@ const Products = (): JSX.Element => {
   const selectTargetAnimations = useSpring({
     opacity: displaySelectTarget ? 1 : 0,
     transform: displaySelectTarget ? `translateX(0)` : `translateX(110%)`,
-  });
-
-  const ButtonAnimations = useSpring({
-    opacity: !displaySelectTarget ? 1 : 0,
   });
 
   return (
@@ -123,7 +129,7 @@ const Products = (): JSX.Element => {
         </ProductsWrapper>
       </Wrapper>
 
-      <ButtonWrapper style={ButtonAnimations}>
+      <ButtonWrapper visible={!displaySelectTarget && !isTargetSelected}>
         <Button onClick={handleOnClick} disabled={!totalCart}>
           המשך
         </Button>

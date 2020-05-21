@@ -13,6 +13,7 @@ const MainTitle = styled.h1`
 
 const SubTitle = styled.h2`
   margin: 0;
+  font-weight: 100;
   font-size: ${({ theme }) => theme.sizes.xl}px;
 `;
 
