@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { HeadPage as HeadPageBase, MainTitle, CartTable } from 'shared/components';
 import DetailsForm from './DetailsForm';
@@ -9,16 +9,21 @@ const HeadPage = styled(HeadPageBase)`
   margin-bottom: 20px;
 `;
 
-const Details = (): JSX.Element => (
-  <Wrapper>
-    <HeadPage small>
-      <MainTitle>סיום הזמנה</MainTitle>
-    </HeadPage>
+const Details = (): JSX.Element => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+  return (
+    <Wrapper>
+      <HeadPage small>
+        <MainTitle>סיום הזמנה</MainTitle>
+      </HeadPage>
 
-    <DetailsForm />
+      <DetailsForm />
 
-    <CartTable />
-  </Wrapper>
-);
+      <CartTable />
+    </Wrapper>
+  );
+};
 
 export default Details;

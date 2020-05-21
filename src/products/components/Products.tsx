@@ -81,9 +81,12 @@ const Products = (): JSX.Element => {
   } = useAppState();
 
   const isTargetSelected = useMemo(() => !!target?.cityId, [target?.cityId]);
+  const [isClick, setIsClick] = useState<boolean>(isTargetSelected);
   const [displaySelectTarget, setDisplaySelectTarget] = useState<boolean>(isTargetSelected);
 
   const handleOnClick = useCallback(async () => {
+    setIsClick(true);
+
     if (isTargetSelected) {
       history.push('/details');
     } else {
@@ -103,6 +106,16 @@ const Products = (): JSX.Element => {
     opacity: displaySelectTarget ? 1 : 0,
     transform: displaySelectTarget ? `translateX(0)` : `translateX(110%)`,
   });
+
+  useEffect(() => {
+    const t = setTimeout(() => {
+      setIsClick(false);
+    }, 150);
+
+    return () => {
+      clearTimeout(t);
+    };
+  }, []);
 
   return (
     <>
@@ -129,7 +142,7 @@ const Products = (): JSX.Element => {
         </ProductsWrapper>
       </Wrapper>
 
-      <ButtonWrapper visible={!displaySelectTarget && !isTargetSelected}>
+      <ButtonWrapper visible={!isClick}>
         <Button onClick={handleOnClick} disabled={!totalCart}>
           המשך
         </Button>
