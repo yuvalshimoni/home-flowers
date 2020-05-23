@@ -5,6 +5,7 @@ import { useAppState } from 'shared/hooks';
 import { useHistory } from 'react-router-dom';
 import { Product, TotalCart, Button, MainTitle, HeadPage } from 'shared/components';
 import SelectTarget from './SelectTarget';
+import { useGetDatesQuery } from '../graphql/dates.generated';
 import { useProductsQuery } from 'shared/graphql';
 
 const Wrapper = styled.div``;
@@ -73,14 +74,17 @@ const TotalWrapper = styled.div<{ displaySelectTarget?: boolean }>`
 
 const Products = (): JSX.Element | null => {
   const { data, loading } = useProductsQuery();
+  const { data: dates } = useGetDatesQuery();
+  const currentDate = dates?.deliveryDates?.[0];
 
   const history = useHistory();
   const {
     totalCart,
-    costumerDetails: { target },
+    orderDetails: { city },
+    setOrderDetails,
   } = useAppState();
 
-  const isTargetSelected = useMemo(() => !!target?.cityId, [target?.cityId]);
+  const isTargetSelected = useMemo(() => !!city, [city]);
   const [isClick, setIsClick] = useState<boolean>(isTargetSelected);
   const [displaySelectTarget, setDisplaySelectTarget] = useState<boolean>(isTargetSelected);
 
@@ -117,6 +121,16 @@ const Products = (): JSX.Element | null => {
     };
   }, []);
 
+  useEffect(() => {
+    if (!!currentDate) {
+      setOrderDetails((prevState) => ({
+        ...prevState,
+        delivery_date: currentDate!.id,
+        dateText: currentDate!.deliveryDate,
+      }));
+    }
+  }, [currentDate, setOrderDetails]);
+
   if (loading) {
     return null;
   }
@@ -140,8 +154,9 @@ const Products = (): JSX.Element | null => {
 
         <ProductsWrapper>
           {data?.products?.map((item) => {
-            const { id, title, price, image } = item!;
-            return <Product key={id} id={id} title={title} price={price} url={image?.url!} />;
+            if (!item) return null;
+            const { id, title, price, image } = item;
+            return <Product key={id} id={id} title={title} price={price} url={image?.url} />;
           })}
         </ProductsWrapper>
       </Wrapper>

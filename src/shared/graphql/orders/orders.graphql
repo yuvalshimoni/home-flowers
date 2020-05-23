@@ -1,0 +1,33 @@
+mutation createOrder(
+  $name: String!
+  $phone: String!
+  $city: ID!
+  $delivery_date: ID!
+  $total: Float!
+) {
+  createOrder(
+    input: {
+      data: {
+        name: $name
+        phone: $phone
+        delivery_date: $delivery_date
+        city: $city
+        total: $total
+      }
+    }
+  ) {
+    order {
+      id
+    }
+  }
+}
+
+mutation createOrderproduct($product: ID!, $price: Float!, $quantity: Int!, $order_id: ID!) {
+  createOrderproduct(
+    input: { data: { product: $product, price: $price, quantity: $quantity, order_id: $order_id } }
+  ) {
+    orderproduct {
+      id
+    }
+  }
+}

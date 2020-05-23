@@ -1,20 +1,19 @@
 import React, { createContext, useReducer, useState, useMemo } from 'react';
 import { cartReducer } from './state/reducers/cart';
-import { AppState, CostumerDetails } from './state/types';
+import { AppState, OrderDetails } from './state/types';
 import { getTotalCart } from 'shared/utils';
 
 const appContext = createContext<AppState | undefined>(undefined);
 
 const { Provider } = appContext;
 
-const initialCostumerDetails: CostumerDetails = {
-  target: {
-    cityId: '',
-    name: '',
-  },
-  name: '',
+const initialOrderDetails: OrderDetails = {
+  city: '',
+  name: null,
   phone: null,
-  deliveryDate: '21.05.2020',
+  cityName: null,
+  delivery_date: '',
+  dateText: '',
 };
 
 interface AppContextProviderProps {
@@ -23,7 +22,7 @@ interface AppContextProviderProps {
 
 const AppContextProvider = ({ children }: AppContextProviderProps): JSX.Element => {
   const [cart, cartDispatch] = useReducer(cartReducer, []);
-  const [costumerDetails, setCostumerDetails] = useState<CostumerDetails>(initialCostumerDetails);
+  const [orderDetails, setOrderDetails] = useState<OrderDetails>(initialOrderDetails);
 
   const totalCart = useMemo<number>(() => getTotalCart(cart), [cart]);
 
@@ -32,10 +31,10 @@ const AppContextProvider = ({ children }: AppContextProviderProps): JSX.Element 
       cart,
       totalCart,
       cartDispatch,
-      costumerDetails,
-      setCostumerDetails,
+      orderDetails,
+      setOrderDetails,
     }),
-    [cart, costumerDetails, totalCart],
+    [cart, orderDetails, totalCart],
   );
 
   return <Provider value={appState}>{children}</Provider>;

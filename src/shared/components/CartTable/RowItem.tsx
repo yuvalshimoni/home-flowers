@@ -41,26 +41,32 @@ const RemoveButton = styled.div`
   color: ${({ theme }) => theme.colors.error};
 `;
 
+type ItemProps = {
+  id: Types.Product['id'];
+  title: Types.Product['title'];
+  url?: Types.UploadFile['url'];
+};
+
 type RowProps = {
-  item: ProductType;
+  item: ItemProps;
   quantity: number;
   price: number;
-  removeProduct?: (productId: ProductType['id']) => void;
+  removeProduct?: (productId: Types.Product['id']) => void;
 };
 
 const RowItem = ({
-  item: { id, image, title },
+  item: { id, title, url },
   price,
   quantity,
   removeProduct,
 }: RowProps): JSX.Element => {
   const handleOnClick = useCallback(() => {
     removeProduct?.(id);
-  }, []);
+  }, [id, removeProduct]);
 
   return (
     <RowWrapper>
-      <Image src={process.env.REACT_APP_STRAPI_URL + image.url!} />
+      {url && <Image src={process.env.REACT_APP_STRAPI_URL + url} />}
       <Name>{title}</Name>
       <Text>כמות: {quantity} </Text>
       <Text>{price * quantity} ש"ח</Text>

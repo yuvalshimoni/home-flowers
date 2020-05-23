@@ -60,7 +60,7 @@ type ProductProps = {
   id: Types.Product['id'];
   title: Types.Product['title'];
   price: Types.Product['price'];
-  url: Types.UploadFile['url'];
+  url?: Types.UploadFile['url'];
 };
 
 const Product = ({ id, title, price, url }: ProductProps): JSX.Element => {
@@ -99,7 +99,7 @@ const Product = ({ id, title, price, url }: ProductProps): JSX.Element => {
 
   return (
     <Wrapper>
-      <Image src={process.env.REACT_APP_STRAPI_URL + url} />
+      {url && <Image src={process.env.REACT_APP_STRAPI_URL + url} />}
 
       <BottomArea>
         <div>

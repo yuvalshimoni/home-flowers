@@ -10,11 +10,9 @@ const TextWrapper = styled(FlexColumn)`
 `;
 
 const Summary = (): JSX.Element => {
-  const {
-    costumerDetails: { name },
-  } = useAppState();
-
-  const fullName = name.split(' ');
+  // const {
+  //   orderDetails: { name },
+  // } = useAppState();
 
   return (
     <Wrapper>

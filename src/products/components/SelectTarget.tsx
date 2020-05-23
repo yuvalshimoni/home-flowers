@@ -1,11 +1,10 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useMemo } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useAppState } from 'shared/hooks';
 import { TextPrimary } from 'shared/components';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import * as Types from 'graphql/types.generated';
 import { useCitiesQuery } from '../graphql/cities.generated';
 
 const TextWrapper = styled.div`
@@ -53,7 +52,7 @@ const TextFieldStyled = styled(TextField)`
 `;
 
 type CityType = {
-  cityId: string;
+  city: string;
   name: string;
 };
 
@@ -61,39 +60,51 @@ const SelectTarget = (): JSX.Element | null => {
   const { data, loading } = useCitiesQuery();
   const history = useHistory();
   const {
-    costumerDetails: { target, deliveryDate },
-    setCostumerDetails,
+    orderDetails: { city, cityName, dateText },
+    setOrderDetails,
   } = useAppState();
 
   const [inputValue, setInputValue] = useState('');
 
   const onSelect = useCallback(
     (event, values) => {
-      const newValue = values ? { name: values.name, cityId: values.id } : undefined;
-      setCostumerDetails((prevState) => ({
+      const id = values?.city;
+      const name = values?.name;
+
+      setOrderDetails((prevState) => ({
         ...prevState,
-        target: values ? { name: values.name, cityId: values.id } : undefined,
+        city: id,
+        cityName: name,
       }));
 
-      if (!!newValue) {
+      if (!!id) {
         history.push('/details');
       }
     },
-    [history, setCostumerDetails],
+    [history, setOrderDetails],
   );
 
   const handleInputChange = useCallback((event, newInputValue) => {
     setInputValue(newInputValue);
   }, []);
 
-  const getOptionLabel = useCallback((option: CityType): string => option.name!, []);
+  const getOptionLabel = useCallback(({ name }: CityType): CityType['name'] => name, []);
 
   const renderInput = useCallback(
     (params): JSX.Element => <TextFieldStyled {...params} label="לאן לשלוח?" />,
     [],
   );
 
-  if (loading) {
+  const options = useMemo<Array<CityType>>(
+    () =>
+      data?.cities
+        ? data.cities.map((city) => ({ city: city!.id, name: city!.name }))
+        : [{ city: '', name: '' }],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [data?.cities],
+  );
+
+  if (loading || !data?.cities) {
     return null;
   }
 
@@ -102,8 +113,8 @@ const SelectTarget = (): JSX.Element | null => {
       <Autocomplete
         fullWidth
         selectOnFocus
-        value={!!target?.cityId ? target : undefined}
-        options={data?.cities!}
+        value={!!city ? { city, name: cityName! } : { city: '', name: '' }}
+        options={options}
         inputValue={inputValue}
         onChange={onSelect}
         style={{ width: '100%' }}
@@ -113,7 +124,7 @@ const SelectTarget = (): JSX.Element | null => {
       />
 
       <TextWrapper>
-        <TextPrimary>{`חלוקה בתאריך ${deliveryDate} בשעות הערב`}</TextPrimary>
+        <TextPrimary>{`חלוקה בתאריך ${dateText} בשעות הערב`}</TextPrimary>
       </TextWrapper>
     </>
   );

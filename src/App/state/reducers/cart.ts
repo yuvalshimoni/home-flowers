@@ -1,14 +1,14 @@
-import { Cart, CartItemType } from '../types';
+import { Cart, CartItem } from '../types';
 
 export type CartAction =
   | {
       type: 'UPDATE_CART_ITEM';
-      payload: CartItemType;
+      payload: CartItem;
     }
   | {
       type: 'REMOVE_ITEM_FROM_CART';
       payload: {
-        productId: CartItemType['productId'];
+        productId: CartItem['productId'];
       };
     };
 

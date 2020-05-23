@@ -68,6 +68,42 @@
             "name": "deleteCityPayload"
           },
           {
+            "name": "DeliveryDate"
+          },
+          {
+            "name": "DeliveryDateConnection"
+          },
+          {
+            "name": "DeliveryDateAggregator"
+          },
+          {
+            "name": "DeliveryDateGroupBy"
+          },
+          {
+            "name": "DeliveryDateConnectionId"
+          },
+          {
+            "name": "DeliveryDateConnectionCreated_at"
+          },
+          {
+            "name": "DeliveryDateConnectionUpdated_at"
+          },
+          {
+            "name": "DeliveryDateConnectionTitle"
+          },
+          {
+            "name": "DeliveryDateConnectionDeliveryDate"
+          },
+          {
+            "name": "createDeliveryDatePayload"
+          },
+          {
+            "name": "updateDeliveryDatePayload"
+          },
+          {
+            "name": "deleteDeliveryDatePayload"
+          },
+          {
             "name": "Order"
           },
           {
@@ -104,16 +140,22 @@
             "name": "OrderConnectionName"
           },
           {
-            "name": "OrderConnectionPhone"
-          },
-          {
-            "name": "OrderConnectionDeliveryDate"
-          },
-          {
             "name": "OrderConnectionCity"
           },
           {
             "name": "OrderConnectionTotal"
+          },
+          {
+            "name": "OrderConnectionIs_paid"
+          },
+          {
+            "name": "OrderConnectionPhone"
+          },
+          {
+            "name": "OrderConnectionDelivery_date"
+          },
+          {
+            "name": "OrderConnectionDeliveryDate"
           },
           {
             "name": "createOrderPayload"
@@ -125,58 +167,58 @@
             "name": "deleteOrderPayload"
           },
           {
-            "name": "Orderitem"
+            "name": "Orderproduct"
           },
           {
-            "name": "OrderitemConnection"
+            "name": "OrderproductConnection"
           },
           {
-            "name": "OrderitemAggregator"
+            "name": "OrderproductAggregator"
           },
           {
-            "name": "OrderitemAggregatorSum"
+            "name": "OrderproductAggregatorSum"
           },
           {
-            "name": "OrderitemAggregatorAvg"
+            "name": "OrderproductAggregatorAvg"
           },
           {
-            "name": "OrderitemAggregatorMin"
+            "name": "OrderproductAggregatorMin"
           },
           {
-            "name": "OrderitemAggregatorMax"
+            "name": "OrderproductAggregatorMax"
           },
           {
-            "name": "OrderitemGroupBy"
+            "name": "OrderproductGroupBy"
           },
           {
-            "name": "OrderitemConnectionId"
+            "name": "OrderproductConnectionId"
           },
           {
-            "name": "OrderitemConnectionCreated_at"
+            "name": "OrderproductConnectionCreated_at"
           },
           {
-            "name": "OrderitemConnectionUpdated_at"
+            "name": "OrderproductConnectionUpdated_at"
           },
           {
-            "name": "OrderitemConnectionProduct"
+            "name": "OrderproductConnectionProduct"
           },
           {
-            "name": "OrderitemConnectionPrice"
+            "name": "OrderproductConnectionPrice"
           },
           {
-            "name": "OrderitemConnectionQuantity"
+            "name": "OrderproductConnectionQuantity"
           },
           {
-            "name": "OrderitemConnectionOrder_id"
+            "name": "OrderproductConnectionOrder_id"
           },
           {
-            "name": "createOrderitemPayload"
+            "name": "createOrderproductPayload"
           },
           {
-            "name": "updateOrderitemPayload"
+            "name": "updateOrderproductPayload"
           },
           {
-            "name": "deleteOrderitemPayload"
+            "name": "deleteOrderproductPayload"
           },
           {
             "name": "Product"

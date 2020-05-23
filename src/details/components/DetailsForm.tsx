@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { useForm, Controller } from 'react-hook-form';
 import { FlexRowSpaceBetween, Button, FlexColumn, SubTitle, FadeIn } from 'shared/components';
 import TextField from '@material-ui/core/TextField';
 import { useAppState } from 'shared/hooks';
+import { useCreateOrderMutation, useCreateOrderproductMutation } from 'shared/graphql';
 import { useHistory } from 'react-router-dom';
 
 const FormWrapper = styled(FlexRowSpaceBetween)`
@@ -39,10 +40,18 @@ type FormValues = {
 };
 
 const DetailsForm = (): JSX.Element => {
+  const [createOrder, { loading: isCreateOrderLoading }] = useCreateOrderMutation();
+  const [
+    createOrderproduct,
+    { loading: isCreateOrderproductLoading },
+  ] = useCreateOrderproductMutation();
+
   const history = useHistory();
   const {
-    costumerDetails: { name, phone },
-    setCostumerDetails,
+    cart,
+    totalCart,
+    setOrderDetails,
+    orderDetails: { name, phone, delivery_date, city },
   } = useAppState();
 
   const { control, handleSubmit, errors } = useForm({
@@ -54,15 +63,50 @@ const DetailsForm = (): JSX.Element => {
     },
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onSubmit = ({ name, phone }: any): void => {
-    setCostumerDetails((state) => ({
-      ...state,
-      name,
-      phone,
-    }));
-    history.push('./summary');
-  };
+  const makeOrderproduct = useCallback(
+    async (order_id, { productId, quantity, price }) => {
+      return createOrderproduct({
+        variables: {
+          order_id,
+          product: productId,
+          quantity,
+          price,
+        },
+      });
+    },
+    [createOrderproduct],
+  );
+
+  const saveCart = useCallback(
+    async (order_id) => {
+      return Promise.all(cart.map((item) => makeOrderproduct(order_id, item)));
+    },
+    [cart, makeOrderproduct],
+  );
+
+  const onSubmit = useCallback(
+    async ({ name, phone }: any) => {
+      setOrderDetails((state) => ({
+        ...state,
+        name,
+        phone,
+      }));
+
+      const { data } = await createOrder({
+        variables: {
+          name,
+          phone: String(phone),
+          city,
+          delivery_date,
+          total: totalCart,
+        },
+      });
+
+      await saveCart(data?.createOrder?.order?.id);
+      history.push('./summary');
+    },
+    [history, setOrderDetails, createOrder, totalCart, city, saveCart, delivery_date],
+  );
 
   return (
     <FadeIn>

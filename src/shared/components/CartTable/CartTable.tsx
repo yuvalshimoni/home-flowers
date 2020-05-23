@@ -2,38 +2,11 @@ import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { TotalCart } from 'shared/components';
 import { useHistory } from 'react-router-dom';
-import { ProductType, SubTitle, TextPrimary, NormalText } from 'shared/components';
+import { SubTitle, TextPrimary, NormalText } from 'shared/components';
 import { useAppState } from 'shared/hooks';
 import RowItem from './RowItem';
 import { Flex } from '../FlexHelper';
 import { useProductsQuery } from 'shared/graphql';
-
-const products: Array<ProductType> = [
-  {
-    id: '12ds324dsf',
-    title: 'פריחת אביב',
-    price: 20,
-    image: 'http://174.138.32.210/uploads/flowers-1_ceaac651ef.png',
-  },
-  {
-    id: '12dsdsfsdf324dsf',
-    title: 'פריחת קיץ',
-    price: 50,
-    image: 'http://174.138.32.210/uploads/bouquet-roses-tendresse@2x_d1140ec205.png',
-  },
-  {
-    id: '324dfgfdg',
-    title: 'פריחת קיץ',
-    price: 25,
-    image: 'http://174.138.32.210/uploads/Postabloom---cutout_3_grande_15eb843564.png',
-  },
-  {
-    id: '324dfgfsdfdg',
-    title: 'פריחת קיץ',
-    price: 35,
-    image: 'http://174.138.32.210/uploads/flowers-1_ceaac651ef.png',
-  },
-];
 
 const Wrapper = styled.div`
   display: flex;
@@ -69,7 +42,7 @@ type CartTableProps = {
   editable?: boolean;
 };
 
-const CartTable = ({ editable = true }: CartTableProps): JSX.Element => {
+const CartTable = ({ editable = true }: CartTableProps): JSX.Element | null => {
   const { data } = useProductsQuery();
 
   const history = useHistory();
@@ -77,7 +50,7 @@ const CartTable = ({ editable = true }: CartTableProps): JSX.Element => {
     cart,
     totalCart,
     cartDispatch,
-    costumerDetails: { target },
+    orderDetails: { cityName, dateText },
   } = useAppState();
 
   useEffect(() => {
@@ -93,26 +66,39 @@ const CartTable = ({ editable = true }: CartTableProps): JSX.Element => {
     [cartDispatch],
   );
 
+  const products = data?.products;
+
+  if (!products) {
+    return null;
+  }
+
   return (
     <Wrapper>
       <SubTitle>פרוט הזמנה</SubTitle>
 
       <TargetWrapper>
-        <NormalText>{target?.name}</NormalText>
-        <TextPrimary>חלוקה בתאריך 23.3.20 בשעה 20:00</TextPrimary>
+        <NormalText>{cityName}</NormalText>
+        <TextPrimary>{`חלוקה בתאריך: ${dateText}`}</TextPrimary>
       </TargetWrapper>
 
       <ItemsWrapper>
         {cart?.length &&
-          cart.map(({ productId, quantity, price }) => (
-            <RowItem
-              key={productId}
-              item={data?.products.find((p) => p.id === productId)!}
-              quantity={quantity}
-              price={price}
-              removeProduct={editable ? removeProduct : undefined}
-            />
-          ))}
+          products &&
+          cart.map(({ productId, quantity, price }) => {
+            const item = products.find((p) => p?.id === productId);
+
+            if (!item) return null;
+
+            return (
+              <RowItem
+                key={productId}
+                item={{ id: item.id, title: item.title, url: item.image?.url }}
+                quantity={quantity}
+                price={price}
+                removeProduct={editable ? removeProduct : undefined}
+              />
+            );
+          })}
       </ItemsWrapper>
 
       <TotalWrapper>
