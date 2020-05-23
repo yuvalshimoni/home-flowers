@@ -8,7 +8,7 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
 const cache = new InMemoryCache({ fragmentMatcher });
 
 const client = new ApolloClient({
-  uri: process.env.REACT_APP_STRAPI_URL + '/graphql',
+  uri: 'http://178.128.248.28/graphql',
   cache,
 });
 
