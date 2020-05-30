@@ -1,5 +1,5 @@
 schema:
-  - http://178.128.248.28/graphql
+  - https://178.128.248.28/graphql
 documents:
   - ./src/**/graphql/**/*.graphql
 generates:
