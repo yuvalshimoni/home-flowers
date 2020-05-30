@@ -99,7 +99,7 @@ const Product = ({ id, title, price, url }: ProductProps): JSX.Element => {
 
   return (
     <Wrapper>
-      {url && <Image src={process.env.REACT_APP_STRAPI_URL + url} />}
+      {url && <Image src={'https://admin.homeflowers.co.il' + url} />}
 
       <BottomArea>
         <div>

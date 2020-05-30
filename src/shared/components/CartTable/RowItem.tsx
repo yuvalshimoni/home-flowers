@@ -66,7 +66,7 @@ const RowItem = ({
 
   return (
     <RowWrapper>
-      {url && <Image src={process.env.REACT_APP_STRAPI_URL + url} />}
+      {url && <Image src={'https://admin.homeflowers.co.il' + url} />}
       <Name>{title}</Name>
       <Text>כמות: {quantity} </Text>
       <Text>{price * quantity} ש"ח</Text>
