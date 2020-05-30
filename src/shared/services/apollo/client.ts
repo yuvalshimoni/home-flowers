@@ -8,7 +8,7 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
 const cache = new InMemoryCache({ fragmentMatcher });
 
 const client = new ApolloClient({
-  uri: 'https://178.128.248.28/graphql',
+  uri: 'https://admin.homeflowers.co.il/graphql',
   cache,
 });
 
