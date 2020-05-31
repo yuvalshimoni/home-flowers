@@ -5,6 +5,7 @@ import { FlexRowSpaceBetween, Button, FlexColumn, SubTitle, FadeIn } from 'share
 import TextField from '@material-ui/core/TextField';
 import { useAppState } from 'shared/hooks';
 import { useCreateOrderMutation, useCreateOrderproductMutation } from 'shared/graphql';
+
 import { useHistory } from 'react-router-dom';
 
 const FormWrapper = styled(FlexRowSpaceBetween)`
@@ -102,8 +103,11 @@ const DetailsForm = (): JSX.Element => {
         },
       });
 
-      await saveCart(data?.createOrder?.order?.id);
-      history.push('./summary');
+      const orderId = data?.createOrder?.order?.id;
+
+      await saveCart(orderId);
+
+      history.push(`/payment/${orderId}`);
     },
     [history, setOrderDetails, createOrder, totalCart, city, saveCart, delivery_date],
   );
