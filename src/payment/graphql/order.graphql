@@ -1,0 +1,18 @@
+query getOrder($id: ID!) {
+  order(id: $id) {
+    name
+    total
+    phone
+    city {
+      name
+    }
+    orderproducts {
+      quantity
+      price
+      product {
+        id
+        title
+      }
+    }
+  }
+}
