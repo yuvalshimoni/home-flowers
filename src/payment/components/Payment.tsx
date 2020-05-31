@@ -31,6 +31,7 @@ const Payment = (): JSX.Element => {
 
     const iframeUrl = await getIframeUrl({
       token,
+      orderId: id,
       amount: total,
       name,
       phone,
@@ -55,7 +56,7 @@ const Payment = (): JSX.Element => {
         {loading ? (
           <span>טוען...</span>
         ) : (
-          url && <iframe src={url} frameBorder="0" width="100%" height="470px"></iframe>
+          url && <iframe src={url} frameBorder="0" width="100%" height="500px"></iframe>
         )}
       </Iframe>
     </Wrapper>

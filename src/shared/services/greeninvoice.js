@@ -24,7 +24,7 @@ const getToken = async () => {
   return res.data.token;
 };
 
-const getIframeUrl = async ({ token, amount, name, phone, cityName, cart }) => {
+const getIframeUrl = async ({ token, orderId, amount, name, phone, cityName, cart }) => {
   let res;
 
   http.interceptors.request.use((config) => {
@@ -63,8 +63,8 @@ const getIframeUrl = async ({ token, amount, name, phone, cityName, cart }) => {
     income,
     successUrl: 'https://home-flowers.netlify.app/summary',
     failureUrl: 'https://home-flowers.netlify.app/fail',
-    notifyUrl: 'https://www.your-site-here.com/notification-endpoint-here',
-    custom: 'some custom data comes here',
+    notifyUrl: 'https://admin.home-flowers.co.il/payment',
+    custom: orderId,
   };
 
   try {
