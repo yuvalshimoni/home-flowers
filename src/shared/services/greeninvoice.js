@@ -39,7 +39,7 @@ const getIframeUrl = async ({ token, orderId, amount, name, phone, cityName, car
     quantity,
     price,
     currency: 'ILS',
-    vatType: 1,
+    vatType: 0,
   }));
 
   const body = {
