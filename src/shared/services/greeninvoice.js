@@ -61,9 +61,9 @@ const getIframeUrl = async ({ token, orderId, amount, name, phone, cityName, car
       add: true,
     },
     income,
-    successUrl: 'https://admin.home-flowers.co.il/payment/success',
-    failureUrl: 'https://admin.home-flowers.co.il/payment/fail',
-    notifyUrl: 'https://admin.home-flowers.co.il/payment/notify',
+    successUrl: 'https://admin.homeflowers.co.il/payment/success',
+    failureUrl: 'https://admin.homeflowers.co.il/payment/fail',
+    notifyUrl: 'https://admin.homeflowers.co.il/payment/notify',
     custom: orderId,
   };
 
