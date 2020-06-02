@@ -61,9 +61,9 @@ const getIframeUrl = async ({ token, orderId, amount, name, phone, cityName, car
       add: true,
     },
     income,
-    successUrl: 'https://home-flowers.netlify.app/summary',
-    failureUrl: 'https://home-flowers.netlify.app/fail',
-    notifyUrl: 'https://admin.home-flowers.co.il/payment',
+    successUrl: 'https://admin.home-flowers.co.il/payment/success',
+    failureUrl: 'https://admin.home-flowers.co.il/payment/fail',
+    notifyUrl: 'https://admin.home-flowers.co.il/payment/notify',
     custom: orderId,
   };
 
