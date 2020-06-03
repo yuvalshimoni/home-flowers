@@ -13,7 +13,7 @@ const MainRouter = (): JSX.Element => {
       <Route path="/summary" exact component={Summary} />
 
       {/* This route should be placed last because it matches every possible route */}
-      <Route path="/" component={Products} />
+      <Route path="/" exact component={Products} />
     </Switch>
   );
 };
