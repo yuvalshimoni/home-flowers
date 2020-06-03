@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.js": "/home-flowers/static/js/main.1b55d437.chunk.js",
+    "main.js.map": "/home-flowers/static/js/main.1b55d437.chunk.js.map",
+    "runtime-main.js": "/home-flowers/static/js/runtime-main.1edffb17.js",
+    "runtime-main.js.map": "/home-flowers/static/js/runtime-main.1edffb17.js.map",
+    "static/js/2.07a4229c.chunk.js": "/home-flowers/static/js/2.07a4229c.chunk.js",
+    "static/js/2.07a4229c.chunk.js.map": "/home-flowers/static/js/2.07a4229c.chunk.js.map",
+    "index.html": "/home-flowers/index.html",
+    "precache-manifest.c6f9e5960c3b351b272818b74efff5bd.js": "/home-flowers/precache-manifest.c6f9e5960c3b351b272818b74efff5bd.js",
+    "service-worker.js": "/home-flowers/service-worker.js",
+    "static/js/2.07a4229c.chunk.js.LICENSE.txt": "/home-flowers/static/js/2.07a4229c.chunk.js.LICENSE.txt",
+    "static/media/logo.png": "/home-flowers/static/media/logo.66d2d4bf.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1edffb17.js",
+    "static/js/2.07a4229c.chunk.js",
+    "static/js/main.1b55d437.chunk.js"
+  ]
+}
