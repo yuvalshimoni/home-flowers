@@ -8,12 +8,10 @@ import Summary from 'summary';
 const MainRouter = (): JSX.Element => {
   return (
     <Switch>
+      <Route path="/" exact component={Products} />
       <Route path="/details" exact component={Details} />
       <Route path="/payment/:id" exact component={Payment} />
       <Route path="/summary" exact component={Summary} />
-
-      {/* This route should be placed last because it matches every possible route */}
-      <Route path="/" exact component={Products} />
     </Switch>
   );
 };
