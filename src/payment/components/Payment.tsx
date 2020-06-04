@@ -46,7 +46,7 @@ const Payment = (): JSX.Element => {
         <MainTitle>תשלום</MainTitle>
       </HeadPage>
 
-      {loading && <span>כמה שניות ועוברים לתשלום...</span>}
+      <span>כמה שניות ועוברים לתשלום...</span>
     </Wrapper>
   );
 };
