@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
+import { useAppState } from 'shared/hooks';
 import { HeadPage as HeadPageBase, MainTitle, CartTable } from 'shared/components';
 import DetailsForm from './DetailsForm';
 
@@ -10,9 +12,19 @@ const HeadPage = styled(HeadPageBase)`
 `;
 
 const Details = (): JSX.Element => {
+  const history = useHistory();
+  const { totalCart } = useAppState();
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
+
+  useEffect(() => {
+    if (!totalCart) {
+      history.push('/');
+    }
+  }, [totalCart, history]);
+
   return (
     <Wrapper>
       <HeadPage small>

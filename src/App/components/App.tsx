@@ -1,5 +1,4 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/react-hooks';
 import client from 'shared/services/apollo';
 import { theme, GlobalStyle, themeMaterialConfig } from 'shared/theme';
@@ -50,13 +49,11 @@ const App = (): JSX.Element => {
 
           <MaterialThemeProvider<Theme> theme={themeMaterialConfig}>
             <AppContextProvider>
-              <Router>
-                <Layout>
-                  <Logo src={logo} alt="Home Flowers Logo" />
+              <Layout>
+                <Logo src={logo} alt="Home Flowers Logo" />
 
-                  <MainRouter />
-                </Layout>
-              </Router>
+                <MainRouter />
+              </Layout>
             </AppContextProvider>
           </MaterialThemeProvider>
         </StylesProvider>

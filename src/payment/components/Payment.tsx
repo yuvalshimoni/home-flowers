@@ -1,15 +1,11 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import { HeadPage, MainTitle, FlexCenter } from 'shared/components';
+import { HeadPage, MainTitle } from 'shared/components';
 import { useParams } from 'react-router-dom';
 import { useGetOrderQuery } from '../graphql/order.generated';
 import { getToken, getIframeUrl } from 'shared/services/greeninvoice';
 
 const Wrapper = styled.div``;
-
-const Iframe = styled(FlexCenter)`
-  width: 100%;
-`;
 
 const Payment = (): JSX.Element => {
   const { id } = useParams();
@@ -18,8 +14,6 @@ const Payment = (): JSX.Element => {
       id,
     },
   });
-
-  const [url, setUrl] = useState<string>('');
 
   const getPaymentUrl = useCallback(async () => {
     const token = await getToken();
@@ -39,7 +33,7 @@ const Payment = (): JSX.Element => {
       cart: orderproducts,
     });
 
-    setUrl(iframeUrl);
+    window.location = iframeUrl;
   }, [data?.order]);
 
   useEffect(() => {
@@ -52,13 +46,7 @@ const Payment = (): JSX.Element => {
         <MainTitle>תשלום</MainTitle>
       </HeadPage>
 
-      <Iframe>
-        {loading ? (
-          <span>טוען...</span>
-        ) : (
-          url && <iframe src={url} frameBorder="0" width="100%" height="500px"></iframe>
-        )}
-      </Iframe>
+      {loading && <span>כמה שניות ועוברים לתשלום...</span>}
     </Wrapper>
   );
 };
