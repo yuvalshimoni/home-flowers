@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useAppState } from 'shared/hooks';
 import { HeadPage, CartTable, SubTitle, FlexColumn } from 'shared/components';
 
 const Wrapper = styled.div``;
@@ -10,10 +9,6 @@ const TextWrapper = styled(FlexColumn)`
 `;
 
 const Summary = (): JSX.Element => {
-  // const {
-  //   orderDetails: { name },
-  // } = useAppState();
-
   return (
     <Wrapper>
       <HeadPage>

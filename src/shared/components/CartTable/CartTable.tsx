@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { TotalCart } from 'shared/components';
-import { useHistory } from 'react-router-dom';
 import { SubTitle, TextPrimary, NormalText } from 'shared/components';
 import { useAppState } from 'shared/hooks';
+import { CartItem, OrderDetails } from 'App/state/types';
 import RowItem from './RowItem';
 import { Flex } from '../FlexHelper';
 import { useProductsQuery } from 'shared/graphql';
@@ -39,25 +39,21 @@ const TotalWrapper = styled(Flex)`
 `;
 
 type CartTableProps = {
+  cart: Array<CartItem>;
+  cityName: OrderDetails['cityName'];
+  dateText: OrderDetails['dateText'];
   editable?: boolean;
 };
 
-const CartTable = ({ editable = true }: CartTableProps): JSX.Element | null => {
+const CartTable = ({
+  cart,
+  cityName,
+  dateText,
+  editable = true,
+}: CartTableProps): JSX.Element | null => {
   const { data } = useProductsQuery();
 
-  const history = useHistory();
-  const {
-    cart,
-    totalCart,
-    cartDispatch,
-    orderDetails: { cityName, dateText },
-  } = useAppState();
-
-  useEffect(() => {
-    if (!totalCart) {
-      history.push('/');
-    }
-  }, [totalCart, history]);
+  const { cartDispatch } = useAppState();
 
   const removeProduct = useCallback(
     (productId) => {

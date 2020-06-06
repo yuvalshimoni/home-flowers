@@ -61,7 +61,7 @@ const getIframeUrl = async ({ token, orderId, amount, name, phone, cityName, car
       add: true,
     },
     income,
-    successUrl: 'https://admin.homeflowers.co.il/payment/success',
+    successUrl: `https://home-flowers.firebaseapp.com/summary/${orderId}`,
     failureUrl: 'https://admin.homeflowers.co.il/payment/fail',
     notifyUrl: 'https://admin.homeflowers.co.il/payment/notify',
     custom: orderId,
