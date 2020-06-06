@@ -147,7 +147,9 @@ const DetailsForm = (): JSX.Element => {
           </FieldWrapper>
 
           <SubmitWrapper>
-            <Button type="submit">לתשלום</Button>
+            <Button type="submit">
+              {isCreateOrderLoading || isCreateOrderproductLoading ? 'מכין הזמנה...' : 'לתשלום'}
+            </Button>
           </SubmitWrapper>
         </FormWrapper>
       </form>

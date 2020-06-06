@@ -64,6 +64,7 @@ type ProductProps = {
 };
 
 const Product = ({ id, title, price, url }: ProductProps): JSX.Element => {
+  const [loadImage, setLoadImage] = useState<boolean>(true);
   const { cart, cartDispatch } = useAppState();
   const [quantity, setQuantity] = useState<number>(
     () => cart.find((i) => i.productId === id)?.quantity || 0,
@@ -75,6 +76,10 @@ const Product = ({ id, title, price, url }: ProductProps): JSX.Element => {
 
   const onDecrease = useCallback(() => {
     setQuantity((prev) => (prev < 1 ? 0 : prev - 1));
+  }, []);
+
+  const onLoagImage = useCallback(() => {
+    setLoadImage(true);
   }, []);
 
   useEffectOnUpdate(() => {
@@ -99,7 +104,9 @@ const Product = ({ id, title, price, url }: ProductProps): JSX.Element => {
 
   return (
     <Wrapper>
-      {url && <Image src={'https://admin.homeflowers.co.il' + url} />}
+      {url && loadImage && (
+        <Image src={'https://admin.homeflowers.co.il' + url} onLoad={onLoagImage} />
+      )}
 
       <BottomArea>
         <div>
