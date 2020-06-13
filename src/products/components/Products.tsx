@@ -7,6 +7,7 @@ import { Product, TotalCart, Button, MainTitle, HeadPage } from 'shared/componen
 import SelectTarget from './SelectTarget';
 import { useGetDatesQuery } from '../graphql/dates.generated';
 import { useProductsQuery } from 'shared/graphql';
+import format from 'date-fns/format';
 
 const Wrapper = styled.div``;
 
@@ -126,7 +127,7 @@ const Products = (): JSX.Element | null => {
       setOrderDetails((prevState) => ({
         ...prevState,
         delivery_date: currentDate!.id,
-        dateText: currentDate!.deliveryDate,
+        dateText: format(new Date(currentDate!.deliveryDate), 'd.M.Y'),
       }));
     }
   }, [currentDate, setOrderDetails]);

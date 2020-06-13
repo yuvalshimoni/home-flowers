@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
 import { TotalCart } from 'shared/components';
 import { SubTitle, TextPrimary, NormalText } from 'shared/components';
@@ -7,6 +7,7 @@ import { CartItem, OrderDetails } from 'App/state/types';
 import RowItem from './RowItem';
 import { Flex } from '../FlexHelper';
 import { useProductsQuery } from 'shared/graphql';
+import { getTotalCart } from 'shared/utils';
 
 const Wrapper = styled.div`
   display: flex;
@@ -42,6 +43,7 @@ type CartTableProps = {
   cart: Array<CartItem>;
   cityName: OrderDetails['cityName'];
   dateText: OrderDetails['dateText'];
+  totalCart?: number;
   editable?: boolean;
 };
 
@@ -63,6 +65,8 @@ const CartTable = ({
   );
 
   const products = data?.products;
+
+  const totalCart = useMemo<number>(() => getTotalCart(cart), [cart]);
 
   if (!products) {
     return null;
@@ -98,7 +102,7 @@ const CartTable = ({
       </ItemsWrapper>
 
       <TotalWrapper>
-        <TotalCart />
+        <TotalCart value={totalCart} />
       </TotalWrapper>
     </Wrapper>
   );

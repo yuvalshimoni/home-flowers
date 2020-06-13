@@ -4,12 +4,16 @@ import { useAppState } from 'shared/hooks';
 
 const Total = styled.div``;
 
-const TotalCart = (): JSX.Element => {
+type TotalCartProps = {
+  value?: number;
+};
+
+const TotalCart = ({ value }: TotalCartProps): JSX.Element => {
   const { totalCart } = useAppState();
 
   return (
     <Total>
-      <strong>סה"כ {totalCart}</strong> ש"ח
+      <strong>סה"כ {totalCart || value}</strong> ש"ח
     </Total>
   );
 };

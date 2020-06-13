@@ -1,0 +1,17 @@
+query OrderSummary($id: ID!) {
+  order(id: $id) {
+    delivery_date {
+      deliveryDate
+    }
+    city {
+      name
+    }
+    orderproducts {
+      product {
+        id
+      }
+      quantity
+      price
+    }
+  }
+}
