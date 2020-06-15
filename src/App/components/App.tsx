@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { ApolloProvider } from '@apollo/react-hooks';
 import client from 'shared/services/apollo';
 import { theme, GlobalStyle, themeMaterialConfig } from 'shared/theme';
@@ -13,6 +13,7 @@ import {
 } from '@material-ui/core/styles';
 import { AppContextProvider } from 'App/Context';
 import MainRouter from './MainRouter';
+import Footer from './Footer';
 import logo from 'shared/assets/logo.png';
 
 const Layout = styled.div`
@@ -21,6 +22,7 @@ const Layout = styled.div`
   margin: 0 auto;
   max-width: 1140px;
   padding: 0px 15px 100px 15px;
+  min-height: 100vh;
 `;
 
 const Logo = styled.img`
@@ -30,6 +32,8 @@ const Logo = styled.img`
   top: 25px;
   height: 70px;
   width: auto;
+  cursor: pointer;
+  z-index: 55;
 
   @media (max-width: 500px) {
     left: 15px;
@@ -41,6 +45,10 @@ const Logo = styled.img`
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 const App = (): JSX.Element => {
+  const onClickLogo = useCallback(() => {
+    document.location.href = '/';
+  }, []);
+
   return (
     <ApolloProvider client={client}>
       <ThemeProvider theme={{ ...theme }}>
@@ -50,10 +58,12 @@ const App = (): JSX.Element => {
           <MaterialThemeProvider<Theme> theme={themeMaterialConfig}>
             <AppContextProvider>
               <Layout>
-                <Logo src={logo} alt="Home Flowers Logo" />
+                <Logo src={logo} alt="Home Flowers Logo" onClick={onClickLogo} />
 
                 <MainRouter />
               </Layout>
+
+              <Footer />
             </AppContextProvider>
           </MaterialThemeProvider>
         </StylesProvider>

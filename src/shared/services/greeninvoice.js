@@ -53,7 +53,7 @@ const getIframeUrl = async ({ token, orderId, amount, name, phone, cityName, car
     pluginId: '6e5eec8b-368d-4b89-953b-72c9959a8f1b',
     client: {
       name,
-      // emails: ['email1@example.com', 'email2@example.com'],
+      emails: ['yuvalshim@gmail.com'],
       city: cityName,
       country: 'IL',
       phone,
