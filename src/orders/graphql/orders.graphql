@@ -1,0 +1,23 @@
+query getOrdersByDate($dateId: ID!) {
+  deliveryDate(id: $dateId) {
+    title
+    deliveryDate
+    orders {
+      name
+      phone
+      total
+      is_paid
+      city {
+        id
+        name
+      }
+      orderproducts {
+        price
+        quantity
+        product {
+          title
+        }
+      }
+    }
+  }
+}
