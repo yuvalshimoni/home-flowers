@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { ApolloProvider } from '@apollo/react-hooks';
 import client from 'shared/services/apollo';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { theme, GlobalStyle, themeMaterialConfig } from 'shared/theme';
 import styled, { ThemeProvider } from 'styled-components';
 import rtl from 'jss-rtl';
@@ -57,13 +58,15 @@ const App = (): JSX.Element => {
 
           <MaterialThemeProvider<Theme> theme={themeMaterialConfig}>
             <AppContextProvider>
-              <Layout>
-                <Logo src={logo} alt="Home Flowers Logo" onClick={onClickLogo} />
+              <Router>
+                <Layout>
+                  <Logo src={logo} alt="Home Flowers Logo" onClick={onClickLogo} />
 
-                <MainRouter />
-              </Layout>
+                  <MainRouter />
+                </Layout>
 
-              <Footer />
+                <Footer />
+              </Router>
             </AppContextProvider>
           </MaterialThemeProvider>
         </StylesProvider>

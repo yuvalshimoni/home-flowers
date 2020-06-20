@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { useEffectOnUpdate } from 'shared/hooks';
 import { useAppState } from 'shared/hooks';
 import { NormalText } from '../Typography';
-import { FlexRowSpaceBetween, FlexRow } from '../FlexHelper';
+import { FlexRowSpaceBetween, FlexRow, FlexCenter } from '../FlexHelper';
+import Skeleton from '@material-ui/lab/Skeleton';
 import * as Types from 'graphql/types.generated';
 
 const Wrapper = styled.div`
@@ -13,12 +14,14 @@ const Wrapper = styled.div`
   }
 `;
 
-const Image = styled.img`
-  display: block;
+const ImageWrapper = styled(FlexCenter)``;
+
+const Image = styled.img<{ visible: boolean }>`
   width: 80%;
   height: auto;
   margin: 0 auto;
   object-fit: contain;
+  display: ${({ visible }) => (visible ? 'block' : 'none')};
 
   @media (max-width: 500px) {
     width: 60%;
@@ -65,6 +68,8 @@ type ProductProps = {
 
 const Product = ({ id, title, price, url }: ProductProps): JSX.Element => {
   const [loadImage, setLoadImage] = useState<boolean>(true);
+  const [visible, setVisible] = useState<boolean>(false);
+
   const { cart, cartDispatch } = useAppState();
   const [quantity, setQuantity] = useState<number>(
     () => cart.find((i) => i.productId === id)?.quantity || 0,
@@ -78,8 +83,9 @@ const Product = ({ id, title, price, url }: ProductProps): JSX.Element => {
     setQuantity((prev) => (prev < 1 ? 0 : prev - 1));
   }, []);
 
-  const onLoagImage = useCallback(() => {
-    setLoadImage(true);
+  const onLoadImage = useCallback(() => {
+    setLoadImage(false);
+    setVisible(true);
   }, []);
 
   useEffectOnUpdate(() => {
@@ -104,9 +110,17 @@ const Product = ({ id, title, price, url }: ProductProps): JSX.Element => {
 
   return (
     <Wrapper>
-      {url && loadImage && (
-        <Image src={'https://admin.homeflowers.co.il' + url} onLoad={onLoagImage} />
-      )}
+      <ImageWrapper>
+        {loadImage && <Skeleton variant="circle" width={100} height={100} />}
+
+        {url && (
+          <Image
+            src={'https://admin.homeflowers.co.il' + url}
+            onLoad={onLoadImage}
+            visible={visible}
+          />
+        )}
+      </ImageWrapper>
 
       <BottomArea>
         <div>

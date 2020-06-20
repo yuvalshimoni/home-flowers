@@ -54,7 +54,7 @@ const ButtonWrapper = styled.div<{ visible: boolean }>`
 const ProductsWrapper = styled.div`
   display: grid;
   grid-gap: 50px;
-  margin-top: 85px;
+  margin-top: 95px;
   align-items: center;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 

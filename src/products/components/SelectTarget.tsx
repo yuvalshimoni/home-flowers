@@ -113,7 +113,6 @@ const SelectTarget = (): JSX.Element | null => {
       <Autocomplete
         fullWidth
         selectOnFocus
-        value={!!city ? { city, name: cityName! } : { city: '', name: '' }}
         options={options}
         inputValue={inputValue}
         onChange={onSelect}
@@ -121,6 +120,7 @@ const SelectTarget = (): JSX.Element | null => {
         onInputChange={handleInputChange}
         getOptionLabel={getOptionLabel}
         renderInput={renderInput}
+        defaultValue={!!city ? { city, name: cityName! } : { city: '', name: '' }}
       />
 
       <TextWrapper>
