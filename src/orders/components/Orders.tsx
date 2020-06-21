@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { HeadPage, SubTitle, FlexCenter, MainTitle } from 'shared/components';
+import { HeadPage, SubTitle, FlexCenter, MainTitle, CartTable } from 'shared/components';
 import format from 'date-fns/format';
 import { useParams } from 'react-router-dom';
 import { useGetOrdersByDateQuery } from '../graphql/orders.generated';
@@ -72,7 +72,7 @@ const Orders = (): JSX.Element => {
         <>
           <HeadPage>
             <SubTitle>
-              הזמנות לתאריך: {format(new Date(data.deliveryDate['deliveryDate']), 'd.M.Y')}
+              הזמנות לתאריך: {format(new Date(data.deliveryDate.deliveryDate), 'd.M.Y')}
             </SubTitle>
           </HeadPage>
 
@@ -83,7 +83,7 @@ const Orders = (): JSX.Element => {
                   <MainTitle>{city.name}</MainTitle>
 
                   <TableContainer component={Paper}>
-                    <Table aria-label="simple table">
+                    <Table size="small" aria-label="a dense table">
                       <TableHead>
                         <TableRow>
                           <TableCell>שם</TableCell>
@@ -105,6 +105,16 @@ const Orders = (): JSX.Element => {
                               <TableCell align="right">{row.total}</TableCell>
                               <TableCell align="right">{String(row.is_paid)}</TableCell>
                             </TableRow>
+
+                            <CartTable
+                              small
+                              editable={false}
+                              cart={row.orderproducts.map((item) => ({
+                                productId: item.product.id,
+                                quantity: item.quantity,
+                                price: item.price,
+                              }))}
+                            />
                           </>
                         ))}
                       </TableBody>

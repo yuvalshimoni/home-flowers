@@ -1,12 +1,13 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
-import { ProductType, FlexRowSpaceBetween } from 'shared/components';
+import { FlexRowSpaceBetween } from 'shared/components';
 import * as Types from 'graphql/types.generated';
 
-const RowWrapper = styled(FlexRowSpaceBetween)`
+const RowWrapper = styled(FlexRowSpaceBetween)<{ small?: boolean }>`
   padding: 35px 0px;
   align-items: center;
   flex-wrap: wrap;
+  padding: ${({ small }) => (small ? '5px 0px' : '35px 0px')};
 `;
 
 const Name = styled.div`
@@ -23,15 +24,15 @@ const Text = styled.div`
   font-size: ${({ theme }) => theme.sizes.main}px;
 `;
 
-const Image = styled.img`
+const Image = styled.img<{ small?: boolean }>`
   display: block;
-  width: 126px;
-  height: 126px;
+  width: ${({ small }) => (small ? 35 : 126)}px;
+  height: ${({ small }) => (small ? 35 : 126)}px;
   object-fit: contain;
 
   @media (max-width: 500px) {
     width: 85%;
-    height: 150px;
+    height: ${({ small }) => (small ? 35 : 150)}px;
   }
 `;
 
@@ -51,6 +52,7 @@ type RowProps = {
   item: ItemProps;
   quantity: number;
   price: number;
+  small?: boolean;
   removeProduct?: (productId: Types.Product['id']) => void;
 };
 
@@ -59,14 +61,15 @@ const RowItem = ({
   price,
   quantity,
   removeProduct,
+  small = false,
 }: RowProps): JSX.Element => {
   const handleOnClick = useCallback(() => {
     removeProduct?.(id);
   }, [id, removeProduct]);
 
   return (
-    <RowWrapper>
-      {url && <Image src={'https://admin.homeflowers.co.il' + url} />}
+    <RowWrapper small={small}>
+      {url && <Image src={'https://admin.homeflowers.co.il' + url} small={small} />}
       <Name>{title}</Name>
       <Text>כמות: {quantity} </Text>
       <Text>{price * quantity} ש"ח</Text>

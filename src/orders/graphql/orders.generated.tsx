@@ -33,7 +33,7 @@ export type GetOrdersByDateQuery = (
         & Pick<Types.Orderproduct, 'price' | 'quantity'>
         & { product?: Types.Maybe<(
           { __typename?: 'Product' }
-          & Pick<Types.Product, 'title'>
+          & Pick<Types.Product, 'id' | 'title'>
         )> }
       )>>> }
     )>>> }
@@ -59,6 +59,7 @@ export const GetOrdersByDateDocument = gql`
         price
         quantity
         product {
+          id
           title
         }
       }
